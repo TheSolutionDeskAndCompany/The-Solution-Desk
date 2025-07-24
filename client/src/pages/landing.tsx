@@ -345,7 +345,7 @@ export default function Landing() {
                     marginBottom: '16px'
                   }}>
                     <img 
-                      src="/attached_assets/free-plan-icon.svg" 
+                      src="/assets/free-plan-icon.svg" 
                       alt="Free Plan"
                       style={{ 
                         width: '48px', 
@@ -488,7 +488,7 @@ export default function Landing() {
                     marginBottom: '16px'
                   }}>
                     <img 
-                      src="/attached_assets/professional-plan-icon.svg" 
+                      src="/assets/professional-plan-icon.svg" 
                       alt="Professional Plan"
                       style={{ 
                         width: '48px', 
@@ -611,7 +611,7 @@ export default function Landing() {
                     marginBottom: '16px'
                   }}>
                     <img 
-                      src="/attached_assets/enterprise-plan-icon.svg" 
+                      src="/assets/enterprise-plan-icon.svg" 
                       alt="Enterprise Plan"
                       style={{ 
                         width: '48px', 

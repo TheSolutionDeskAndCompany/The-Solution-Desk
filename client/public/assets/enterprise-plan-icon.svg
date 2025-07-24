@@ -1,0 +1,60 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="enterpriseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E90FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4169E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6495ED;stop-opacity:1" />
+    </linearGradient>
+    <filter id="enterpriseGlow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with strongest glow -->
+  <circle cx="60" cy="60" r="50" fill="url(#enterpriseGradient)" opacity="0.2" filter="url(#enterpriseGlow)"/>
+  
+  <!-- Enterprise building/tower structure -->
+  <rect x="40" y="30" width="40" height="50" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2" rx="2"/>
+  <rect x="45" y="25" width="30" height="60" fill="none" stroke="url(#enterpriseGradient)" stroke-width="3" rx="3"/>
+  
+  <!-- Building floors/windows -->
+  <rect x="48" y="30" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="56" y="30" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="64" y="30" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  
+  <rect x="48" y="38" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="56" y="38" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="64" y="38" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  
+  <rect x="48" y="46" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="56" y="46" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="64" y="46" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  
+  <rect x="48" y="54" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="56" y="54" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  <rect x="64" y="54" width="6" height="4" fill="url(#enterpriseGradient)" opacity="0.6"/>
+  
+  <!-- Network connections around building -->
+  <circle cx="25" cy="50" r="8" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2"/>
+  <circle cx="95" cy="50" r="8" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2"/>
+  <circle cx="60" cy="15" r="8" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2"/>
+  <circle cx="60" cy="95" r="8" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2"/>
+  
+  <!-- Connection lines -->
+  <line x1="33" y1="50" x2="45" y2="45" stroke="url(#enterpriseGradient)" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="87" y1="50" x2="75" y2="45" stroke="url(#enterpriseGradient)" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="60" y1="23" x2="60" y2="25" stroke="url(#enterpriseGradient)" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="60" y1="87" x2="60" y2="85" stroke="url(#enterpriseGradient)" stroke-width="2" stroke-dasharray="3,2"/>
+  
+  <!-- Security shield overlay -->
+  <path d="M60 70 L52 75 L52 85 L60 90 L68 85 L68 75 Z" fill="none" stroke="url(#enterpriseGradient)" stroke-width="2"/>
+  <path d="M60 73 L55 76 L55 82 L60 85 L65 82 L65 76 Z" fill="url(#enterpriseGradient)" opacity="0.3"/>
+  
+  <!-- Enterprise badge -->
+  <rect x="75" y="20" width="25" height="15" fill="#1E293B" stroke="url(#enterpriseGradient)" stroke-width="2" rx="7"/>
+  <text x="87.5" y="29" text-anchor="middle" fill="url(#enterpriseGradient)" font-size="7" font-weight="bold">ENT</text>
+</svg>

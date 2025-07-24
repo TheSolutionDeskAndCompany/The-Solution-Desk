@@ -19,16 +19,21 @@ import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
 
 export interface IStorage {
-  // User operations (mandatory for Replit Auth)
-  getUser(id: string): Promise<User | undefined>;
-  upsertUser(user: UpsertUser): Promise<User>;
-  updateUserStripeInfo(userId: string, customerId: string, subscriptionId: string | null): Promise<User>;
-  updateUserSubscriptionStatus(userId: string, status: string): Promise<User>;
+  // User operations
+  getUser(id: number): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  getUserByGoogleId(googleId: string): Promise<User | undefined>;
+  getUserByGithubId(githubId: string): Promise<User | undefined>;
+  createUser(user: Partial<User>): Promise<User>;
+  linkGoogleAccount(userId: number, googleId: string): Promise<User>;
+  linkGithubAccount(userId: number, githubId: string): Promise<User>;
+  updateUserStripeInfo(userId: number, customerId: string, subscriptionId: string | null): Promise<User>;
+  updateUserSubscriptionStatus(userId: number, status: string): Promise<User>;
   
   // Project operations
-  getUserProjects(userId: string): Promise<Project[]>;
+  getUserProjects(userId: number): Promise<Project[]>;
   getProject(id: number): Promise<Project | undefined>;
-  createProject(userId: string, project: InsertProject): Promise<Project>;
+  createProject(userId: number, project: InsertProject): Promise<Project>;
   updateProject(id: number, updates: Partial<Project>): Promise<Project>;
   
   // Project data operations
@@ -44,7 +49,7 @@ export interface IStorage {
   addStatisticalAnalysis(analysis: InsertStatisticalAnalysis): Promise<StatisticalAnalysis>;
   
   // Dashboard data
-  getDashboardMetrics(userId: string): Promise<{
+  getDashboardMetrics(userId: number): Promise<{
     activeProjects: number;
     costSavings: number;
     efficiency: number;
@@ -54,27 +59,69 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   // User operations
-  async getUser(id: string): Promise<User | undefined> {
+  async getUser(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   }
 
-  async upsertUser(userData: UpsertUser): Promise<User> {
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async getUserByGoogleId(googleId: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.googleId, googleId));
+    return user;
+  }
+
+  async getUserByGithubId(githubId: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.githubId, githubId));
+    return user;
+  }
+
+  async createUser(userData: Partial<User>): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(userData)
-      .onConflictDoUpdate({
-        target: users.id,
-        set: {
-          ...userData,
-          updatedAt: new Date(),
-        },
+      .values({
+        email: userData.email!,
+        password: userData.password,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        profileImageUrl: userData.profileImageUrl,
+        googleId: userData.googleId,
+        githubId: userData.githubId,
+        authProvider: userData.authProvider!,
+        subscriptionStatus: 'free',
       })
       .returning();
     return user;
   }
 
-  async updateUserStripeInfo(userId: string, customerId: string, subscriptionId: string | null): Promise<User> {
+  async linkGoogleAccount(userId: number, googleId: string): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({
+        googleId,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning();
+    return user;
+  }
+
+  async linkGithubAccount(userId: number, githubId: string): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({
+        githubId,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId))
+      .returning();
+    return user;
+  }
+
+  async updateUserStripeInfo(userId: number, customerId: string, subscriptionId: string | null): Promise<User> {
     const [user] = await db
       .update(users)
       .set({
@@ -87,7 +134,7 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async updateUserSubscriptionStatus(userId: string, status: string): Promise<User> {
+  async updateUserSubscriptionStatus(userId: number, status: string): Promise<User> {
     const [user] = await db
       .update(users)
       .set({
@@ -100,7 +147,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Project operations
-  async getUserProjects(userId: string): Promise<Project[]> {
+  async getUserProjects(userId: number): Promise<Project[]> {
     return await db
       .select()
       .from(projects)
@@ -113,7 +160,7 @@ export class DatabaseStorage implements IStorage {
     return project;
   }
 
-  async createProject(userId: string, project: InsertProject): Promise<Project> {
+  async createProject(userId: number, project: InsertProject): Promise<Project> {
     const [newProject] = await db
       .insert(projects)
       .values({
@@ -194,7 +241,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Dashboard data
-  async getDashboardMetrics(userId: string): Promise<{
+  async getDashboardMetrics(userId: number): Promise<{
     activeProjects: number;
     costSavings: number;
     efficiency: number;

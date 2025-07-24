@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAuth, isAuthenticated } from "./auth";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
 import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
@@ -20,7 +20,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const user = await storage.getUser(userId);
       
       // Add tier information for frontend
@@ -41,7 +41,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Dashboard routes
   app.get('/api/dashboard/metrics', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const metrics = await storage.getDashboardMetrics(userId);
       res.json(metrics);
     } catch (error) {
@@ -53,7 +53,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Project routes
   app.get('/api/projects', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projects = await storage.getUserProjects(userId);
       res.json(projects);
     } catch (error) {
@@ -72,7 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Check if user owns this project
-      if (project.userId !== req.user.claims.sub) {
+      if (project.userId !== req.user.id) {
         return res.status(403).json({ message: "Access denied" });
       }
       
@@ -85,7 +85,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post('/api/projects', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projectData = insertProjectSchema.parse(req.body);
       
       const project = await storage.createProject(userId, {
@@ -108,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const projectId = parseInt(req.params.id);
       const project = await storage.getProject(projectId);
       
-      if (!project || project.userId !== req.user.claims.sub) {
+      if (!project || project.userId !== req.user.id) {
         return res.status(404).json({ message: "Project not found" });
       }
       
@@ -125,7 +125,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const projectId = parseInt(req.params.id);
       const project = await storage.getProject(projectId);
       
-      if (!project || project.userId !== req.user.claims.sub) {
+      if (!project || project.userId !== req.user.id) {
         return res.status(404).json({ message: "Project not found" });
       }
       
@@ -150,7 +150,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const projectId = parseInt(req.params.id);
       const project = await storage.getProject(projectId);
       
-      if (!project || project.userId !== req.user.claims.sub) {
+      if (!project || project.userId !== req.user.id) {
         return res.status(404).json({ message: "Project not found" });
       }
       
@@ -167,7 +167,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const projectId = parseInt(req.params.id);
       const project = await storage.getProject(projectId);
       
-      if (!project || project.userId !== req.user.claims.sub) {
+      if (!project || project.userId !== req.user.id) {
         return res.status(404).json({ message: "Project not found" });
       }
       
@@ -189,7 +189,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to check current tier (useful for debugging)
   app.get('/api/admin/tier-status', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const user = await storage.getUser(userId);
       const tier = await checkUserTierAccess(userId);
       
@@ -209,7 +209,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to temporarily set testing tier for comparison
   app.post('/api/admin/set-testing-tier', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const user = await storage.getUser(userId);
       
       // Only allow @thesolutiondesk.ca emails to use testing overrides
@@ -240,7 +240,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin route to clear testing tier override
   app.post('/api/admin/clear-testing-tier', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const user = await storage.getUser(userId);
       
       // Only allow @thesolutiondesk.ca emails to clear testing overrides
@@ -270,7 +270,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create subscription for specific tier
   app.post('/api/create-subscription', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { plan } = req.body;
       
       if (!plan || !['professional', 'enterprise'].includes(plan)) {
@@ -288,7 +288,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get subscription status
   app.get('/api/subscription-status', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const status = await getSubscriptionStatus(userId);
       res.json(status);
     } catch (error: any) {
@@ -300,7 +300,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Cancel subscription
   app.post('/api/cancel-subscription', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const result = await cancelSubscription(userId);
       res.json(result);
     } catch (error: any) {
@@ -313,7 +313,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/projects/:id/analyze', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       const analysis = await runAutomatedAnalysis(projectId, userId);
       res.json(analysis);
@@ -332,7 +332,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/projects/:id/insights', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       const insights = await generateProjectInsights(projectId, userId);
       res.json(insights);
@@ -351,7 +351,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/projects/:id/optimize', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       const optimization = await autoOptimizeProcess(projectId, userId);
       res.json(optimization);

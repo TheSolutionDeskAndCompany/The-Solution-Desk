@@ -30,17 +30,17 @@ export const TIER_FEATURES = {
 };
 
 // Testing overrides - allows temporary tier assignment for testing/comparison
-const TESTING_OVERRIDES: { [userId: string]: keyof typeof TIER_FEATURES } = {};
+const TESTING_OVERRIDES: { [userId: number]: keyof typeof TIER_FEATURES } = {};
 
-export function setTestingTier(userId: string, tier: keyof typeof TIER_FEATURES) {
+export function setTestingTier(userId: number, tier: keyof typeof TIER_FEATURES) {
   TESTING_OVERRIDES[userId] = tier;
 }
 
-export function clearTestingTier(userId: string) {
+export function clearTestingTier(userId: number) {
   delete TESTING_OVERRIDES[userId];
 }
 
-export async function checkUserTierAccess(userId: string): Promise<keyof typeof TIER_FEATURES> {
+export async function checkUserTierAccess(userId: number): Promise<keyof typeof TIER_FEATURES> {
   const user = await storage.getUser(userId);
   if (!user) {
     throw new Error("User not found");
@@ -66,7 +66,7 @@ export async function checkUserTierAccess(userId: string): Promise<keyof typeof 
   return 'free';
 }
 
-export async function runAutomatedAnalysis(projectId: number, userId: string): Promise<any> {
+export async function runAutomatedAnalysis(projectId: number, userId: number): Promise<any> {
   const tier = await checkUserTierAccess(userId);
   const features = TIER_FEATURES[tier];
   
@@ -97,7 +97,7 @@ export async function runAutomatedAnalysis(projectId: number, userId: string): P
   return analysis;
 }
 
-export async function generateProjectInsights(projectId: number, userId: string): Promise<any> {
+export async function generateProjectInsights(projectId: number, userId: number): Promise<any> {
   const tier = await checkUserTierAccess(userId);
   const features = TIER_FEATURES[tier];
   
@@ -119,7 +119,7 @@ export async function generateProjectInsights(projectId: number, userId: string)
   return insights;
 }
 
-export async function autoOptimizeProcess(projectId: number, userId: string): Promise<any> {
+export async function autoOptimizeProcess(projectId: number, userId: number): Promise<any> {
   const tier = await checkUserTierAccess(userId);
   const features = TIER_FEATURES[tier];
   

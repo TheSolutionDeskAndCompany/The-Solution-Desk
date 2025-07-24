@@ -7,7 +7,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export async function createSubscription(userId: string, plan: 'professional' | 'enterprise') {
+export async function createSubscription(userId: number, plan: 'professional' | 'enterprise') {
   const user = await storage.getUser(userId);
   if (!user) {
     throw new Error("User not found");
@@ -59,7 +59,7 @@ export async function createSubscription(userId: string, plan: 'professional' | 
   };
 }
 
-export async function getSubscriptionStatus(userId: string) {
+export async function getSubscriptionStatus(userId: number) {
   const user = await storage.getUser(userId);
   if (!user) {
     throw new Error("User not found");
@@ -79,7 +79,7 @@ export async function getSubscriptionStatus(userId: string) {
   };
 }
 
-export async function cancelSubscription(userId: string) {
+export async function cancelSubscription(userId: number) {
   const user = await storage.getUser(userId);
   if (!user || !user.stripeSubscriptionId) {
     throw new Error("No active subscription found");

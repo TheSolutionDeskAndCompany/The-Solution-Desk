@@ -9,6 +9,7 @@ import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Subscribe from "@/pages/subscribe";
 import Demo from "@/pages/demo";
+import About from "@/pages/about";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -46,6 +47,7 @@ function Router() {
           <Route path="/" component={Landing} />
           <Route path="/demo" component={Demo} />
           <Route path="/subscribe" component={Subscribe} />
+          <Route path="/about" component={About} />
         </>
       )}
       <Route path="*" component={NotFound} />

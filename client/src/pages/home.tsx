@@ -7,43 +7,11 @@ export default function Home() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: `
-        radial-gradient(ellipse at center, #0f172a 0%, #1e293b 30%, #0f172a 100%),
-        linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, transparent 20%, rgba(30, 64, 175, 0.1) 40%, transparent 60%, rgba(30, 64, 175, 0.1) 80%, transparent 100%),
-        linear-gradient(45deg, rgba(30, 64, 175, 0.1) 0%, transparent 20%, rgba(30, 64, 175, 0.1) 40%, transparent 60%, rgba(30, 64, 175, 0.1) 80%, transparent 100%)
-      `,
-      backgroundImage: `
-        radial-gradient(circle at 18% 25%, rgba(6, 182, 212, 0.6) 1px, transparent 2px),
-        radial-gradient(circle at 82% 15%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 35% 75%, rgba(6, 182, 212, 0.5) 1px, transparent 2px),
-        radial-gradient(circle at 75% 65%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 12% 80%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 88% 85%, rgba(6, 182, 212, 0.5) 1px, transparent 2px)
-      `,
-      backgroundSize: '200px 200px, 300px 300px, 250px 250px, 180px 180px, 220px 220px, 160px 160px, 240px 240px, 280px 280px', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
-      {/* Logo Banner */}
-      <div style={{
-        position: 'fixed',
-        top: '80px',
-        right: '20px',
-        zIndex: 5,
-        opacity: 0.45,
-        pointerEvents: 'none'
-      }}>
-        <img 
-          src={logoImage} 
-          alt="Solution Desk Logo" 
-          style={{ 
-            height: '100px', 
-            width: 'auto',
-            filter: 'brightness(1.2) saturate(0.8)',
-            clipPath: 'inset(0 0 25% 0)'
-          }} 
-        />
-      </div>
+
       {/* Navigation */}
       <header style={{
         backgroundColor: 'rgba(11, 20, 38, 0.95)',

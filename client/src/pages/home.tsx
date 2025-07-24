@@ -6,12 +6,12 @@ export default function Home() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        backgroundColor: 'rgba(11, 20, 38, 0.95)',
         borderBottom: '1px solid #334155',
         padding: '0 20px',
         backdropFilter: 'blur(10px)'
@@ -26,7 +26,7 @@ export default function Home() {
         }}>
           <h1 style={{
             fontSize: '28px',
-            color: '#A78BFA',
+            color: '#9333EA',
             margin: '0',
             fontFamily: 'Inter, sans-serif',
             fontWeight: '700'

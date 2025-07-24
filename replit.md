@@ -20,11 +20,12 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 ## Recent Changes
 - **July 24, 2025**: Complete platform overhaul with darker theme, comprehensive pricing tiers, and example client dashboard
   - Implemented darker professional design with purple/blue gradients and improved contrast
-  - Reordered landing page sections: Hero → About → Systoro → Pricing (per user request)
+  - Removed "About The Solution Desk" section from main page (user request)
+  - Refined color scheme with deeper blues (#0B1426, #1A202C) and improved purple/blue accents
   - Added comprehensive pricing section with Free ($0) and Professional ($29/month) plans
   - Created subscription checkout page with Stripe integration for Professional plan purchases
   - Built example client dashboard with sample metrics, active projects, and available tools
-  - Updated navigation with About, Systoro, and Pricing links
+  - Updated navigation with About, Systoro, and Pricing links (About kept in navigation only)
   - Fixed "Featured Product" badge positioning beside Systoro heading instead of above
   - Added subscription management routes and database schema for Stripe integration
 

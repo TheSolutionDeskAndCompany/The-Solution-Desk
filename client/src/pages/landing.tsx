@@ -2,12 +2,12 @@ export default function Landing() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        backgroundColor: 'rgba(11, 20, 38, 0.95)',
         borderBottom: '1px solid #334155',
         padding: '0 20px',
         backdropFilter: 'blur(10px)'
@@ -22,7 +22,7 @@ export default function Landing() {
         }}>
           <h1 style={{
             fontSize: '28px',
-            color: '#A78BFA',
+            color: '#9333EA',
             margin: '0',
             fontFamily: 'Inter, sans-serif',
             fontWeight: '700'
@@ -40,7 +40,7 @@ export default function Landing() {
               About
             </a>
             <a href="#systoro" style={{
-              color: '#22D3EE',
+              color: '#0EA5E9',
               textDecoration: 'none',
               fontWeight: '600',
               fontSize: '16px',
@@ -110,29 +110,7 @@ export default function Landing() {
             </p>
           </section>
 
-          {/* About Section */}
-          <section id="about" style={{ marginBottom: '80px', textAlign: 'center' }}>
-            <h2 style={{
-              fontSize: '36px',
-              color: '#F1F5F9',
-              marginBottom: '24px',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '700'
-            }}>
-              About The Solution Desk
-            </h2>
-            <p style={{
-              fontSize: '18px',
-              color: '#94A3B8',
-              maxWidth: '800px',
-              margin: '0 auto',
-              lineHeight: '1.7'
-            }}>
-              We specialize in creating software solutions that make process improvement accessible, 
-              efficient, and results-driven. Our tools are designed by practitioners, for practitioners, 
-              ensuring they solve real-world challenges while remaining intuitive and powerful.
-            </p>
-          </section>
+
 
           {/* Systoro Section */}
           <section id="systoro" style={{
@@ -164,7 +142,7 @@ export default function Landing() {
               </h2>
               <div style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                background: 'linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)',
                 color: 'white',
                 padding: '8px 20px',
                 borderRadius: '25px',
@@ -219,10 +197,10 @@ export default function Landing() {
               <button 
                 style={{
                   backgroundColor: 'transparent',
-                  color: '#22D3EE',
+                  color: '#0EA5E9',
                   padding: '16px 32px',
                   fontSize: '18px',
-                  border: '2px solid #22D3EE',
+                  border: '2px solid #0EA5E9',
                   borderRadius: '12px',
                   cursor: 'pointer',
                   fontWeight: '600',
@@ -286,25 +264,25 @@ export default function Landing() {
                   color: '#94A3B8'
                 }}>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Up to 3 projects
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Basic analytics
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Essential tools
                   </li>
                 </ul>
                 <button 
                   style={{
                     backgroundColor: 'transparent',
-                    color: '#22D3EE',
+                    color: '#0EA5E9',
                     padding: '12px 24px',
                     fontSize: '16px',
-                    border: '2px solid #22D3EE',
+                    border: '2px solid #0EA5E9',
                     borderRadius: '8px',
                     cursor: 'pointer',
                     fontWeight: '600',
@@ -357,23 +335,23 @@ export default function Landing() {
                   color: '#94A3B8'
                 }}>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Unlimited projects
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Advanced analytics & reporting
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Full Six Sigma & Lean toolkit
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Team collaboration
                   </li>
                   <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                     Priority support
                   </li>
                 </ul>

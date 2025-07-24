@@ -47,7 +47,7 @@ const SubscribeForm = () => {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       padding: '40px 20px'
     }}>
@@ -131,7 +131,7 @@ export default function Subscribe() {
     return (
       <div style={{ 
         minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center' 
@@ -160,7 +160,7 @@ export default function Subscribe() {
     return (
       <div style={{ 
         minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center' 

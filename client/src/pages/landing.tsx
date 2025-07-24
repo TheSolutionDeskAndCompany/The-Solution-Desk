@@ -103,7 +103,7 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <h1 style={{ 
                 fontSize: '56px', 
-                background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
+                background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -177,7 +177,7 @@ export default function Landing() {
             }}>
               <h2 style={{
                 fontSize: '48px',
-                background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
+                background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -270,7 +270,7 @@ export default function Landing() {
           <section id="pricing" style={{ textAlign: 'center' }}>
             <h2 style={{
               fontSize: '36px',
-              background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
+              background: 'linear-gradient(135deg, #00BFFF 0%, #1E90FF 50%, #4169E1 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -331,7 +331,7 @@ export default function Landing() {
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
-                      background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
+                      background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',

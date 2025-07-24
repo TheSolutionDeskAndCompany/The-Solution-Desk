@@ -67,7 +67,8 @@ export async function runAutomatedAnalysis(projectId: number, userId: string): P
   const analysis = await performStatisticalAnalysis(projectData, project);
   
   // Store the analysis results
-  await storage.addStatisticalAnalysis(projectId, {
+  await storage.addStatisticalAnalysis({
+    projectId: projectId,
     analysisType: 'automated_analysis',
     results: analysis
   });
@@ -91,14 +92,9 @@ export async function generateProjectInsights(projectId: number, userId: string)
   const projectData = await storage.getProjectData(projectId);
   const projectMetrics = await storage.getProjectMetrics(projectId);
   
-  // Generate AI-powered insights
-  const insights = {
-    processEfficiency: calculateProcessEfficiency(projectData),
-    improvementOpportunities: identifyImprovementOpportunities(projectData, projectMetrics),
-    riskAssessment: assessProjectRisks(project, projectData),
-    recommendations: generateRecommendations(project, projectData, projectMetrics),
-    generatedAt: new Date().toISOString()
-  };
+  // Use OpenAI service for AI-powered insights
+  const { generateAIInsights } = await import('./openai-service');
+  const insights = await generateAIInsights(project, projectData, projectMetrics);
   
   return insights;
 }

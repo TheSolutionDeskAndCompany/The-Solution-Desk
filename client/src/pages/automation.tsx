@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Lock, Unlock, BarChart3, Brain, Zap, ArrowRight, CheckCircle } from 'lucide-react';
+import logoImage from "@assets/logo_1753331638873.png";
 
 interface SubscriptionStatus {
   status: string;
@@ -25,47 +23,47 @@ interface AutomationTool {
 const automationTools: AutomationTool[] = [
   {
     id: 'analysis',
-    name: 'Automated Statistical Analysis',
-    description: 'Run comprehensive statistical analysis on your project data including control charts, capability studies, and trend analysis.',
+    name: 'Statistical Process Analysis',
+    description: 'Automated statistical analysis including control charts, capability studies, and trend analysis using proven Six Sigma methodologies.',
     icon: <BarChart3 className="w-6 h-6" />,
     tier: 'professional',
     features: [
-      'Descriptive statistics',
-      'Control limit calculations',
-      'Process capability analysis',
-      'Trend analysis with R-squared',
-      'Outlier detection',
-      'Statistical recommendations'
+      'Descriptive statistics and data validation',
+      'Control limit calculations (UCL/LCL)',
+      'Process capability analysis (Cp, Cpk)',
+      'Trend analysis with regression models',
+      'Outlier detection and flagging',
+      'Statistical process recommendations'
     ],
     endpoint: 'analyze'
   },
   {
     id: 'insights',
-    name: 'AI-Powered Process Insights',
-    description: 'Generate intelligent insights about your processes using advanced AI algorithms to identify improvement opportunities.',
+    name: 'Process Intelligence Engine',
+    description: 'Advanced data-driven insights using statistical models to identify improvement opportunities and performance patterns.',
     icon: <Brain className="w-6 h-6" />,
     tier: 'professional',
     features: [
-      'Process efficiency scoring',
-      'Improvement opportunities',
-      'Risk assessment',
-      'AI-generated recommendations',
-      'Performance benchmarking'
+      'Process efficiency scoring algorithms',
+      'Data-driven improvement opportunities',
+      'Statistical risk assessment models',
+      'Performance benchmarking analysis',
+      'Predictive trend modeling'
     ],
     endpoint: 'insights'
   },
   {
     id: 'optimization',
-    name: 'Automated Process Optimization',
-    description: 'Automatically optimize your processes with machine learning algorithms and best practice recommendations.',
+    name: 'Process Optimization Engine',
+    description: 'Automated process optimization using statistical analysis and lean methodologies to identify the highest-impact improvements.',
     icon: <Zap className="w-6 h-6" />,
     tier: 'professional',
     features: [
-      'Current state analysis',
-      'Optimization target identification',
-      'Recommended actions',
-      'Projected impact calculations',
-      'Implementation planning'
+      'Current state statistical analysis',
+      'Mathematical optimization modeling',
+      'Evidence-based improvement recommendations',
+      'ROI impact calculations',
+      'Implementation priority ranking'
     ],
     endpoint: 'optimize'
   }
@@ -78,7 +76,7 @@ export default function AutomationPage() {
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [runningTool, setRunningTool] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, any>>({});
-  const [sampleProjectId] = useState(1); // Using sample project ID for demo
+  const [sampleProjectId] = useState(1);
 
   useEffect(() => {
     if (user) {
@@ -116,7 +114,6 @@ export default function AutomationPage() {
         description: `${tool.name} requires a ${tool.tier} subscription. Upgrade now to unlock advanced automation!`,
         variant: "destructive",
       });
-      // Redirect to upgrade page after showing toast
       setTimeout(() => {
         window.location.href = '/subscribe';
       }, 2000);
@@ -150,21 +147,12 @@ export default function AutomationPage() {
       } else {
         toast({
           title: "Error",
-          description: `Failed to run ${tool.name}. This might be because no sample data is available.`,
+          description: `Failed to run ${tool.name}. This requires sample project data to analyze.`,
           variant: "destructive",
         });
       }
     } finally {
       setRunningTool(null);
-    }
-  };
-
-  const getTierBadgeColor = (tier: string) => {
-    switch (tier) {
-      case 'free': return 'bg-gray-500/20 text-gray-300 border-gray-500';
-      case 'professional': return 'bg-blue-500/20 text-blue-300 border-blue-500';
-      case 'enterprise': return 'bg-purple-500/20 text-purple-300 border-purple-500';
-      default: return 'bg-gray-500/20 text-gray-300 border-gray-500';
     }
   };
 
@@ -216,8 +204,8 @@ export default function AutomationPage() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
-              src="/assets/logo_1753331638873.png" 
-              alt="The Solution Desk Logo" 
+              src={logoImage} 
+              alt="Systoro Logo" 
               style={{ 
                 height: '36px', 
                 width: 'auto',
@@ -262,6 +250,7 @@ export default function AutomationPage() {
       {/* Main Content */}
       <main style={{ padding: '40px 20px', position: 'relative', zIndex: 10 }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <h1 style={{
@@ -293,20 +282,17 @@ export default function AutomationPage() {
               <div style={{ 
                 padding: '8px 16px', 
                 borderRadius: '20px',
-                border: '1px solid',
-                ...getTierBadgeColor(subscription?.plan || 'free').split(' ').reduce((acc, cls) => {
-                  if (cls.includes('bg-')) acc.backgroundColor = cls.replace('bg-', '').replace('/', '');
-                  if (cls.includes('text-')) acc.color = cls.replace('text-', '');
-                  if (cls.includes('border-')) acc.borderColor = cls.replace('border-', '');
-                  return acc;
-                }, {} as any)
+                backgroundColor: subscription?.plan === 'free' ? 'rgba(107, 114, 128, 0.2)' : 'rgba(147, 51, 234, 0.2)',
+                color: subscription?.plan === 'free' ? '#9CA3AF' : '#A855F7',
+                border: subscription?.plan === 'free' ? '1px solid #6B7280' : '1px solid #9333EA',
+                fontWeight: '600'
               }}>
                 {subscription?.plan?.toUpperCase() || 'FREE'}
               </div>
               {subscription?.plan === 'free' && (
                 <button 
                   style={{
-                    background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #DC2626 100%)',
+                    background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)',
                     color: 'white',
                     padding: '12px 24px',
                     fontSize: '16px',
@@ -314,7 +300,7 @@ export default function AutomationPage() {
                     border: 'none',
                     borderRadius: '12px',
                     cursor: 'pointer',
-                    boxShadow: '0 8px 20px rgba(245, 158, 11, 0.4)',
+                    boxShadow: '0 8px 20px rgba(147, 51, 234, 0.4)',
                     transition: 'all 0.3s ease',
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px'
@@ -322,11 +308,11 @@ export default function AutomationPage() {
                   onClick={() => window.location.href = '/subscribe'}
                   onMouseOver={(e) => {
                     e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(245, 158, 11, 0.6)';
+                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(147, 51, 234, 0.6)';
                   }}
                   onMouseOut={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.4)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(147, 51, 234, 0.4)';
                   }}
                 >
                   Upgrade to Professional
@@ -342,65 +328,106 @@ export default function AutomationPage() {
             gap: '32px',
             marginBottom: '48px'
           }}>
-          {automationTools.map((tool) => {
-            const hasAccess = canAccessTool(tool);
-            const isRunning = runningTool === tool.id;
-            const hasResults = results[tool.id];
+            {automationTools.map((tool) => {
+              const hasAccess = canAccessTool(tool);
+              const isRunning = runningTool === tool.id;
+              const hasResults = results[tool.id];
 
-            return (
-              <div key={tool.id} style={{
-                background: hasAccess 
-                  ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
-                  : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
-                backgroundColor: 'rgba(30, 41, 59, 0.8)',
-                borderRadius: '16px',
-                padding: '24px',
-                border: hasAccess ? '2px solid #9333EA' : '2px solid #6B7280',
-                backdropFilter: 'blur(15px)',
-                boxShadow: hasAccess 
-                  ? '0 8px 24px rgba(147, 51, 234, 0.2)' 
-                  : '0 8px 24px rgba(0, 0, 0, 0.1)',
-                transition: 'all 0.3s ease',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${hasAccess ? 'bg-blue-100' : 'bg-gray-100'}`}>
-                        {hasAccess ? <Unlock className="w-5 h-5 text-blue-600" /> : <Lock className="w-5 h-5 text-gray-600" />}
-                      </div>
-                      <div className={`p-2 rounded-lg ${hasAccess ? 'bg-cyan-100' : 'bg-gray-100'}`}>
-                        <div className={hasAccess ? 'text-cyan-600' : 'text-gray-600'}>
-                          {tool.icon}
+              return (
+                <div key={tool.id} style={{
+                  background: hasAccess 
+                    ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
+                    : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
+                  backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  border: hasAccess ? '2px solid #9333EA' : '2px solid #6B7280',
+                  backdropFilter: 'blur(15px)',
+                  boxShadow: hasAccess 
+                    ? '0 8px 24px rgba(147, 51, 234, 0.2)' 
+                    : '0 8px 24px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  
+                  {/* Header */}
+                  <div style={{ marginBottom: '16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ 
+                          padding: '8px', 
+                          borderRadius: '8px', 
+                          backgroundColor: hasAccess ? 'rgba(34, 211, 238, 0.1)' : 'rgba(107, 114, 128, 0.1)' 
+                        }}>
+                          {hasAccess ? <Unlock style={{ width: '20px', height: '20px', color: '#22D3EE' }} /> : <Lock style={{ width: '20px', height: '20px', color: '#6B7280' }} />}
+                        </div>
+                        <div style={{ 
+                          padding: '8px', 
+                          borderRadius: '8px', 
+                          backgroundColor: hasAccess ? 'rgba(147, 51, 234, 0.1)' : 'rgba(107, 114, 128, 0.1)' 
+                        }}>
+                          <div style={{ color: hasAccess ? '#9333EA' : '#6B7280' }}>
+                            {tool.icon}
+                          </div>
                         </div>
                       </div>
+                      <div style={{ 
+                        padding: '4px 12px', 
+                        borderRadius: '12px',
+                        backgroundColor: hasAccess ? 'rgba(147, 51, 234, 0.2)' : 'rgba(107, 114, 128, 0.2)',
+                        color: hasAccess ? '#A855F7' : '#9CA3AF',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        textTransform: 'uppercase'
+                      }}>
+                        {tool.tier}
+                      </div>
                     </div>
-                    <Badge className={`${getTierBadgeColor(tool.tier)}`}>
-                      {tool.tier}
-                    </Badge>
+                    
+                    <h3 style={{ 
+                      fontSize: '20px', 
+                      fontWeight: '700', 
+                      margin: '0 0 8px 0',
+                      color: hasAccess ? '#FFFFFF' : '#9CA3AF'
+                    }}>
+                      {tool.name}
+                    </h3>
+                    
+                    <p style={{ 
+                      fontSize: '14px', 
+                      color: hasAccess ? '#CBD5E1' : '#6B7280',
+                      lineHeight: '1.5',
+                      margin: '0'
+                    }}>
+                      {tool.description}
+                    </p>
                   </div>
-                  
-                  <CardTitle className={`text-xl ${hasAccess ? 'text-white' : 'text-gray-400'}`}>
-                    {tool.name}
-                  </CardTitle>
-                  
-                  <CardDescription className={hasAccess ? 'text-gray-300' : 'text-gray-500'}>
-                    {tool.description}
-                  </CardDescription>
-                </CardHeader>
 
-                <CardContent>
                   {/* Features list */}
-                  <div className="mb-6">
-                    <h4 className={`text-sm font-semibold mb-3 ${hasAccess ? 'text-gray-200' : 'text-gray-500'}`}>
+                  <div style={{ marginBottom: '24px' }}>
+                    <h4 style={{ 
+                      fontSize: '14px', 
+                      fontWeight: '600', 
+                      marginBottom: '12px',
+                      color: hasAccess ? '#E2E8F0' : '#6B7280'
+                    }}>
                       Features:
                     </h4>
-                    <ul className="space-y-2">
+                    <ul style={{ margin: '0', padding: '0', listStyle: 'none' }}>
                       {tool.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className={`w-4 h-4 mt-0.5 flex-shrink-0 ${hasAccess ? 'text-green-400' : 'text-gray-500'}`} />
-                          <span className={`text-sm ${hasAccess ? 'text-gray-300' : 'text-gray-500'}`}>
+                        <li key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+                          <CheckCircle style={{ 
+                            width: '16px', 
+                            height: '16px', 
+                            marginTop: '2px', 
+                            flexShrink: 0,
+                            color: hasAccess ? '#10B981' : '#6B7280'
+                          }} />
+                          <span style={{ 
+                            fontSize: '14px',
+                            color: hasAccess ? '#CBD5E1' : '#6B7280'
+                          }}>
                             {feature}
                           </span>
                         </li>
@@ -409,69 +436,109 @@ export default function AutomationPage() {
                   </div>
 
                   {/* Action button */}
-                  <Button 
+                  <button 
                     onClick={() => runAutomationTool(tool)}
                     disabled={!hasAccess || isRunning}
-                    className={`w-full ${hasAccess 
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700' 
-                      : 'bg-gray-600 hover:bg-gray-700'
-                    }`}
+                    style={{
+                      width: '100%',
+                      padding: '12px 20px',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      border: 'none',
+                      borderRadius: '12px',
+                      cursor: hasAccess && !isRunning ? 'pointer' : 'not-allowed',
+                      background: hasAccess 
+                        ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)' 
+                        : 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                      color: 'white',
+                      transition: 'all 0.3s ease',
+                      boxShadow: hasAccess ? '0 4px 12px rgba(147, 51, 234, 0.3)' : 'none'
+                    }}
+                    onMouseOver={(e) => {
+                      if (hasAccess && !isRunning) {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 8px 20px rgba(147, 51, 234, 0.4)';
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (hasAccess && !isRunning) {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(147, 51, 234, 0.3)';
+                      }
+                    }}
                   >
                     {isRunning ? (
-                      <div className="flex items-center gap-2">
-                        <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                        Running...
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                        <div style={{
+                          width: '16px',
+                          height: '16px',
+                          border: '2px solid white',
+                          borderTop: '2px solid transparent',
+                          borderRadius: '50%',
+                          animation: 'spin 1s linear infinite'
+                        }}></div>
+                        Running Analysis...
                       </div>
                     ) : hasAccess ? (
-                      <div className="flex items-center gap-2">
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                         Run Analysis
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight style={{ width: '16px', height: '16px' }} />
                       </div>
                     ) : (
-                      <div className="flex items-center gap-2">
-                        <Lock className="w-4 h-4" />
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                        <Lock style={{ width: '16px', height: '16px' }} />
                         Requires {tool.tier}
                       </div>
                     )}
-                  </Button>
+                  </button>
 
                   {/* Results preview */}
                   {hasResults && (
-                    <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="flex items-center gap-2 text-green-800 text-sm font-semibold mb-2">
-                        <CheckCircle className="w-4 h-4" />
-                        Analysis Complete
+                    <div style={{
+                      marginTop: '16px',
+                      padding: '12px',
+                      backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                      borderRadius: '8px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                        <CheckCircle style={{ width: '16px', height: '16px', color: '#10B981' }} />
+                        <span style={{ fontSize: '14px', fontWeight: '600', color: '#10B981' }}>
+                          Analysis Complete
+                        </span>
                       </div>
-                      <p className="text-green-700 text-sm">
+                      <p style={{ fontSize: '14px', color: '#059669', margin: '0' }}>
                         Results generated successfully. Check the console for detailed output.
                       </p>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                </div>
+              );
+            })}
+          </div>
 
-        {/* Tier comparison */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-6">Unlock More Tools with Higher Tiers</h2>
+          {/* Upgrade banner for free users */}
           {subscription?.plan === 'free' && (
             <div style={{
-              background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)',
-              padding: '20px',
+              background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)',
+              padding: '32px',
               borderRadius: '16px',
-              marginBottom: '32px',
-              border: '2px solid #F59E0B',
-              boxShadow: '0 8px 24px rgba(245, 158, 11, 0.3)'
+              marginBottom: '48px',
+              border: '2px solid #9333EA',
+              boxShadow: '0 8px 24px rgba(147, 51, 234, 0.3)',
+              textAlign: 'center'
             }}>
-              <h3 className="text-white text-xl font-bold mb-2">⚡ Limited Access Detected</h3>
-              <p className="text-white/90 mb-4">You're currently on the Free plan. Upgrade to Professional for $29/month to unlock all automation tools!</p>
+              <h3 style={{ fontSize: '24px', fontWeight: '800', color: 'white', margin: '0 0 12px 0' }}>
+                Unlock Professional Automation Tools
+              </h3>
+              <p style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', margin: '0 0 24px 0' }}>
+                Upgrade to Professional for $29/month to access advanced statistical analysis, process insights, and optimization tools.
+              </p>
               <button 
                 style={{
                   background: 'white',
-                  color: '#DC2626',
-                  padding: '14px 32px',
+                  color: '#9333EA',
+                  padding: '16px 32px',
                   fontSize: '18px',
                   fontWeight: '800',
                   border: 'none',
@@ -479,53 +546,93 @@ export default function AutomationPage() {
                   cursor: 'pointer',
                   textTransform: 'uppercase',
                   letterSpacing: '1px',
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
                 }}
                 onClick={() => window.location.href = '/subscribe'}
-                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                }}
               >
-                🚀 Upgrade to Professional Now
+                Upgrade to Professional Now
               </button>
             </div>
           )}
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {['Free', 'Professional', 'Enterprise'].map((tier) => (
-              <Card key={tier} className={`border-2 ${
-                tier.toLowerCase() === subscription?.plan 
-                  ? 'border-cyan-400 bg-cyan-50/10' 
-                  : 'border-gray-600 bg-gray-800/50'
-              }`}>
-                <CardHeader>
-                  <CardTitle className={`text-lg ${tier.toLowerCase() === subscription?.plan ? 'text-cyan-400' : 'text-white'}`}>
+
+          {/* Tier comparison */}
+          <div style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#FFFFFF', marginBottom: '32px' }}>
+              Choose Your Plan
+            </h2>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+              gap: '24px', 
+              maxWidth: '900px', 
+              margin: '0 auto' 
+            }}>
+              {['Free', 'Professional', 'Enterprise'].map((tier) => (
+                <div key={tier} style={{
+                  background: tier.toLowerCase() === subscription?.plan 
+                    ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
+                    : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
+                  backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  border: tier.toLowerCase() === subscription?.plan ? '2px solid #9333EA' : '2px solid #6B7280',
+                  backdropFilter: 'blur(15px)'
+                }}>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: '700', 
+                    margin: '0 0 8px 0',
+                    color: tier.toLowerCase() === subscription?.plan ? '#A855F7' : '#FFFFFF'
+                  }}>
                     {tier}
-                  </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '16px' }}>
                     {tier === 'Free' && 'Basic project management'}
                     {tier === 'Professional' && 'Advanced automation tools'}
                     {tier === 'Enterprise' && 'Full suite + priority support'}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-white mb-4">
+                  </p>
+                  <div style={{ fontSize: '32px', fontWeight: '800', color: '#FFFFFF', marginBottom: '16px' }}>
                     {tier === 'Free' && '$0'}
                     {tier === 'Professional' && '$29'}
                     {tier === 'Enterprise' && '$49'}
-                    {tier !== 'Free' && <span className="text-sm font-normal text-gray-400">/month</span>}
+                    {tier !== 'Free' && <span style={{ fontSize: '14px', fontWeight: '400', color: '#9CA3AF' }}>/month</span>}
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-300">
-                    <li>• {tier === 'Free' ? '1 project' : tier === 'Professional' ? '10 projects' : 'Unlimited projects'}</li>
-                    <li>• {tier === 'Free' ? '50 data points' : tier === 'Professional' ? '1,000 data points' : 'Unlimited data'}</li>
-                    <li>• {tier === 'Free' ? 'Basic reporting' : 'Automated analysis'}</li>
-                    {tier !== 'Free' && <li>• AI-powered insights</li>}
-                    {tier === 'Enterprise' && <li>• Priority support</li>}
+                  <ul style={{ margin: '0', padding: '0', listStyle: 'none' }}>
+                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
+                      • {tier === 'Free' ? '1 project' : tier === 'Professional' ? '10 projects' : 'Unlimited projects'}
+                    </li>
+                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
+                      • {tier === 'Free' ? '50 data points' : tier === 'Professional' ? '1,000 data points' : 'Unlimited data'}
+                    </li>
+                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
+                      • {tier === 'Free' ? 'Basic reporting' : 'Automated analysis'}
+                    </li>
+                    {tier !== 'Free' && (
+                      <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
+                        • Statistical process insights
+                      </li>
+                    )}
+                    {tier === 'Enterprise' && (
+                      <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
+                        • Priority support
+                      </li>
+                    )}
                   </ul>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

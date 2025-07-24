@@ -4,21 +4,26 @@ export default function Landing() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0B1426 0%, #1A1F3A 50%, #2D1B42 100%)',
+      background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f172a 100%)',
       backgroundImage: `
-        /* Circuit board pattern - diagonal lines */
-        linear-gradient(45deg, transparent 45%, rgba(30, 58, 138, 0.3) 49%, rgba(30, 58, 138, 0.3) 51%, transparent 55%),
-        linear-gradient(-45deg, transparent 45%, rgba(30, 58, 138, 0.2) 49%, rgba(30, 58, 138, 0.2) 51%, transparent 55%),
-        linear-gradient(135deg, transparent 45%, rgba(30, 58, 138, 0.15) 49%, rgba(30, 58, 138, 0.15) 51%, transparent 55%),
-        /* Connection points */
-        radial-gradient(circle at 15% 25%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 35% 15%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 65% 35%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 25% 75%, rgba(244, 114, 182, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 75% 85%, rgba(244, 114, 182, 0.4) 1px, transparent 2px)
+        /* Main circuit traces - matching logo's blue lines */
+        linear-gradient(135deg, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
+        linear-gradient(45deg, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
+        linear-gradient(vertical, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
+        linear-gradient(horizontal, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
+        /* Glowing connection nodes - cyan dots like in logo */
+        radial-gradient(circle at 12% 18%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 28% 35%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 45% 15%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 65% 30%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 82% 22%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 15% 65%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 35% 78%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 58% 70%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 78% 85%, #06b6d4 0.5px, transparent 1px),
+        radial-gradient(circle at 90% 60%, #06b6d4 0.5px, transparent 1px)
       `,
-      backgroundSize: '80px 80px, 60px 60px, 100px 100px, 200px 200px, 150px 150px, 180px 180px, 220px 220px, 160px 160px, 190px 190px', 
+      backgroundSize: '120px 120px, 100px 100px, 80px 80px, 90px 90px, 200px 200px, 180px 180px, 160px 160px, 220px 220px, 240px 240px, 190px 190px, 210px 210px, 170px 170px, 250px 250px, 140px 140px', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>

@@ -338,18 +338,34 @@ export default function Landing() {
                 overflow: 'hidden'
               }}>
                 <div>
-                  <h3 style={{ 
-                    background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontSize: '24px', 
-                    fontWeight: '700', 
-                    marginBottom: '8px',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginBottom: '16px'
                   }}>
-                    Free
-                  </h3>
+                    <img 
+                      src="/attached_assets/free-plan-icon.svg" 
+                      alt="Free Plan"
+                      style={{ 
+                        width: '48px', 
+                        height: '48px',
+                        marginRight: '12px'
+                      }}
+                    />
+                    <h3 style={{ 
+                      background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      fontSize: '24px', 
+                      fontWeight: '700', 
+                      margin: '0',
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                    }}>
+                      Free
+                    </h3>
+                  </div>
                   <p style={{
                     fontSize: '14px',
                     color: '#64748B',
@@ -465,18 +481,34 @@ export default function Landing() {
                   Most Popular
                 </div>
                 <div>
-                  <h3 style={{ 
-                    background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontSize: '24px', 
-                    fontWeight: '700', 
-                    marginBottom: '8px',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginBottom: '16px'
                   }}>
-                    Professional
-                  </h3>
+                    <img 
+                      src="/attached_assets/professional-plan-icon.svg" 
+                      alt="Professional Plan"
+                      style={{ 
+                        width: '48px', 
+                        height: '48px',
+                        marginRight: '12px'
+                      }}
+                    />
+                    <h3 style={{ 
+                      background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      fontSize: '24px', 
+                      fontWeight: '700', 
+                      margin: '0',
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                    }}>
+                      Professional
+                    </h3>
+                  </div>
                   <p style={{
                     fontSize: '14px',
                     color: '#64748B',
@@ -572,18 +604,34 @@ export default function Landing() {
                 overflow: 'hidden'
               }}>
                 <div>
-                  <h3 style={{ 
-                    background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontSize: '24px', 
-                    fontWeight: '700', 
-                    marginBottom: '8px',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginBottom: '16px'
                   }}>
-                    Enterprise
-                  </h3>
+                    <img 
+                      src="/attached_assets/enterprise-plan-icon.svg" 
+                      alt="Enterprise Plan"
+                      style={{ 
+                        width: '48px', 
+                        height: '48px',
+                        marginRight: '12px'
+                      }}
+                    />
+                    <h3 style={{ 
+                      background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      fontSize: '24px', 
+                      fontWeight: '700', 
+                      margin: '0',
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
+                    }}>
+                      Enterprise
+                    </h3>
+                  </div>
                   <p style={{
                     fontSize: '14px',
                     color: '#64748B',

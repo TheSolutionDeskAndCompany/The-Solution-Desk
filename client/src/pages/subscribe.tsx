@@ -59,19 +59,38 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
           border: '1px solid #334155',
           backdropFilter: 'blur(10px)'
         }}>
-          <h1 style={{
-            fontSize: '32px',
-            background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: '8px',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: '700',
-            textAlign: 'center'
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            marginBottom: '16px'
           }}>
-            Subscribe to {planType === 'enterprise' ? 'Enterprise' : 'Professional'}
-          </h1>
+            <img 
+              src={planType === 'professional' 
+                ? "/attached_assets/professional-plan-icon.svg" 
+                : "/attached_assets/enterprise-plan-icon.svg"}
+              alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan`}
+              style={{ 
+                width: '40px', 
+                height: '40px',
+                marginRight: '12px'
+              }}
+            />
+            <h1 style={{
+              fontSize: '32px',
+              background: planType === 'professional' 
+                ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              margin: '0',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              {planType === 'enterprise' ? 'Enterprise' : 'Professional'}
+            </h1>
+          </div>
           <p style={{
             fontSize: '18px',
             background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',

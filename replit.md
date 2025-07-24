@@ -26,6 +26,7 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
   - Fixed all Stripe payment integration issues and subscription management with proper API compatibility
   - Enhanced payment error handling with clear user feedback and authentication redirects
   - Added comprehensive product descriptions for all three subscription tiers explaining value propositions
+  - Created professional SVG product icons for each plan with brand-consistent neon gradients and visual themes
   - Updated navigation typography to 20px across all pages for improved readability and professional proportioning
   - Increased button sizes to 20px font with proportional padding (12px-24px) for better visual balance
   - Enhanced logo visibility with consistent 76-80px height across all navigation headers

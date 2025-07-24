@@ -112,7 +112,7 @@ export default function AutomationPage() {
   const runAutomationTool = async (tool: AutomationTool) => {
     if (!canAccessTool(tool)) {
       toast({
-        title: "🔒 Professional Feature",
+        title: "Professional Feature",
         description: `${tool.name} requires a ${tool.tier} subscription. Upgrade now to unlock advanced automation!`,
         variant: "destructive",
       });
@@ -161,117 +161,208 @@ export default function AutomationPage() {
 
   const getTierBadgeColor = (tier: string) => {
     switch (tier) {
-      case 'free': return 'bg-gray-100 text-gray-800';
-      case 'professional': return 'bg-blue-100 text-blue-800';
-      case 'enterprise': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'free': return 'bg-gray-500/20 text-gray-300 border-gray-500';
+      case 'professional': return 'bg-blue-500/20 text-blue-300 border-blue-500';
+      case 'enterprise': return 'bg-purple-500/20 text-purple-300 border-purple-500';
+      default: return 'bg-gray-500/20 text-gray-300 border-gray-500';
     }
   };
 
   if (authLoading || loadingStatus) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          width: '32px',
+          height: '32px',
+          border: '3px solid #9333EA',
+          borderTop: '3px solid transparent',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }}></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen" style={{
-      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%)',
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
-      {/* Background watermark logo */}
-      <div 
-        style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '800px',
-          height: '800px',
-          backgroundImage: 'url(/assets/logo_1753331638873.png)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          opacity: 0.03,
-          zIndex: 0,
-          pointerEvents: 'none'
-        }}
-      />
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 style={{
-            backgroundImage: 'linear-gradient(135deg, #22D3EE 0%, #3B82F6 50%, #8B5CF6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            fontSize: '3.5rem',
-            fontWeight: '800',
-            marginBottom: '1rem'
-          }}>
-            Automated Process Tools
-          </h1>
-          
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-6">
-            Leverage powerful automation tools to analyze, optimize, and improve your business processes. 
-            Advanced features unlock with higher subscription tiers.
-          </p>
-
-          {/* Current subscription status */}
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <span className="text-gray-300">Current Plan:</span>
-            <Badge className={`px-4 py-2 text-sm font-semibold ${getTierBadgeColor(subscription?.plan || 'free')}`}>
-              {subscription?.plan?.toUpperCase() || 'FREE'}
-            </Badge>
-            {subscription?.plan === 'free' && (
-              <button 
-                style={{
-                  background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #DC2626 100%)',
-                  color: 'white',
-                  padding: '12px 24px',
-                  fontSize: '16px',
-                  fontWeight: '700',
-                  border: 'none',
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  boxShadow: '0 8px 20px rgba(245, 158, 11, 0.4)',
-                  transition: 'all 0.3s ease',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
-                  animation: 'pulse 2s infinite'
-                }}
-                onClick={() => window.location.href = '/subscribe'}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(245, 158, 11, 0.6)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.4)';
-                }}
-              >
-                🚀 Upgrade to Professional
-              </button>
-            )}
+      {/* Navigation */}
+      <header style={{
+        backgroundColor: 'rgba(11, 20, 38, 0.95)',
+        borderBottom: '1px solid #334155',
+        padding: '0 20px',
+        backdropFilter: 'blur(10px)',
+        position: 'relative',
+        zIndex: 10
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          height: '70px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img 
+              src="/assets/logo_1753331638873.png" 
+              alt="The Solution Desk Logo" 
+              style={{ 
+                height: '36px', 
+                width: 'auto',
+                filter: 'brightness(1.3) saturate(1.2)'
+              }} 
+            />
+            <h1 style={{
+              fontSize: '28px',
+              color: '#9333EA',
+              margin: '0',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              Systoro
+            </h1>
+          </div>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <span style={{ color: '#CBD5E1', fontWeight: '500' }}>
+              Automation Tools
+            </span>
+            <button 
+              style={{
+                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                color: 'white',
+                padding: '10px 20px',
+                fontSize: '14px',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                boxShadow: '0 4px 12px rgba(34, 211, 238, 0.25)',
+                transition: 'all 0.2s ease'
+              }} 
+              onClick={() => window.location.href = '/'}
+            >
+              Back to Dashboard
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Tools Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+      {/* Main Content */}
+      <main style={{ padding: '40px 20px', position: 'relative', zIndex: 10 }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h1 style={{
+              fontSize: '48px',
+              fontWeight: '800',
+              margin: '0 0 16px 0',
+              background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Automated Process Tools
+            </h1>
+            
+            <p style={{ 
+              fontSize: '20px', 
+              color: '#94A3B8', 
+              maxWidth: '800px', 
+              margin: '0 auto 32px auto',
+              lineHeight: '1.6'
+            }}>
+              Leverage powerful automation tools to analyze, optimize, and improve your business processes. 
+              Advanced features unlock with higher subscription tiers.
+            </p>
+
+            {/* Current subscription status */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '32px' }}>
+              <span style={{ color: '#94A3B8', fontWeight: '500' }}>Current Plan:</span>
+              <div style={{ 
+                padding: '8px 16px', 
+                borderRadius: '20px',
+                border: '1px solid',
+                ...getTierBadgeColor(subscription?.plan || 'free').split(' ').reduce((acc, cls) => {
+                  if (cls.includes('bg-')) acc.backgroundColor = cls.replace('bg-', '').replace('/', '');
+                  if (cls.includes('text-')) acc.color = cls.replace('text-', '');
+                  if (cls.includes('border-')) acc.borderColor = cls.replace('border-', '');
+                  return acc;
+                }, {} as any)
+              }}>
+                {subscription?.plan?.toUpperCase() || 'FREE'}
+              </div>
+              {subscription?.plan === 'free' && (
+                <button 
+                  style={{
+                    background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #DC2626 100%)',
+                    color: 'white',
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    fontWeight: '700',
+                    border: 'none',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 20px rgba(245, 158, 11, 0.4)',
+                    transition: 'all 0.3s ease',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}
+                  onClick={() => window.location.href = '/subscribe'}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(245, 158, 11, 0.6)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.4)';
+                  }}
+                >
+                  Upgrade to Professional
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Tools Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
+            gap: '32px',
+            marginBottom: '48px'
+          }}>
           {automationTools.map((tool) => {
             const hasAccess = canAccessTool(tool);
             const isRunning = runningTool === tool.id;
             const hasResults = results[tool.id];
 
             return (
-              <Card key={tool.id} className="relative overflow-hidden border-2 transition-all duration-300 hover:shadow-lg" style={{
+              <div key={tool.id} style={{
                 background: hasAccess 
-                  ? 'linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)'
-                  : 'linear-gradient(135deg, rgba(107, 114, 128, 0.1) 0%, rgba(75, 85, 99, 0.1) 100%)',
-                borderColor: hasAccess ? '#22D3EE' : '#6B7280'
+                  ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
+                  : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                borderRadius: '16px',
+                padding: '24px',
+                border: hasAccess ? '2px solid #9333EA' : '2px solid #6B7280',
+                backdropFilter: 'blur(15px)',
+                boxShadow: hasAccess 
+                  ? '0 8px 24px rgba(147, 51, 234, 0.2)' 
+                  : '0 8px 24px rgba(0, 0, 0, 0.1)',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                overflow: 'hidden'
               }}>
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">

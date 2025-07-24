@@ -1,4 +1,4 @@
-import logoImage from "@assets/assets_task_01k0xxcddae2ztf238qpfhf1w6_1753350666_img_1_1753350706829.webp";
+import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
 
 export default function Landing() {
   return (
@@ -91,23 +91,43 @@ export default function Landing() {
             }}>
               Pricing
             </a>
-            <button 
-              style={{
-                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
-                color: 'white',
-                padding: '14px 28px',
-                fontSize: '20px',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '600',
-                boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
-                transition: 'all 0.2s ease'
-              }} 
-              onClick={() => window.location.href = '/auth'}
-            >
-              Sign In
-            </button>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <button 
+                style={{
+                  background: 'transparent',
+                  color: '#A78BFA',
+                  padding: '12px 24px',
+                  fontSize: '18px',
+                  border: '2px solid #A78BFA',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  transition: 'all 0.2s ease'
+                }} 
+                onClick={() => window.location.href = '/auth'}
+                aria-label="Sign in to existing account"
+              >
+                Sign In
+              </button>
+              <button 
+                style={{
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                  color: 'white',
+                  padding: '14px 28px',
+                  fontSize: '18px',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
+                  transition: 'all 0.2s ease'
+                }} 
+                onClick={() => window.location.href = '/auth'}
+                aria-label="Create new account"
+              >
+                Get Started
+              </button>
+            </div>
           </nav>
         </div>
       </header>

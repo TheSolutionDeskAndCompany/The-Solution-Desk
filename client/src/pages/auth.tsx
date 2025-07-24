@@ -286,22 +286,30 @@ export default function AuthPage() {
               </Button>
             </div>
 
-            <div className="mt-4 text-center" role="region" aria-label="Account options">
-              <button
-                type="button"
-                className="text-sm text-[#1D3557] hover:underline focus:ring-2 focus:ring-[#1D3557] focus:ring-offset-2 rounded px-2 py-1"
-                onClick={() => setIsLogin(!isLogin)}
-                aria-describedby="auth-toggle-help"
-              >
-                {isLogin
-                  ? "Don't have an account? Sign up"
-                  : "Already have an account? Sign in"}
-              </button>
-              <div id="auth-toggle-help" className="sr-only">
-                {isLogin 
-                  ? "Switch to registration form to create a new account"
-                  : "Switch to sign-in form if you already have an account"
-                }
+            <div className="mt-6 text-center" role="region" aria-label="Account options">
+              <div className="border-t pt-6">
+                <p className="text-sm text-gray-600 mb-3">
+                  {isLogin 
+                    ? "New to Systoro?" 
+                    : "Already have an account?"
+                  }
+                </p>
+                <button
+                  type="button"
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-[#1D3557] font-semibold py-3 px-4 rounded-lg focus:ring-2 focus:ring-[#1D3557] focus:ring-offset-2 transition-all"
+                  onClick={() => setIsLogin(!isLogin)}
+                  aria-describedby="auth-toggle-help"
+                >
+                  {isLogin
+                    ? "Create New Account"
+                    : "Sign In Instead"}
+                </button>
+                <div id="auth-toggle-help" className="sr-only">
+                  {isLogin 
+                    ? "Switch to registration form to create a new account"
+                    : "Switch to sign-in form if you already have an account"
+                  }
+                </div>
               </div>
             </div>
           </CardContent>

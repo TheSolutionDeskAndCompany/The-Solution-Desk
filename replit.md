@@ -11,6 +11,15 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Positioning**: All-in-one tool suite with simple tiered pricing
 - **Target**: Teams focused on results without complexity
 
+## Brand Style Guide
+- **Color Palette**: Deep Navy (#1D3557), Warm Orange (#F4A261), Cream White (#FDF6E3), Charcoal Gray (#333333), Soft Blue (#A8DADC)
+- **Typography**: Lora (headings), Open Sans/Roboto (body text)
+- **UI Style**: Professional but warm, rounded corners, soft shadows
+- **Updated**: July 24, 2025
+
+## Recent Changes
+- **July 24, 2025**: Implemented complete professional brand styling with Lora/Open Sans typography, updated color scheme across all components, enhanced tool cards with hover effects, and applied consistent visual hierarchy throughout the landing page
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

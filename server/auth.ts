@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import { Express } from "express";
 import session from "express-session";
@@ -76,47 +75,6 @@ export function setupAuth(app: Express) {
       }
     )
   );
-
-  // Google Strategy
-  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    passport.use(
-      new GoogleStrategy(
-        {
-          clientID: process.env.GOOGLE_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-          callbackURL: "/api/auth/google/callback",
-        },
-        async (accessToken, refreshToken, profile, done) => {
-          try {
-            let user = await storage.getUserByGoogleId(profile.id);
-            
-            if (!user) {
-              // Check if user exists with same email
-              const existingUser = await storage.getUserByEmail(profile.emails?.[0]?.value || '');
-              if (existingUser) {
-                // Link Google account to existing user
-                user = await storage.linkGoogleAccount(existingUser.id, profile.id);
-              } else {
-                // Create new user
-                user = await storage.createUser({
-                  email: profile.emails?.[0]?.value || '',
-                  firstName: profile.name?.givenName || '',
-                  lastName: profile.name?.familyName || '',
-                  profileImageUrl: profile.photos?.[0]?.value || '',
-                  googleId: profile.id,
-                  authProvider: 'google',
-                });
-              }
-            }
-            
-            return done(null, user);
-          } catch (error) {
-            return done(error);
-          }
-        }
-      )
-    );
-  }
 
   // GitHub Strategy
   if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
@@ -202,7 +160,7 @@ export function setupAuth(app: Express) {
     passport.authenticate("local", (err: any, user: any, info: any) => {
       if (err) return next(err);
       if (!user) {
-        return res.status(401).json({ message: info?.message || "Invalid credentials" });
+        return res.status(401).json({ message: info?.message || "Authentication failed" });
       }
       
       req.login(user, (err) => {
@@ -219,32 +177,11 @@ export function setupAuth(app: Express) {
     });
   });
 
-  app.get("/api/auth/user", (req, res) => {
-    if (!req.isAuthenticated()) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    res.json(req.user);
-  });
-
-  // Google OAuth routes
-  app.get("/api/auth/google", 
-    passport.authenticate("google", { scope: ["profile", "email"] })
-  );
-
-  app.get("/api/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/?error=google_auth_failed" }),
-    (req, res) => {
-      res.redirect("/");
-    }
-  );
-
   // GitHub OAuth routes
-  app.get("/api/auth/github",
-    passport.authenticate("github", { scope: ["user:email"] })
-  );
-
-  app.get("/api/auth/github/callback",
-    passport.authenticate("github", { failureRedirect: "/?error=github_auth_failed" }),
+  app.get("/api/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
+  
+  app.get("/api/auth/github/callback", 
+    passport.authenticate("github", { failureRedirect: "/auth?error=github_failed" }),
     (req, res) => {
       res.redirect("/");
     }
@@ -252,8 +189,8 @@ export function setupAuth(app: Express) {
 }
 
 export const isAuthenticated = (req: any, res: any, next: any) => {
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (req.isAuthenticated()) {
+    return next();
   }
-  next();
+  res.status(401).json({ message: "Unauthorized" });
 };

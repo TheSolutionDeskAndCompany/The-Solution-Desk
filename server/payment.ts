@@ -17,17 +17,15 @@ export async function createSubscription(userId: string, plan: 'professional' | 
     throw new Error('No user email on file');
   }
 
-  // Define pricing for different tiers
-  const planPricing = {
-    professional: { amount: 2900, name: 'Systoro Professional' }, // $29
-    enterprise: { amount: 4900, name: 'Systoro Enterprise' } // $49
+  // Define price IDs for different tiers
+  const planPriceIds = {
+    professional: process.env.STRIPE_PROFESSIONAL_PRICE_ID,
+    enterprise: process.env.STRIPE_ENTERPRISE_PRICE_ID
   };
 
-  if (!planPricing[plan]) {
-    throw new Error("Invalid plan selected");
+  if (!planPriceIds[plan]) {
+    throw new Error(`Missing Stripe price ID for ${plan} plan`);
   }
-
-  const selectedPlan = planPricing[plan];
 
   // Create or get customer
   let customerId = user.stripeCustomerId;
@@ -40,16 +38,11 @@ export async function createSubscription(userId: string, plan: 'professional' | 
     await storage.updateUserStripeInfo(userId, customerId, null);
   }
 
-  // Create subscription
+  // Create subscription using the actual Stripe price IDs
   const subscription = await stripe.subscriptions.create({
     customer: customerId,
     items: [{
-      price_data: {
-        currency: 'usd',
-        product: selectedPlan.name,
-        unit_amount: selectedPlan.amount,
-        recurring: { interval: 'month' }
-      }
+      price: planPriceIds[plan]
     }],
     payment_behavior: 'default_incomplete',
     expand: ['latest_invoice.payment_intent'],

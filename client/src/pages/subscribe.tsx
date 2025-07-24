@@ -67,8 +67,8 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
           }}>
             <img 
               src={planType === 'professional' 
-                ? "/attached_assets/professional-plan-icon.svg" 
-                : "/attached_assets/enterprise-plan-icon.svg"}
+                ? "/assets/professional-checkout-image.svg" 
+                : "/assets/enterprise-checkout-image.svg"}
               alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan`}
               style={{ 
                 width: '40px', 
@@ -114,8 +114,8 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
           }}>
             <img 
               src={planType === 'professional' 
-                ? "/attached_assets/professional-checkout-image.svg" 
-                : "/attached_assets/enterprise-checkout-image.svg"}
+                ? "/assets/professional-checkout-image.svg" 
+                : "/assets/enterprise-checkout-image.svg"}
               alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan Features`}
               style={{ 
                 width: '200px', 

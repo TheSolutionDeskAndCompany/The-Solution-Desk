@@ -121,12 +121,18 @@ export function setupAuth(app: Express) {
   }
 
   passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser(async (id: number, done) => {
+  passport.deserializeUser(async (id: any, done) => {
     try {
-      const user = await storage.getUser(id);
+      // Handle both string and number IDs for compatibility
+      const userId = typeof id === 'string' ? parseInt(id, 10) : id;
+      if (isNaN(userId)) {
+        return done(null, false);
+      }
+      const user = await storage.getUser(userId);
       done(null, user);
     } catch (error) {
-      done(error);
+      console.error("Deserialize user error:", error);
+      done(null, false); // Don't error out, just return no user
     }
   });
 

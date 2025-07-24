@@ -168,7 +168,7 @@ export default function Home() {
               boxShadow: '0 8px 24px rgba(34, 211, 238, 0.2)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                backgroundImage: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -180,7 +180,7 @@ export default function Home() {
                 Efficiency Score
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #0891B2 100%)',
+                backgroundImage: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #0891B2 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -207,7 +207,7 @@ export default function Home() {
               boxShadow: '0 8px 24px rgba(167, 139, 250, 0.2)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                backgroundImage: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -219,7 +219,7 @@ export default function Home() {
                 Quality Index
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #7C3AED 100%)',
+                backgroundImage: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #7C3AED 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

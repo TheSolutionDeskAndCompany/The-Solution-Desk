@@ -1,3 +1,5 @@
+import logoImage from "@assets/logo_1753331638873.png";
+
 export default function Landing() {
   return (
     <div style={{ 
@@ -22,7 +24,7 @@ export default function Landing() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
-              src="/attached_assets/logo_1753331638873.png" 
+              src={logoImage} 
               alt="The Solution Desk Logo" 
               style={{ 
                 height: '40px', 
@@ -95,7 +97,7 @@ export default function Landing() {
           <section style={{ textAlign: 'center', marginBottom: '80px' }}>
             <div style={{ textAlign: 'center', marginBottom: '24px' }}>
               <img 
-                src="/attached_assets/logo_1753331638873.png" 
+                src={logoImage} 
                 alt="The Solution Desk Logo" 
                 style={{ 
                   height: '120px', 

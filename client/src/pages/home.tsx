@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import logoImage from "@assets/logo_1753331638873.png";
 
 export default function Home() {
   const { user } = useAuth();
@@ -26,7 +27,7 @@ export default function Home() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
-              src="/attached_assets/logo_1753331638873.png" 
+              src={logoImage} 
               alt="The Solution Desk Logo" 
               style={{ 
                 height: '35px', 

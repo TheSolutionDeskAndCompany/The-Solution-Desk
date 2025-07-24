@@ -28,6 +28,18 @@ export default function AuthPage() {
     return null;
   }
 
+  // Show loading spinner while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#FDF6E3] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-[#1D3557] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#1D3557] font-medium">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   const loginMutation = useMutation({
     mutationFn: async (credentials: { email: string; password: string }) => {
       const response = await fetch("/api/auth/login", {

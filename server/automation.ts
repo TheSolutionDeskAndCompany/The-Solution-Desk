@@ -29,10 +29,26 @@ export const TIER_FEATURES = {
   }
 };
 
+// Testing overrides - allows temporary tier assignment for testing/comparison
+const TESTING_OVERRIDES: { [userId: string]: keyof typeof TIER_FEATURES } = {};
+
+export function setTestingTier(userId: string, tier: keyof typeof TIER_FEATURES) {
+  TESTING_OVERRIDES[userId] = tier;
+}
+
+export function clearTestingTier(userId: string) {
+  delete TESTING_OVERRIDES[userId];
+}
+
 export async function checkUserTierAccess(userId: string): Promise<keyof typeof TIER_FEATURES> {
   const user = await storage.getUser(userId);
   if (!user) {
     throw new Error("User not found");
+  }
+  
+  // Check for testing override first
+  if (TESTING_OVERRIDES[userId]) {
+    return TESTING_OVERRIDES[userId];
   }
   
   // Admin override - give full enterprise access to any @thesolutiondesk.ca email

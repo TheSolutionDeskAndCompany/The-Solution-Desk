@@ -5,7 +5,7 @@ import { setupAuth, isAuthenticated } from "./replitAuth";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
 import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
-import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess, checkUserTierAccess, TIER_FEATURES } from "./automation";
+import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess, checkUserTierAccess, TIER_FEATURES, setTestingTier, clearTestingTier } from "./automation";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -197,10 +197,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
         email: user?.email,
         currentTier: tier,
         features: TIER_FEATURES[tier],
-        isAdmin: user?.email && user.email.toLowerCase().endsWith('@thesolutiondesk.ca')
+        isAdmin: user?.email && user.email.toLowerCase().endsWith('@thesolutiondesk.ca'),
+        availableTiers: Object.keys(TIER_FEATURES)
       });
     } catch (error: any) {
       console.error("Tier status error:", error);
+      res.status(500).json({ error: { message: error.message } });
+    }
+  });
+
+  // Admin route to temporarily set testing tier for comparison
+  app.post('/api/admin/set-testing-tier', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      
+      // Only allow @thesolutiondesk.ca emails to use testing overrides
+      if (!user?.email || !user.email.toLowerCase().endsWith('@thesolutiondesk.ca')) {
+        return res.status(403).json({ message: "Admin access required" });
+      }
+      
+      const { tier, targetUserId } = req.body;
+      const testUserId = targetUserId || userId; // Default to current user
+      
+      if (!['free', 'professional', 'enterprise'].includes(tier)) {
+        return res.status(400).json({ message: "Invalid tier. Use: free, professional, or enterprise" });
+      }
+      
+      setTestingTier(testUserId, tier as keyof typeof TIER_FEATURES);
+      
+      res.json({ 
+        message: `Set testing tier to ${tier} for user ${testUserId}`,
+        newTier: tier,
+        features: TIER_FEATURES[tier as keyof typeof TIER_FEATURES]
+      });
+    } catch (error: any) {
+      console.error("Set testing tier error:", error);
+      res.status(500).json({ error: { message: error.message } });
+    }
+  });
+
+  // Admin route to clear testing tier override
+  app.post('/api/admin/clear-testing-tier', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      
+      // Only allow @thesolutiondesk.ca emails to clear testing overrides
+      if (!user?.email || !user.email.toLowerCase().endsWith('@thesolutiondesk.ca')) {
+        return res.status(403).json({ message: "Admin access required" });
+      }
+      
+      const { targetUserId } = req.body;
+      const testUserId = targetUserId || userId; // Default to current user
+      
+      clearTestingTier(testUserId);
+      
+      // Get the new tier after clearing override
+      const newTier = await checkUserTierAccess(testUserId);
+      
+      res.json({ 
+        message: `Cleared testing tier override for user ${testUserId}`,
+        newTier: newTier,
+        features: TIER_FEATURES[newTier]
+      });
+    } catch (error: any) {
+      console.error("Clear testing tier error:", error);
       res.status(500).json({ error: { message: error.message } });
     }
   });

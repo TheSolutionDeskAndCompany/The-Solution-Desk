@@ -276,7 +276,7 @@ export default function Demo() {
                 textAlign: 'center'
               }}>
                 <h4 style={{ 
-                  background: 'linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%)',
+                  background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -307,7 +307,10 @@ export default function Demo() {
             <div>
               <h3 style={{ 
                 fontSize: '24px', 
-                color: '#F1F5F9', 
+                background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
                 marginBottom: '24px',
                 fontWeight: '600'
               }}>
@@ -378,7 +381,10 @@ export default function Demo() {
             <div>
               <h3 style={{ 
                 fontSize: '24px', 
-                color: '#F1F5F9', 
+                background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
                 marginBottom: '24px',
                 fontWeight: '600'
               }}>
@@ -387,7 +393,10 @@ export default function Demo() {
               
               <div style={{ marginBottom: '32px' }}>
                 <h4 style={{ 
-                  color: '#10B981', 
+                  background: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                   fontSize: '18px', 
                   marginBottom: '16px',
                   fontWeight: '600'
@@ -450,7 +459,10 @@ export default function Demo() {
           }}>
             <h3 style={{ 
               fontSize: '28px', 
-              color: '#F1F5F9', 
+              background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '16px',
               fontWeight: '700'
             }}>

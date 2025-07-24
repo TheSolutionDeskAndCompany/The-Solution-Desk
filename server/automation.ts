@@ -29,21 +29,14 @@ export const TIER_FEATURES = {
   }
 };
 
-// Admin/testing email addresses that get full access
-const ADMIN_EMAILS = [
-  // Add your email and friends' emails here for free testing access
-  'admin@thesolutiondesk.ca',
-  'test@thesolutiondesk.ca'
-];
-
 export async function checkUserTierAccess(userId: string): Promise<keyof typeof TIER_FEATURES> {
   const user = await storage.getUser(userId);
   if (!user) {
     throw new Error("User not found");
   }
   
-  // Admin override - give full enterprise access for testing
-  if (user.email && ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+  // Admin override - give full enterprise access to any @thesolutiondesk.ca email
+  if (user.email && user.email.toLowerCase().endsWith('@thesolutiondesk.ca')) {
     return 'enterprise';
   }
   

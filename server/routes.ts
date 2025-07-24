@@ -197,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         email: user?.email,
         currentTier: tier,
         features: TIER_FEATURES[tier],
-        isAdmin: user?.email && ['admin@thesolutiondesk.ca', 'test@thesolutiondesk.ca'].includes(user.email.toLowerCase())
+        isAdmin: user?.email && user.email.toLowerCase().endsWith('@thesolutiondesk.ca')
       });
     } catch (error: any) {
       console.error("Tier status error:", error);

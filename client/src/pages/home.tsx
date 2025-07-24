@@ -25,15 +25,28 @@ export default function Home() {
           alignItems: 'center',
           height: '70px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img 
-              src={logoImage} 
-              alt="The Solution Desk Logo" 
-              style={{ 
-                height: '35px', 
-                width: 'auto'
-              }} 
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ 
+              width: '45px', 
+              height: '45px', 
+              borderRadius: '10px',
+              background: 'rgba(147, 51, 234, 0.1)',
+              border: '1px solid rgba(147, 51, 234, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '6px'
+            }}>
+              <img 
+                src={logoImage} 
+                alt="The Solution Desk Logo" 
+                style={{ 
+                  height: '28px', 
+                  width: 'auto',
+                  filter: 'brightness(1.2)'
+                }} 
+              />
+            </div>
             <h1 style={{
               fontSize: '28px',
               color: '#9333EA',

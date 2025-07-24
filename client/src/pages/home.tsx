@@ -92,7 +92,7 @@ export default function Home() {
               backdropFilter: 'blur(10px)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                background: 'linear-gradient(135deg, #00FFFF 0%, #40E0D0 50%, #20B2AA 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -104,7 +104,7 @@ export default function Home() {
                 Active Projects
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -112,7 +112,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>7</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #22D3EE 0%, #0EA5E9 100%)',
+                background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -129,7 +129,7 @@ export default function Home() {
               backdropFilter: 'blur(10px)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                background: 'linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -141,7 +141,7 @@ export default function Home() {
                 Cost Savings
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -149,7 +149,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>$127K</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

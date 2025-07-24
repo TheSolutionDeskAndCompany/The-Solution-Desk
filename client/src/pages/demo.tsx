@@ -276,7 +276,7 @@ export default function Demo() {
                 textAlign: 'center'
               }}>
                 <h4 style={{ 
-                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  background: 'linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -288,7 +288,7 @@ export default function Demo() {
                   {key.replace(/([A-Z])/g, ' $1').trim()}
                 </h4>
                 <p style={{ 
-                  background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

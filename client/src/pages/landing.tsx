@@ -103,7 +103,7 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <h1 style={{ 
                 fontSize: '56px', 
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -126,7 +126,7 @@ export default function Landing() {
             </div>
             <p style={{ 
               fontSize: '24px', 
-              background: 'linear-gradient(135deg, #CBD5E1 0%, #64748B 100%)',
+              background: 'linear-gradient(135deg, #00FFFF 0%, #1E90FF 50%, #9370DB 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -177,7 +177,7 @@ export default function Landing() {
             }}>
               <h2 style={{
                 fontSize: '48px',
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #FFD700 0%, #FF4500 50%, #DC143C 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -204,7 +204,7 @@ export default function Landing() {
             
             <p style={{
               fontSize: '20px',
-              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -216,7 +216,7 @@ export default function Landing() {
             
             <p style={{
               fontSize: '18px',
-              background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+              background: 'linear-gradient(135deg, #40E0D0 0%, #48D1CC 50%, #5F9EA0 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -270,7 +270,7 @@ export default function Landing() {
           <section id="pricing" style={{ textAlign: 'center' }}>
             <h2 style={{
               fontSize: '36px',
-              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              background: 'linear-gradient(135deg, #FFD700 0%, #FF8C00 50%, #FF6347 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -283,7 +283,7 @@ export default function Landing() {
             </h2>
             <p style={{
               fontSize: '18px',
-              background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+              background: 'linear-gradient(135deg, #00BFFF 0%, #87CEEB 50%, #4169E1 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -317,7 +317,7 @@ export default function Landing() {
               }}>
                 <div>
                   <h3 style={{ 
-                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -331,7 +331,7 @@ export default function Landing() {
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
-                      background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                      background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',

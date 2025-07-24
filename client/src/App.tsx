@@ -21,23 +21,11 @@ import Auth from "@/pages/auth";
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
 
+  // Show loading only briefly during initial load
   if (isLoading) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FDF6E3'
-      }}>
-        <div style={{
-          width: '32px',
-          height: '32px',
-          border: '3px solid #1D3557',
-          borderTop: '3px solid transparent',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite'
-        }}></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#FDF6E3]">
+        <div className="w-8 h-8 border-3 border-[#1D3557] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }

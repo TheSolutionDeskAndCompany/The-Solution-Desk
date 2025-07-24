@@ -7,7 +7,12 @@ export default function Home() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)',
+      backgroundImage: `
+        radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%)
+      `, 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
@@ -17,7 +22,7 @@ export default function Home() {
         top: '20px',
         right: '20px',
         zIndex: 5,
-        opacity: 0.3,
+        opacity: 0.45,
         pointerEvents: 'none'
       }}>
         <img 

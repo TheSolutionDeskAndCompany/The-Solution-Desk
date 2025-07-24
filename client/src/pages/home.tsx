@@ -11,23 +11,22 @@ export default function Home() {
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
-      {/* Fixed Background Logo */}
+      {/* Logo Banner */}
       <div style={{
         position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 1,
-        opacity: 0.15,
+        top: '20px',
+        right: '20px',
+        zIndex: 5,
+        opacity: 0.3,
         pointerEvents: 'none'
       }}>
         <img 
           src={logoImage} 
-          alt="Background Logo" 
+          alt="Solution Desk Logo" 
           style={{ 
-            height: '600px', 
+            height: '100px', 
             width: 'auto',
-            filter: 'brightness(2) saturate(0.6)'
+            filter: 'brightness(1.2) saturate(0.8)'
           }} 
         />
       </div>

@@ -4,12 +4,21 @@ export default function Landing() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)',
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A1F3A 50%, #2D1B42 100%)',
       backgroundImage: `
-        radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%)
-      `, 
+        /* Circuit board pattern - diagonal lines */
+        linear-gradient(45deg, transparent 45%, rgba(30, 58, 138, 0.3) 49%, rgba(30, 58, 138, 0.3) 51%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, rgba(30, 58, 138, 0.2) 49%, rgba(30, 58, 138, 0.2) 51%, transparent 55%),
+        linear-gradient(135deg, transparent 45%, rgba(30, 58, 138, 0.15) 49%, rgba(30, 58, 138, 0.15) 51%, transparent 55%),
+        /* Connection points */
+        radial-gradient(circle at 15% 25%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 35% 15%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 65% 35%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 25% 75%, rgba(244, 114, 182, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 75% 85%, rgba(244, 114, 182, 0.4) 1px, transparent 2px)
+      `,
+      backgroundSize: '80px 80px, 60px 60px, 100px 100px, 200px 200px, 150px 150px, 180px 180px, 220px 220px, 160px 160px, 190px 190px', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>

@@ -83,7 +83,7 @@ export function setupAuth(app: Express) {
         {
           clientID: process.env.GITHUB_CLIENT_ID,
           clientSecret: process.env.GITHUB_CLIENT_SECRET,
-          callbackURL: "/api/auth/github/callback",
+          callbackURL: "https://thesolutiondesk.ca/api/auth/github/callback",
         },
         async (accessToken: string, refreshToken: string, profile: any, done: any) => {
           try {
@@ -181,9 +181,9 @@ export function setupAuth(app: Express) {
   app.get("/api/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
   
   app.get("/api/auth/github/callback", 
-    passport.authenticate("github", { failureRedirect: "/auth?error=github_failed" }),
+    passport.authenticate("github", { failureRedirect: "https://thesolutiondesk.ca/auth?error=github_failed" }),
     (req, res) => {
-      res.redirect("/");
+      res.redirect("https://thesolutiondesk.ca/");
     }
   );
 }

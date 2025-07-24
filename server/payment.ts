@@ -81,8 +81,8 @@ export async function getSubscriptionStatus(userId: string) {
   return {
     status: subscription.status,
     plan: subscription.status === 'active' ? 'professional' : 'free',
-    current_period_end: new Date(subscription.current_period_end * 1000),
-    cancel_at_period_end: subscription.cancel_at_period_end
+    current_period_end: (subscription as any).current_period_end ? new Date((subscription as any).current_period_end * 1000) : null,
+    cancel_at_period_end: (subscription as any).cancel_at_period_end || false
   };
 }
 
@@ -98,6 +98,6 @@ export async function cancelSubscription(userId: string) {
 
   return {
     message: "Subscription will be cancelled at the end of the current period",
-    cancel_at: new Date(subscription.current_period_end * 1000)
+    cancel_at: (subscription as any).current_period_end ? new Date((subscription as any).current_period_end * 1000) : null
   };
 }

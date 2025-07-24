@@ -50,15 +50,15 @@ export default function Home() {
             </h1>
           </div>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <span style={{ color: '#CBD5E1', fontWeight: '500' }}>
+            <span style={{ color: '#CBD5E1', fontWeight: '500', fontSize: '18px' }}>
               Welcome, {user?.firstName || user?.email || 'User'}!
             </span>
             <button 
               style={{
                 background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%)',
                 color: 'white',
-                padding: '10px 20px',
-                fontSize: '18px',
+                padding: '12px 24px',
+                fontSize: '20px',
                 border: 'none',
                 borderRadius: '8px',
                 cursor: 'pointer',
@@ -74,8 +74,8 @@ export default function Home() {
               style={{
                 background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
                 color: 'white',
-                padding: '10px 20px',
-                fontSize: '18px',
+                padding: '12px 24px',
+                fontSize: '20px',
                 border: 'none',
                 borderRadius: '8px',
                 cursor: 'pointer',

@@ -78,8 +78,8 @@ export default function Landing() {
               style={{
                 background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                 color: 'white',
-                padding: '12px 24px',
-                fontSize: '16px',
+                padding: '14px 28px',
+                fontSize: '20px',
                 border: 'none',
                 borderRadius: '8px',
                 cursor: 'pointer',

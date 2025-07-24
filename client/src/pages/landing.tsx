@@ -290,7 +290,7 @@ export default function Landing() {
                   fontWeight: '600',
                   transition: 'all 0.2s ease'
                 }}
-                onClick={() => window.location.href = '/api/login'}
+                onClick={() => window.location.href = '/demo'}
               >
                 View Demo
               </button>

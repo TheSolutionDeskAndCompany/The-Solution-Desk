@@ -1,4 +1,5 @@
 
+import logoImage from "@assets/logo_1753331638873.png";
 
 export default function About() {
   return (
@@ -25,20 +26,20 @@ export default function About() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          height: '70px'
+          height: '90px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
               src={logoImage} 
               alt="The Solution Desk Logo" 
               style={{ 
-                height: '40px', 
+                height: '52px', 
                 width: 'auto',
                 filter: 'brightness(1.3) saturate(1.2)'
               }} 
             />
             <h1 style={{
-              fontSize: '28px',
+              fontSize: '32px',
               background: 'linear-gradient(135deg, #9333EA 0%, #7C3AED 50%, #C084FC 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',

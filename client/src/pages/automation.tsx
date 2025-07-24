@@ -200,20 +200,20 @@ export default function AutomationPage() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          height: '70px'
+          height: '90px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
               src={logoImage} 
               alt="Systoro Logo" 
               style={{ 
-                height: '36px', 
+                height: '48px', 
                 width: 'auto',
                 filter: 'brightness(1.3) saturate(1.2)'
               }} 
             />
             <h1 style={{
-              fontSize: '28px',
+              fontSize: '32px',
               color: '#9333EA',
               margin: '0',
               fontFamily: 'Inter, sans-serif',

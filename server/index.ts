@@ -6,6 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Debug middleware to see all requests
+app.use((req, res, next) => {
+  console.log(`[DEBUG] Incoming request: ${req.method} ${req.url}`);
+  next();
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;

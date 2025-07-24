@@ -6,28 +6,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
-import Dashboard from "@/pages/dashboard";
-import Projects from "@/pages/projects";
-import Analytics from "@/pages/analytics";
-import Billing from "@/pages/billing";
-import Subscribe from "@/pages/subscribe";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
 
   return (
     <Switch>
-      {isLoading || !isAuthenticated ? (
-        <Route path="/" component={Landing} />
-      ) : (
-        <>
-          <Route path="/" component={Dashboard} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/analytics" component={Analytics} />
-          <Route path="/billing" component={Billing} />
-          <Route path="/subscribe" component={Subscribe} />
-        </>
-      )}
+      <Route path="/" component={Landing} />
       <Route component={NotFound} />
     </Switch>
   );

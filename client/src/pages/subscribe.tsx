@@ -70,7 +70,7 @@ const SubscribeForm = () => {
             fontWeight: '700',
             textAlign: 'center'
           }}>
-            Subscribe to Professional
+            Subscribe to {planType === 'enterprise' ? 'Enterprise' : 'Professional'}
           </h1>
           <p style={{
             fontSize: '18px',
@@ -81,7 +81,10 @@ const SubscribeForm = () => {
             marginBottom: '32px',
             textAlign: 'center'
           }}>
-            Unlock unlimited projects and advanced features for $29/month
+            {planType === 'enterprise' 
+              ? 'Get advanced integrations and dedicated support for $49/month'
+              : 'Unlock unlimited projects and advanced features for $29/month'
+            }
           </p>
 
           <form onSubmit={handleSubmit}>
@@ -117,18 +120,30 @@ const SubscribeForm = () => {
 
 export default function Subscribe() {
   const [clientSecret, setClientSecret] = useState("");
+  const [planType, setPlanType] = useState("professional");
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // Create subscription as soon as the page loads
-    apiRequest("POST", "/api/get-or-create-subscription")
+    // Get plan from URL params or default to professional
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPlan = urlParams.get('plan') || 'professional';
+    setPlanType(selectedPlan);
+    
+    // Create subscription for selected plan
+    apiRequest("POST", "/api/create-subscription", { plan: selectedPlan })
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error creating subscription:", error);
+      .catch(err => {
+        console.error("Error creating subscription:", err);
+        toast({
+          title: "Error",
+          description: "Failed to initialize payment. Please try again.",
+          variant: "destructive",
+        });
         setLoading(false);
       });
   }, []);

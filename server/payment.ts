@@ -22,7 +22,7 @@ export async function createSubscription(userId: string, plan: 'professional' | 
   // Define pricing for different tiers
   const planPricing = {
     professional: { amount: 2900, name: 'Systoro Professional' }, // $29
-    enterprise: { amount: 9900, name: 'Systoro Enterprise' } // $99 (placeholder for custom pricing)
+    enterprise: { amount: 4900, name: 'Systoro Enterprise' } // $49
   };
 
   if (!planPricing[plan]) {

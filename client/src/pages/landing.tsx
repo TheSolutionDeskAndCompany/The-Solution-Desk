@@ -537,14 +537,14 @@ export default function Landing() {
                   </h3>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
-                      fontSize: '32px', 
+                      fontSize: '48px', 
                       background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
                       fontWeight: '800',
                       textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
-                    }}>Custom</span>
+                    }}>$49</span>
                     <span style={{ 
                       background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                       WebkitBackgroundClip: 'text',
@@ -552,7 +552,7 @@ export default function Landing() {
                       backgroundClip: 'text',
                       fontSize: '16px',
                       textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
-                    }}> pricing</span>
+                    }}>/month</span>
                   </div>
                   <ul style={{ 
                     listStyle: 'none', 
@@ -600,11 +600,13 @@ export default function Landing() {
                     transition: 'all 0.2s ease'
                   }}
                   onClick={() => {
-                    // For Enterprise, redirect to contact page
-                    window.location.href = '/contact';
+                    // Create subscription checkout for Enterprise plan
+                    const url = new URL('/subscribe', window.location.origin);
+                    url.searchParams.set('plan', 'enterprise');
+                    window.location.href = url.toString();
                   }}
                 >
-                  Contact Sales
+                  Start Enterprise Plan
                 </button>
               </div>
             </div>

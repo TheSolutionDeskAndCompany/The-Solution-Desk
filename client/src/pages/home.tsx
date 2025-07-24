@@ -159,14 +159,16 @@ export default function Home() {
             </div>
 
             <div style={{
-              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
+              backgroundColor: 'rgba(30, 41, 59, 0.8)',
               borderRadius: '16px',
               padding: '24px',
-              border: '1px solid #334155',
-              backdropFilter: 'blur(10px)'
+              border: '2px solid #22D3EE',
+              backdropFilter: 'blur(15px)',
+              boxShadow: '0 8px 24px rgba(34, 211, 238, 0.2)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -178,7 +180,7 @@ export default function Home() {
                 Efficiency Score
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #0891B2 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -186,7 +188,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>94%</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #22D3EE 0%, #0EA5E9 100%)',
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -196,14 +198,16 @@ export default function Home() {
             </div>
 
             <div style={{
-              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%)',
+              backgroundColor: 'rgba(30, 41, 59, 0.8)',
               borderRadius: '16px',
               padding: '24px',
-              border: '1px solid #334155',
-              backdropFilter: 'blur(10px)'
+              border: '2px solid #A78BFA',
+              backdropFilter: 'blur(15px)',
+              boxShadow: '0 8px 24px rgba(167, 139, 250, 0.2)'
             }}>
               <h3 style={{ 
-                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -215,7 +219,7 @@ export default function Home() {
                 Quality Index
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #7C3AED 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

@@ -50,6 +50,9 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
     - Migrated authentication to use auto-incrementing numeric user IDs for better performance
     - Fixed all route handlers and business logic to use new authentication system
     - Removed Google OAuth to avoid additional costs, focusing on GitHub and email authentication
+    - **Comprehensive Accessibility**: Added full screen reader support, ARIA labels, semantic HTML
+    - **Authentication Fixed**: Sign-in/sign-up toggle working with test account (test@example.com/password)
+    - **Domain Setup**: Planning to use Replit domain forwarding instead of DNS record management
 
 ## User Preferences
 
@@ -176,5 +179,7 @@ Required environment variables:
 
 ### Custom Domain Setup
 - **Primary Domain**: thesolutiondesk.ca
-- **Platform**: Replit Deployments with custom domain configuration
+- **Platform**: Replit Deployments with custom domain forwarding/aliasing
+- **Setup Method**: Domain forwarding instead of DNS record management
 - **Benefits**: Professional branding, SEO optimization, customer trust
+- **Note**: Using Replit's domain forwarding feature to avoid DNS record verification issues

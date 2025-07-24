@@ -1,18 +1,11 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import Stripe from "stripe";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
-
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-06-30.basil",
-});
+import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
+import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess } from "./automation";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -184,63 +177,93 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Stripe subscription route
-  app.post('/api/get-or-create-subscription', isAuthenticated, async (req: any, res) => {
+  // Create subscription for specific tier
+  app.post('/api/create-subscription', isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
-      let user = await storage.getUser(userId);
+      const { plan } = req.body;
       
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      if (user.stripeSubscriptionId) {
-        const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-        
-        const invoice = await stripe.invoices.retrieve(subscription.latest_invoice as string, {
-          expand: ['payment_intent'],
-        });
-
-        res.json({
-          subscriptionId: subscription.id,
-          clientSecret: (invoice as any).payment_intent?.client_secret,
-        });
-        return;
-      }
-      
-      if (!user.email) {
-        throw new Error('No user email on file');
-      }
-
-      const customer = await stripe.customers.create({
-        email: user.email,
-        name: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
-      });
-
-      const subscription = await stripe.subscriptions.create({
-        customer: customer.id,
-        items: [{
-          price_data: {
-            currency: 'usd',
-            product_data: { name: 'Systoro Professional' },
-            unit_amount: 2900, // $29.00
-            recurring: { interval: 'month' }
-          }
-        }],
-        payment_behavior: 'default_incomplete',
-        expand: ['latest_invoice.payment_intent'],
-      });
-
-      await storage.updateUserStripeInfo(userId, customer.id, subscription.id);
-  
-      const invoice = subscription.latest_invoice as any;
-      res.json({
-        subscriptionId: subscription.id,
-        clientSecret: invoice.payment_intent.client_secret,
-      });
+      const result = await createSubscription(userId, plan);
+      res.json(result);
     } catch (error: any) {
       console.error("Subscription error:", error);
       return res.status(400).json({ error: { message: error.message } });
+    }
+  });
+
+  // Check subscription status
+  app.get('/api/subscription-status', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const status = await getSubscriptionStatus(userId);
+      res.json(status);
+    } catch (error: any) {
+      console.error("Subscription status error:", error);
+      res.status(500).json({ message: "Failed to check subscription status" });
+    }
+  });
+
+  // Cancel subscription
+  app.post('/api/cancel-subscription', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const result = await cancelSubscription(userId);
+      res.json(result);
+    } catch (error: any) {
+      console.error("Cancel subscription error:", error);
+      res.status(500).json({ message: "Failed to cancel subscription" });
+    }
+  });
+
+  // Automated analysis routes
+  app.post('/api/projects/:id/analyze', isAuthenticated, async (req: any, res) => {
+    try {
+      const projectId = parseInt(req.params.id);
+      const project = await storage.getProject(projectId);
+      
+      if (!project || project.userId !== req.user.claims.sub) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      const analysis = await runAutomatedAnalysis(projectId);
+      res.json(analysis);
+    } catch (error: any) {
+      console.error("Analysis error:", error);
+      res.status(500).json({ message: "Failed to run automated analysis" });
+    }
+  });
+
+  app.get('/api/projects/:id/insights', isAuthenticated, async (req: any, res) => {
+    try {
+      const projectId = parseInt(req.params.id);
+      const project = await storage.getProject(projectId);
+      
+      if (!project || project.userId !== req.user.claims.sub) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      const insights = await generateProjectInsights(projectId);
+      res.json(insights);
+    } catch (error: any) {
+      console.error("Insights error:", error);
+      res.status(500).json({ message: "Failed to generate insights" });
+    }
+  });
+
+  app.post('/api/projects/:id/optimize', isAuthenticated, async (req: any, res) => {
+    try {
+      const projectId = parseInt(req.params.id);
+      const project = await storage.getProject(projectId);
+      
+      if (!project || project.userId !== req.user.claims.sub) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      const optimization = await autoOptimizeProcess(projectId);
+      res.json(optimization);
+    } catch (error: any) {
+      console.error("Optimization error:", error);
+      res.status(500).json({ message: "Failed to optimize process" });
     }
   });
 

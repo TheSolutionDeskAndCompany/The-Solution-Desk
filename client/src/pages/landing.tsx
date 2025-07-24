@@ -599,7 +599,10 @@ export default function Landing() {
                     width: '100%',
                     transition: 'all 0.2s ease'
                   }}
-                  onClick={() => window.location.href = '/contact'}
+                  onClick={() => {
+                    // For Enterprise, redirect to contact page
+                    window.location.href = '/contact';
+                  }}
                 >
                   Contact Sales
                 </button>

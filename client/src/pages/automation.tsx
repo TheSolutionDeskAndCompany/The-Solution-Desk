@@ -207,7 +207,7 @@ export default function AutomationPage() {
               src={logoImage} 
               alt="Systoro Logo" 
               style={{ 
-                height: '60px', 
+                height: '76px', 
                 width: 'auto',
                 filter: 'brightness(1.3) saturate(1.2)'
               }} 

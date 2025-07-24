@@ -87,7 +87,7 @@ export default function Landing() {
                 boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
                 transition: 'all 0.2s ease'
               }} 
-              onClick={() => window.location.href = '/api/login'}
+              onClick={() => window.location.href = '/auth'}
             >
               Sign In
             </button>
@@ -249,7 +249,7 @@ export default function Landing() {
                   boxShadow: '0 8px 20px rgba(167, 139, 250, 0.3)',
                   transition: 'all 0.2s ease'
                 }} 
-                onClick={() => window.location.href = '/api/login'}
+                onClick={() => window.location.href = '/auth'}
               >
                 Try Systoro Free
               </button>
@@ -425,7 +425,7 @@ export default function Landing() {
                     boxShadow: '0 4px 12px rgba(34, 211, 238, 0.3)',
                     transition: 'all 0.2s ease'
                   }}
-                  onClick={() => window.location.href = '/api/login'}
+                  onClick={() => window.location.href = '/auth'}
                 >
                   Get Started Free
                 </button>

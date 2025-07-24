@@ -12,6 +12,11 @@ import Demo from "@/pages/demo";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Automation from "@/pages/automation";
+import Analytics from "@/pages/analytics";
+import Billing from "@/pages/billing";
+import Dashboard from "@/pages/dashboard";
+import Projects from "@/pages/projects";
+import Auth from "@/pages/auth";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -42,7 +47,11 @@ function Router() {
       {isAuthenticated ? (
         <>
           <Route path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/projects" component={Projects} />
+          <Route path="/analytics" component={Analytics} />
           <Route path="/automation" component={Automation} />
+          <Route path="/billing" component={Billing} />
           <Route path="/subscribe" component={Subscribe} />
           <Route path="/contact" component={Contact} />
         </>
@@ -53,6 +62,7 @@ function Router() {
           <Route path="/subscribe" component={Subscribe} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
+          <Route path="/auth" component={Auth} />
         </>
       )}
       <Route path="*" component={NotFound} />

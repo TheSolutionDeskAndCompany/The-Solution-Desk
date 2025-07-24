@@ -1,8 +1,41 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
 import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
 
 export default function Home() {
   const { user } = useAuth();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+      
+      if (!response.ok) {
+        throw new Error("Logout failed");
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.setQueryData(["/api/auth/user"], null);
+      toast({
+        title: "Success",
+        description: "Successfully logged out!",
+      });
+      window.location.href = "/";
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Logout failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
 
   return (
     <div style={{ 
@@ -83,7 +116,7 @@ export default function Home() {
                 boxShadow: '0 4px 12px rgba(34, 211, 238, 0.25)',
                 transition: 'all 0.2s ease'
               }} 
-              onClick={() => window.location.href = '/api/logout'}
+              onClick={() => logoutMutation.mutate()}
             >
               Sign Out
             </button>

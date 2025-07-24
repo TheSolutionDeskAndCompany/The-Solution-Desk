@@ -6,21 +6,39 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
+import Home from "@/pages/home";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FDF6E3'
+      }}>
+        <div style={{
+          width: '32px',
+          height: '32px',
+          border: '3px solid #1D3557',
+          borderTop: '3px solid transparent',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }}></div>
       </div>
     );
   }
 
   return (
     <Switch>
-      <Route path="/" component={Landing} />
+      {isAuthenticated ? (
+        <Route path="/" component={Home} />
+      ) : (
+        <Route path="/" component={Landing} />
+      )}
       <Route path="*" component={NotFound} />
     </Switch>
   );

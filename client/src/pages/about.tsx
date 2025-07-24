@@ -140,7 +140,10 @@ export default function About() {
           </h2>
           <p style={{
             fontSize: '24px',
-            color: '#CBD5E1',
+            background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             maxWidth: '800px',
             margin: '0 auto'
           }}>
@@ -170,7 +173,10 @@ export default function About() {
             </h3>
             <p style={{
               fontSize: '16px',
-              color: '#CBD5E1'
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
             }}>
               We empower teams to streamline their path to better processes through intelligent tools that automate complexity and deliver measurable results. Our platform transforms the way organizations approach continuous improvement.
             </p>
@@ -192,7 +198,10 @@ export default function About() {
             </h3>
             <p style={{
               fontSize: '16px',
-              color: '#CBD5E1'
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
             }}>
               We believe process improvement shouldn't be complicated. Our suite of integrated tools handles the complex analysis while you focus on implementation and results. Smart automation meets practical application.
             </p>
@@ -214,7 +223,10 @@ export default function About() {
             </h3>
             <p style={{
               fontSize: '16px',
-              color: '#CBD5E1'
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
             }}>
               Teams using our platform see average improvements of 30% in process efficiency, 25% reduction in operational costs, and 40% faster problem resolution. Real results through intelligent process optimization.
             </p>

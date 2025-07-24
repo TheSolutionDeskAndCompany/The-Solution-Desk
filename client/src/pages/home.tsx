@@ -213,7 +213,14 @@ export default function Home() {
                   <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
                     Customer Service Process Review
                   </h3>
-                  <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '8px' }}>
+                  <p style={{ 
+                    background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontSize: '14px', 
+                    marginBottom: '8px' 
+                  }}>
                     Six Sigma DMAIC approach to reduce response time
                   </p>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -249,7 +256,14 @@ export default function Home() {
                   <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
                     Inventory Management Improvement
                   </h3>
-                  <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '8px' }}>
+                  <p style={{ 
+                    background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontSize: '14px', 
+                    marginBottom: '8px' 
+                  }}>
                     Implement just-in-time principles to reduce waste
                   </p>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -321,7 +335,14 @@ export default function Home() {
                   <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>📊</span>
                 </div>
                 <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Control Charts</h3>
-                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: '1.5' }}>
+                <p style={{ 
+                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontSize: '14px', 
+                  lineHeight: '1.5' 
+                }}>
                   Monitor process stability with statistical control charts
                 </p>
               </div>
@@ -347,7 +368,14 @@ export default function Home() {
                   <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>📈</span>
                 </div>
                 <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Pareto Analysis</h3>
-                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: '1.5' }}>
+                <p style={{ 
+                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontSize: '14px', 
+                  lineHeight: '1.5' 
+                }}>
                   Identify the vital few factors impacting your process
                 </p>
               </div>

@@ -61,7 +61,10 @@ const SubscribeForm = () => {
         }}>
           <h1 style={{
             fontSize: '32px',
-            color: '#F1F5F9',
+            background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             marginBottom: '8px',
             fontFamily: 'Inter, sans-serif',
             fontWeight: '700',
@@ -71,7 +74,10 @@ const SubscribeForm = () => {
           </h1>
           <p style={{
             fontSize: '18px',
-            color: '#94A3B8',
+            background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             marginBottom: '32px',
             textAlign: 'center'
           }}>

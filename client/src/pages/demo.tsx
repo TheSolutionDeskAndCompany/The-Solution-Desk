@@ -164,7 +164,10 @@ export default function Demo() {
             </h2>
             <p style={{ 
               fontSize: '18px', 
-              color: '#94A3B8', 
+              background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '32px'
             }}>
               Switch between tiers to see exactly what features and data you get at each level

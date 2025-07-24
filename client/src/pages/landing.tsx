@@ -126,7 +126,10 @@ export default function Landing() {
             </div>
             <p style={{ 
               fontSize: '24px', 
-              color: '#94A3B8', 
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #64748B 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               maxWidth: '800px',
               margin: '0 auto 40px auto',
               lineHeight: '1.6',
@@ -201,7 +204,10 @@ export default function Landing() {
             
             <p style={{
               fontSize: '20px',
-              color: '#CBD5E1',
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '16px',
               fontWeight: '600'
             }}>
@@ -210,7 +216,10 @@ export default function Landing() {
             
             <p style={{
               fontSize: '18px',
-              color: '#94A3B8',
+              background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               maxWidth: '700px',
               margin: '0 auto 40px auto',
               lineHeight: '1.7'
@@ -274,7 +283,10 @@ export default function Landing() {
             </h2>
             <p style={{
               fontSize: '18px',
-              color: '#94A3B8',
+              background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '48px',
               maxWidth: '600px',
               margin: '0 auto 48px auto',

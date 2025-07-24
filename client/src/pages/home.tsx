@@ -231,7 +231,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>4.8</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
+                backgroundImage: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -252,7 +252,7 @@ export default function Home() {
           }}>
             <h2 style={{
               fontSize: '24px',
-              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              backgroundImage: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -311,7 +311,7 @@ export default function Home() {
               }}>
                 <div>
                   <h3 style={{ 
-                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    backgroundImage: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -322,7 +322,7 @@ export default function Home() {
                     Customer Service Process Review
                   </h3>
                   <p style={{ 
-                    background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                    backgroundImage: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -362,7 +362,7 @@ export default function Home() {
               }}>
                 <div>
                   <h3 style={{ 
-                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    backgroundImage: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -373,7 +373,7 @@ export default function Home() {
                     Inventory Management Improvement
                   </h3>
                   <p style={{ 
-                    background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                    backgroundImage: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -414,7 +414,7 @@ export default function Home() {
           }}>
             <h2 style={{
               fontSize: '24px',
-              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              backgroundImage: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -452,7 +452,7 @@ export default function Home() {
                 </div>
                 <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Control Charts</h3>
                 <p style={{ 
-                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  backgroundImage: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -485,7 +485,7 @@ export default function Home() {
                 </div>
                 <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Pareto Analysis</h3>
                 <p style={{ 
-                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  backgroundImage: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

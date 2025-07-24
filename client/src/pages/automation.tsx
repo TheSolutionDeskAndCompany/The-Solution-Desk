@@ -40,15 +40,15 @@ const automationTools: AutomationTool[] = [
   {
     id: 'insights',
     name: 'Process Intelligence Engine',
-    description: 'Advanced data-driven insights using statistical models to identify improvement opportunities and performance patterns.',
+    description: 'Advanced statistical analysis using Six Sigma methodology to identify improvement opportunities and performance patterns.',
     icon: <Brain className="w-6 h-6" />,
     tier: 'professional',
     features: [
-      'Process efficiency scoring algorithms',
-      'Data-driven improvement opportunities',
-      'Statistical risk assessment models',
+      'Six Sigma statistical analysis',
+      'Process capability studies (Cp/Cpk)',
+      'Risk assessment with mitigation strategies',
       'Performance benchmarking analysis',
-      'Predictive trend modeling'
+      'Trend analysis with regression modeling'
     ],
     endpoint: 'insights'
   },

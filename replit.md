@@ -150,7 +150,7 @@ Required environment variables:
 - `SESSION_SECRET`: Session encryption secret
 - `REPL_ID`: Replit application identifier
 - `ISSUER_URL`: OpenID Connect issuer URL
-- `OPENAI_API_KEY`: Optional - for advanced AI insights (falls back to statistical analysis)
+
 
 ### Custom Domain Setup
 - **Primary Domain**: thesolutiondesk.ca

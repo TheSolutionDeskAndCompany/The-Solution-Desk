@@ -337,7 +337,8 @@ export default function Landing() {
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
               gap: '32px',
               maxWidth: '1200px',
-              margin: '0 auto'
+              margin: '0 auto',
+              paddingTop: '20px'
             }}>
               {/* Free Plan */}
               <div style={{
@@ -461,7 +462,7 @@ export default function Landing() {
               }}>
                 <div style={{
                   position: 'absolute',
-                  top: '-12px',
+                  top: '-8px',
                   left: '50%',
                   transform: 'translateX(-50%)',
                   background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',

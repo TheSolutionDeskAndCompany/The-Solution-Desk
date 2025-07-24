@@ -224,7 +224,7 @@ export default function Demo() {
             </h3>
             {selectedTier === 'free' && (
               <p style={{ 
-                background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -236,7 +236,7 @@ export default function Demo() {
             )}
             {selectedTier === 'professional' && (
               <p style={{ 
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -248,7 +248,7 @@ export default function Demo() {
             )}
             {selectedTier === 'enterprise' && (
               <p style={{ 
-                background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -393,7 +393,7 @@ export default function Demo() {
               
               <div style={{ marginBottom: '32px' }}>
                 <h4 style={{ 
-                  background: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
+                  background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -406,8 +406,8 @@ export default function Demo() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {currentData.tools.map((tool, index) => (
                     <div key={index} style={{
-                      backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                      backgroundColor: 'rgba(0, 206, 209, 0.1)',
+                      border: '1px solid rgba(0, 206, 209, 0.3)',
                       borderRadius: '8px',
                       padding: '12px 16px',
                       color: '#F1F5F9',
@@ -422,7 +422,10 @@ export default function Demo() {
               {currentData.restrictions.length > 0 && (
                 <div>
                   <h4 style={{ 
-                    color: '#EF4444', 
+                    background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
                     fontSize: '18px', 
                     marginBottom: '16px',
                     fontWeight: '600'
@@ -432,8 +435,8 @@ export default function Demo() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {currentData.restrictions.map((restriction, index) => (
                       <div key={index} style={{
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                        border: '1px solid rgba(239, 68, 68, 0.3)',
+                        backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                        border: '1px solid rgba(148, 163, 184, 0.3)',
                         borderRadius: '8px',
                         padding: '12px 16px',
                         color: '#F1F5F9',
@@ -479,14 +482,15 @@ export default function Demo() {
               <button 
                 onClick={() => window.location.href = '/api/login'}
                 style={{
-                  backgroundColor: '#10B981',
+                  background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 100%)',
                   color: '#FFFFFF',
                   border: 'none',
                   padding: '16px 32px',
                   borderRadius: '12px',
                   fontSize: '18px',
                   fontWeight: '600',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0, 206, 209, 0.3)'
                 }}
               >
                 Start Free Trial

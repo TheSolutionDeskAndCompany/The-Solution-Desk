@@ -162,11 +162,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Project not found" });
       }
       
-      const metrics = insertProjectMetricsSchema.parse(req.body);
-      const newMetrics = await storage.addProjectMetrics(projectId, {
-        ...metrics,
-        projectId
-      });
+      const metricsData = insertProjectMetricsSchema.parse(req.body);
+      const newMetrics = await storage.addProjectMetrics(projectId, metricsData);
       res.json(newMetrics);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -215,55 +212,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Automated analysis routes
+  // Automated analysis routes with tier-based access
   app.post('/api/projects/:id/analyze', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const project = await storage.getProject(projectId);
+      const userId = req.user.claims.sub;
       
-      if (!project || project.userId !== req.user.claims.sub) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-      
-      const analysis = await runAutomatedAnalysis(projectId);
+      const analysis = await runAutomatedAnalysis(projectId, userId);
       res.json(analysis);
     } catch (error: any) {
       console.error("Analysis error:", error);
-      res.status(500).json({ message: "Failed to run automated analysis" });
+      const message = error.message || "Failed to run automated analysis";
+      
+      if (message.includes("requires Professional") || message.includes("requires Enterprise")) {
+        return res.status(403).json({ message, requiresUpgrade: true });
+      }
+      
+      res.status(500).json({ message });
     }
   });
 
-  app.get('/api/projects/:id/insights', isAuthenticated, async (req: any, res) => {
+  app.post('/api/projects/:id/insights', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const project = await storage.getProject(projectId);
+      const userId = req.user.claims.sub;
       
-      if (!project || project.userId !== req.user.claims.sub) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-      
-      const insights = await generateProjectInsights(projectId);
+      const insights = await generateProjectInsights(projectId, userId);
       res.json(insights);
     } catch (error: any) {
       console.error("Insights error:", error);
-      res.status(500).json({ message: "Failed to generate insights" });
+      const message = error.message || "Failed to generate insights";
+      
+      if (message.includes("requires Professional") || message.includes("requires Enterprise")) {
+        return res.status(403).json({ message, requiresUpgrade: true });
+      }
+      
+      res.status(500).json({ message });
     }
   });
 
   app.post('/api/projects/:id/optimize', isAuthenticated, async (req: any, res) => {
     try {
       const projectId = parseInt(req.params.id);
-      const project = await storage.getProject(projectId);
+      const userId = req.user.claims.sub;
       
-      if (!project || project.userId !== req.user.claims.sub) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-      
-      const optimization = await autoOptimizeProcess(projectId);
+      const optimization = await autoOptimizeProcess(projectId, userId);
       res.json(optimization);
     } catch (error: any) {
       console.error("Optimization error:", error);
-      res.status(500).json({ message: "Failed to optimize process" });
+      const message = error.message || "Failed to optimize process";
+      
+      if (message.includes("requires Professional") || message.includes("requires Enterprise")) {
+        return res.status(403).json({ message, requiresUpgrade: true });
+      }
+      
+      res.status(500).json({ message });
     }
   });
 

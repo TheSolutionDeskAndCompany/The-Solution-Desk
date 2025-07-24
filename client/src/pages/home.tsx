@@ -55,6 +55,23 @@ export default function Home() {
             </span>
             <button 
               style={{
+                background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%)',
+                color: 'white',
+                padding: '10px 20px',
+                fontSize: '14px',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                boxShadow: '0 4px 12px rgba(139, 92, 246, 0.25)',
+                transition: 'all 0.2s ease'
+              }} 
+              onClick={() => window.location.href = '/automation'}
+            >
+              🤖 Automation Tools
+            </button>
+            <button 
+              style={{
                 background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
                 color: 'white',
                 padding: '10px 20px',

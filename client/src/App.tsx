@@ -11,6 +11,7 @@ import Subscribe from "@/pages/subscribe";
 import Demo from "@/pages/demo";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import Automation from "@/pages/automation";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -41,6 +42,7 @@ function Router() {
       {isAuthenticated ? (
         <>
           <Route path="/" component={Home} />
+          <Route path="/automation" component={Automation} />
           <Route path="/subscribe" component={Subscribe} />
           <Route path="/contact" component={Contact} />
         </>

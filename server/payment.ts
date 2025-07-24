@@ -6,7 +6,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16",
+  apiVersion: "2025-06-30.basil",
 });
 
 export async function createSubscription(userId: string, plan: 'professional' | 'enterprise') {
@@ -48,7 +48,7 @@ export async function createSubscription(userId: string, plan: 'professional' | 
     items: [{
       price_data: {
         currency: 'usd',
-        product_data: { name: selectedPlan.name },
+        product: { name: selectedPlan.name },
         unit_amount: selectedPlan.amount,
         recurring: { interval: 'month' }
       }
@@ -83,8 +83,8 @@ export async function getSubscriptionStatus(userId: string) {
   return {
     status: subscription.status,
     plan: subscription.status === 'active' ? 'professional' : 'free',
-    current_period_end: subscription.current_period_end,
-    cancel_at_period_end: subscription.cancel_at_period_end
+    current_period_end: subscription.current_period_end as number,
+    cancel_at_period_end: subscription.cancel_at_period_end as boolean
   };
 }
 
@@ -100,6 +100,6 @@ export async function cancelSubscription(userId: string) {
 
   return {
     message: "Subscription will be cancelled at the end of the current period",
-    cancel_at: subscription.current_period_end
+    cancel_at: subscription.current_period_end as number
   };
 }

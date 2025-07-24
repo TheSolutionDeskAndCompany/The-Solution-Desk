@@ -1,242 +1,499 @@
 import { storage } from "./storage";
+import { type Project, type ProjectData, type ProjectMetrics } from "@shared/schema";
 
-// Statistical analysis functions for automated tools
-export interface AnalysisResult {
-  mean: number;
-  standardDeviation: number;
-  controlLimits: {
-    upper: number;
-    lower: number;
-  };
-  processCapability: number;
-  recommendations: string[];
+// Define automation capabilities by subscription tier
+export const TIER_FEATURES = {
+  free: {
+    maxProjects: 1,
+    maxDataPoints: 50,
+    automatedAnalysis: false,
+    realTimeMonitoring: false,
+    advancedTools: [],
+    aiInsights: false
+  },
+  professional: {
+    maxProjects: 10,
+    maxDataPoints: 1000,
+    automatedAnalysis: true,
+    realTimeMonitoring: true,
+    advancedTools: ['control_charts', 'pareto_analysis', 'capability_study'],
+    aiInsights: true
+  },
+  enterprise: {
+    maxProjects: -1, // unlimited
+    maxDataPoints: -1, // unlimited
+    automatedAnalysis: true,
+    realTimeMonitoring: true,
+    advancedTools: ['control_charts', 'pareto_analysis', 'capability_study', 'dmaic_framework', 'six_sigma_tools'],
+    aiInsights: true
+  }
+};
+
+export async function checkUserTierAccess(userId: string): Promise<keyof typeof TIER_FEATURES> {
+  const user = await storage.getUser(userId);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  
+  // Map subscription status to tier
+  if (user.subscriptionStatus === 'active' && user.stripeSubscriptionId) {
+    // For now, assume all active subscriptions are professional
+    // In production, you'd check the specific subscription plan
+    return 'professional';
+  }
+  
+  return 'free';
 }
 
-export async function runAutomatedAnalysis(projectId: number): Promise<AnalysisResult> {
-  // Get project data for analysis
-  const projectData = await storage.getProjectData(projectId);
+export async function runAutomatedAnalysis(projectId: number, userId: string): Promise<any> {
+  const tier = await checkUserTierAccess(userId);
+  const features = TIER_FEATURES[tier];
   
+  if (!features.automatedAnalysis) {
+    throw new Error("Automated analysis requires Professional or Enterprise subscription");
+  }
+  
+  const project = await storage.getProject(projectId);
+  if (!project || project.userId !== userId) {
+    throw new Error("Project not found or access denied");
+  }
+  
+  const projectData = await storage.getProjectData(projectId);
   if (projectData.length === 0) {
     throw new Error("No data available for analysis");
   }
-
-  // Convert string values to numbers for statistical analysis
-  const values = projectData.map(d => parseFloat(d.value.toString()));
   
-  // Calculate basic statistics
-  const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
-  const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / (values.length - 1);
-  const standardDeviation = Math.sqrt(variance);
+  // Perform statistical analysis based on data type
+  const analysis = await performStatisticalAnalysis(projectData, project);
   
-  // Calculate control limits (3-sigma)
-  const controlLimits = {
-    upper: mean + (3 * standardDeviation),
-    lower: mean - (3 * standardDeviation)
-  };
-  
-  // Simple process capability calculation (assumes specification limits)
-  const specRange = controlLimits.upper - controlLimits.lower;
-  const processCapability = specRange / (6 * standardDeviation);
-  
-  // Generate automated recommendations
-  const recommendations = generateRecommendations(mean, standardDeviation, processCapability, values);
-  
-  // Store analysis results
+  // Store the analysis results
   await storage.addStatisticalAnalysis(projectId, {
-    projectId,
-    analysisType: 'automated_control_chart',
-    results: {
-      mean,
-      standardDeviation,
-      controlLimits,
-      processCapability,
-      recommendations,
-      sampleSize: values.length,
-      analysisDate: new Date().toISOString()
-    }
+    analysisType: 'automated_analysis',
+    results: analysis
   });
   
+  return analysis;
+}
+
+export async function generateProjectInsights(projectId: number, userId: string): Promise<any> {
+  const tier = await checkUserTierAccess(userId);
+  const features = TIER_FEATURES[tier];
+  
+  if (!features.aiInsights) {
+    throw new Error("AI insights require Professional or Enterprise subscription");
+  }
+  
+  const project = await storage.getProject(projectId);
+  if (!project || project.userId !== userId) {
+    throw new Error("Project not found or access denied");
+  }
+  
+  const projectData = await storage.getProjectData(projectId);
+  const projectMetrics = await storage.getProjectMetrics(projectId);
+  
+  // Generate AI-powered insights
+  const insights = {
+    processEfficiency: calculateProcessEfficiency(projectData),
+    improvementOpportunities: identifyImprovementOpportunities(projectData, projectMetrics),
+    riskAssessment: assessProjectRisks(project, projectData),
+    recommendations: generateRecommendations(project, projectData, projectMetrics),
+    generatedAt: new Date().toISOString()
+  };
+  
+  return insights;
+}
+
+export async function autoOptimizeProcess(projectId: number, userId: string): Promise<any> {
+  const tier = await checkUserTierAccess(userId);
+  const features = TIER_FEATURES[tier];
+  
+  if (tier === 'free') {
+    throw new Error("Process optimization requires Professional or Enterprise subscription");
+  }
+  
+  const project = await storage.getProject(projectId);
+  if (!project || project.userId !== userId) {
+    throw new Error("Project not found or access denied");
+  }
+  
+  const projectData = await storage.getProjectData(projectId);
+  const currentMetrics = await storage.getProjectMetrics(projectId);
+  
+  // Run optimization algorithms
+  const optimization = {
+    currentState: analyzeCurrentState(projectData, currentMetrics),
+    optimizationTargets: identifyOptimizationTargets(projectData),
+    recommendedActions: generateOptimizationActions(project, projectData),
+    projectedImpact: calculateProjectedImpact(projectData, currentMetrics),
+    implementationPlan: createImplementationPlan(project)
+  };
+  
+  return optimization;
+}
+
+// Statistical analysis functions
+async function performStatisticalAnalysis(data: ProjectData[], project: Project) {
+  const values = data.map(d => parseFloat(d.value.toString()));
+  
+  const analysis = {
+    descriptiveStats: {
+      mean: calculateMean(values),
+      median: calculateMedian(values),
+      standardDeviation: calculateStandardDeviation(values),
+      min: Math.min(...values),
+      max: Math.max(...values),
+      count: values.length
+    },
+    controlLimits: calculateControlLimits(values),
+    processCapability: calculateProcessCapability(values),
+    trendAnalysis: performTrendAnalysis(data),
+    outliers: identifyOutliers(values),
+    recommendations: generateStatisticalRecommendations(values, project)
+  };
+  
+  return analysis;
+}
+
+// Helper functions for statistical calculations
+function calculateMean(values: number[]): number {
+  return values.reduce((sum, val) => sum + val, 0) / values.length;
+}
+
+function calculateMedian(values: number[]): number {
+  const sorted = [...values].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0 
+    ? (sorted[middle - 1] + sorted[middle]) / 2 
+    : sorted[middle];
+}
+
+function calculateStandardDeviation(values: number[]): number {
+  const mean = calculateMean(values);
+  const squaredDifferences = values.map(val => Math.pow(val - mean, 2));
+  const variance = calculateMean(squaredDifferences);
+  return Math.sqrt(variance);
+}
+
+function calculateControlLimits(values: number[]) {
+  const mean = calculateMean(values);
+  const stdDev = calculateStandardDeviation(values);
+  
   return {
-    mean,
-    standardDeviation,
-    controlLimits,
-    processCapability,
-    recommendations
+    upperControlLimit: mean + (3 * stdDev),
+    lowerControlLimit: mean - (3 * stdDev),
+    upperWarningLimit: mean + (2 * stdDev),
+    lowerWarningLimit: mean - (2 * stdDev),
+    centerLine: mean
   };
 }
 
-function generateRecommendations(mean: number, stdDev: number, capability: number, values: number[]): string[] {
-  const recommendations: string[] = [];
+function calculateProcessCapability(values: number[]) {
+  const mean = calculateMean(values);
+  const stdDev = calculateStandardDeviation(values);
   
-  // Process capability recommendations
-  if (capability < 1.0) {
-    recommendations.push("Process capability is below 1.0 - consider process improvement initiatives");
-  } else if (capability < 1.33) {
-    recommendations.push("Process capability is adequate but has room for improvement");
-  } else {
-    recommendations.push("Process capability is excellent - focus on maintaining current performance");
+  // Assuming specification limits (these would normally be provided)
+  const upperSpecLimit = mean + (4 * stdDev);
+  const lowerSpecLimit = mean - (4 * stdDev);
+  
+  const cp = (upperSpecLimit - lowerSpecLimit) / (6 * stdDev);
+  const cpk = Math.min(
+    (upperSpecLimit - mean) / (3 * stdDev),
+    (mean - lowerSpecLimit) / (3 * stdDev)
+  );
+  
+  return {
+    cp: Math.round(cp * 100) / 100,
+    cpk: Math.round(cpk * 100) / 100,
+    interpretation: cpk >= 1.33 ? 'Capable' : cpk >= 1.0 ? 'Marginally Capable' : 'Not Capable'
+  };
+}
+
+function performTrendAnalysis(data: ProjectData[]) {
+  if (data.length < 2) return { trend: 'insufficient_data' };
+  
+  const sortedData = data.sort((a, b) => 
+    new Date(a.collectedAt!).getTime() - new Date(b.collectedAt!).getTime()
+  );
+  
+  const values = sortedData.map(d => parseFloat(d.value.toString()));
+  const n = values.length;
+  
+  // Simple linear regression for trend
+  let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+  
+  for (let i = 0; i < n; i++) {
+    sumX += i;
+    sumY += values[i];
+    sumXY += i * values[i];
+    sumXX += i * i;
   }
   
-  // Variation recommendations
-  if (stdDev > mean * 0.15) {
-    recommendations.push("High variation detected - investigate root causes of inconsistency");
+  const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+  const intercept = (sumY - slope * sumX) / n;
+  
+  return {
+    trend: slope > 0.1 ? 'increasing' : slope < -0.1 ? 'decreasing' : 'stable',
+    slope: Math.round(slope * 1000) / 1000,
+    rSquared: calculateRSquared(values, slope, intercept)
+  };
+}
+
+function calculateRSquared(values: number[], slope: number, intercept: number): number {
+  const mean = calculateMean(values);
+  let totalSumSquares = 0;
+  let residualSumSquares = 0;
+  
+  for (let i = 0; i < values.length; i++) {
+    const predicted = slope * i + intercept;
+    totalSumSquares += Math.pow(values[i] - mean, 2);
+    residualSumSquares += Math.pow(values[i] - predicted, 2);
   }
   
-  // Trend analysis
-  const recentValues = values.slice(-10);
-  const trend = calculateTrend(recentValues);
-  if (trend > 0.1) {
-    recommendations.push("Upward trend detected - monitor for potential shift in process mean");
-  } else if (trend < -0.1) {
-    recommendations.push("Downward trend detected - investigate potential degradation");
+  return Math.round((1 - residualSumSquares / totalSumSquares) * 1000) / 1000;
+}
+
+function identifyOutliers(values: number[]): number[] {
+  const q1 = calculatePercentile(values, 25);
+  const q3 = calculatePercentile(values, 75);
+  const iqr = q3 - q1;
+  const lowerBound = q1 - 1.5 * iqr;
+  const upperBound = q3 + 1.5 * iqr;
+  
+  return values.filter(val => val < lowerBound || val > upperBound);
+}
+
+function calculatePercentile(values: number[], percentile: number): number {
+  const sorted = [...values].sort((a, b) => a - b);
+  const index = (percentile / 100) * (sorted.length - 1);
+  const floor = Math.floor(index);
+  const ceil = Math.ceil(index);
+  
+  if (floor === ceil) {
+    return sorted[floor];
   }
   
-  // Outlier detection
-  const outliers = values.filter(v => Math.abs(v - mean) > 2 * stdDev);
-  if (outliers.length > values.length * 0.05) {
-    recommendations.push("Multiple outliers detected - review data collection and process stability");
+  return sorted[floor] * (ceil - index) + sorted[ceil] * (index - floor);
+}
+
+// AI-powered insight functions
+function calculateProcessEfficiency(data: ProjectData[]): number {
+  if (data.length === 0) return 0;
+  
+  const values = data.map(d => parseFloat(d.value.toString()));
+  const mean = calculateMean(values);
+  const stdDev = calculateStandardDeviation(values);
+  
+  // Calculate efficiency based on consistency (lower variation = higher efficiency)
+  const coefficientOfVariation = stdDev / mean;
+  return Math.max(0, Math.min(100, Math.round((1 - coefficientOfVariation) * 100)));
+}
+
+function identifyImprovementOpportunities(data: ProjectData[], metrics: ProjectMetrics[]) {
+  const opportunities = [];
+  
+  if (data.length > 0) {
+    const outliers = identifyOutliers(data.map(d => parseFloat(d.value.toString())));
+    if (outliers.length > 0) {
+      opportunities.push({
+        type: 'variability_reduction',
+        description: `Reduce process variability - ${outliers.length} outliers detected`,
+        priority: 'high',
+        estimatedImpact: '15-25% improvement'
+      });
+    }
+  }
+  
+  // Check if metrics are below targets
+  metrics.forEach(metric => {
+    if (metric.target && parseFloat(metric.value.toString()) < parseFloat(metric.target.toString())) {
+      opportunities.push({
+        type: 'performance_gap',
+        description: `Improve ${metric.metricType} performance`,
+        priority: 'medium',
+        estimatedImpact: '10-20% improvement'
+      });
+    }
+  });
+  
+  return opportunities;
+}
+
+function assessProjectRisks(project: Project, data: ProjectData[]) {
+  const risks = [];
+  
+  if (data.length < 10) {
+    risks.push({
+      type: 'insufficient_data',
+      description: 'Limited data available for reliable analysis',
+      severity: 'medium',
+      mitigation: 'Collect more data points before making process changes'
+    });
+  }
+  
+  if (project.status === 'planning' && data.length === 0) {
+    risks.push({
+      type: 'no_baseline',
+      description: 'No baseline data established',
+      severity: 'high',
+      mitigation: 'Establish baseline measurements before implementing changes'
+    });
+  }
+  
+  return risks;
+}
+
+function generateRecommendations(project: Project, data: ProjectData[], metrics: ProjectMetrics[]) {
+  const recommendations = [];
+  
+  if (data.length > 0) {
+    const values = data.map(d => parseFloat(d.value.toString()));
+    const capability = calculateProcessCapability(values);
+    
+    if (capability.cpk < 1.0) {
+      recommendations.push({
+        category: 'process_improvement',
+        action: 'Implement process controls to reduce variation',
+        priority: 'high',
+        timeline: '2-4 weeks'
+      });
+    }
+    
+    if (capability.cpk >= 1.33) {
+      recommendations.push({
+        category: 'optimization',
+        action: 'Process is capable - focus on cost reduction opportunities',
+        priority: 'low',
+        timeline: '1-2 months'
+      });
+    }
   }
   
   return recommendations;
 }
 
-function calculateTrend(values: number[]): number {
-  if (values.length < 2) return 0;
+function generateStatisticalRecommendations(values: number[], project: Project) {
+  const recommendations = [];
+  const stdDev = calculateStandardDeviation(values);
+  const mean = calculateMean(values);
+  const cv = stdDev / mean;
   
-  const n = values.length;
-  const x = Array.from({ length: n }, (_, i) => i);
-  const sumX = x.reduce((a, b) => a + b, 0);
-  const sumY = values.reduce((a, b) => a + b, 0);
-  const sumXY = x.reduce((sum, xi, i) => sum + xi * values[i], 0);
-  const sumXX = x.reduce((sum, xi) => sum + xi * xi, 0);
-  
-  const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-  return slope;
-}
-
-export async function generateProjectInsights(projectId: number): Promise<{
-  efficiency: number;
-  costSavings: number;
-  qualityScore: number;
-  nextActions: string[];
-}> {
-  const project = await storage.getProject(projectId);
-  const metrics = await storage.getProjectMetrics(projectId);
-  
-  if (!project) {
-    throw new Error("Project not found");
+  if (cv > 0.15) {
+    recommendations.push("High variability detected - implement statistical process control");
   }
   
-  // Calculate efficiency based on project progress and time
-  const daysActive = Math.floor((Date.now() - new Date(project.createdAt!).getTime()) / (1000 * 60 * 60 * 24));
-  const progressRate = daysActive > 0 ? 100 / Math.max(daysActive, 1) : 0;
-  const efficiency = Math.min(progressRate * 10, 100); // Scale to percentage
+  if (values.length < 30) {
+    recommendations.push("Collect more data points for robust statistical analysis");
+  }
   
-  // Calculate cost savings from metrics
-  const costMetrics = metrics.filter(m => m.metricType === 'cost_savings');
-  const costSavings = costMetrics.reduce((sum, metric) => sum + parseFloat(metric.value.toString()), 0);
-  
-  // Calculate quality score
-  const qualityMetrics = metrics.filter(m => m.metricType === 'quality_score');
-  const qualityScore = qualityMetrics.length > 0 
-    ? qualityMetrics.reduce((sum, metric) => sum + parseFloat(metric.value.toString()), 0) / qualityMetrics.length
-    : 85; // Default quality score
-  
-  // Generate automated next actions
-  const nextActions = generateNextActions(project.status!, project.currentPhase!, efficiency, qualityScore);
-  
+  return recommendations;
+}
+
+// Optimization functions
+function analyzeCurrentState(data: ProjectData[], metrics: ProjectMetrics[]) {
   return {
-    efficiency: Math.round(efficiency),
-    costSavings: Math.round(costSavings),
-    qualityScore: Math.round(qualityScore),
-    nextActions
+    dataQuality: data.length > 30 ? 'good' : 'limited',
+    processStability: calculateProcessStability(data),
+    currentPerformance: calculateCurrentPerformance(metrics)
   };
 }
 
-function generateNextActions(status: string, phase: string, efficiency: number, qualityScore: number): string[] {
-  const actions: string[] = [];
+function calculateProcessStability(data: ProjectData[]): string {
+  if (data.length < 10) return 'unknown';
   
-  // Phase-based recommendations
-  switch (phase) {
-    case 'define':
-      actions.push("Complete problem statement and stakeholder analysis");
-      actions.push("Define project scope and success criteria");
-      break;
-    case 'measure':
-      actions.push("Establish baseline measurements");
-      actions.push("Implement data collection plan");
-      break;
-    case 'analyze':
-      actions.push("Conduct root cause analysis");
-      actions.push("Validate hypotheses with data");
-      break;
-    case 'improve':
-      actions.push("Implement improvement solutions");
-      actions.push("Run pilot tests and validate results");
-      break;
-    case 'control':
-      actions.push("Establish monitoring systems");
-      actions.push("Document standard operating procedures");
-      break;
+  const values = data.map(d => parseFloat(d.value.toString()));
+  const outliers = identifyOutliers(values);
+  
+  return outliers.length / values.length < 0.05 ? 'stable' : 'unstable';
+}
+
+function calculateCurrentPerformance(metrics: ProjectMetrics[]): number {
+  if (metrics.length === 0) return 0;
+  
+  const performanceScores = metrics.map(metric => {
+    if (!metric.target) return 50; // neutral score if no target
+    
+    const actual = parseFloat(metric.value.toString());
+    const target = parseFloat(metric.target.toString());
+    
+    return Math.min(100, (actual / target) * 100);
+  });
+  
+  return Math.round(calculateMean(performanceScores));
+}
+
+function identifyOptimizationTargets(data: ProjectData[]) {
+  const targets = [];
+  
+  if (data.length > 0) {
+    const values = data.map(d => parseFloat(d.value.toString()));
+    const stdDev = calculateStandardDeviation(values);
+    const mean = calculateMean(values);
+    
+    targets.push({
+      metric: 'variability_reduction',
+      current: Math.round(stdDev * 100) / 100,
+      target: Math.round(stdDev * 0.8 * 100) / 100,
+      improvement: '20%'
+    });
+    
+    targets.push({
+      metric: 'process_centering',
+      current: Math.round(mean * 100) / 100,
+      target: 'optimize_to_target',
+      improvement: 'TBD'
+    });
   }
   
-  // Performance-based recommendations
-  if (efficiency < 50) {
-    actions.push("Review project timeline and resource allocation");
-  }
+  return targets;
+}
+
+function generateOptimizationActions(project: Project, data: ProjectData[]) {
+  const actions = [];
   
-  if (qualityScore < 80) {
-    actions.push("Focus on quality improvement initiatives");
+  actions.push({
+    action: 'Implement Statistical Process Control',
+    description: 'Set up control charts for real-time monitoring',
+    effort: 'Medium',
+    timeframe: '2-3 weeks'
+  });
+  
+  if (project.template === 'lean_improvement') {
+    actions.push({
+      action: 'Apply Lean Principles',
+      description: 'Eliminate waste and optimize flow',
+      effort: 'High',
+      timeframe: '4-6 weeks'
+    });
   }
   
   return actions;
 }
 
-export async function autoOptimizeProcess(projectId: number): Promise<{
-  optimizations: string[];
-  estimatedImprovement: number;
-  implementationSteps: string[];
-}> {
-  const analysis = await runAutomatedAnalysis(projectId);
-  const insights = await generateProjectInsights(projectId);
-  
-  const optimizations: string[] = [];
-  const implementationSteps: string[] = [];
-  let estimatedImprovement = 0;
-  
-  // Generate optimizations based on analysis
-  if (analysis.processCapability < 1.33) {
-    optimizations.push("Reduce process variation through standardization");
-    implementationSteps.push("Implement standard work procedures");
-    implementationSteps.push("Train operators on consistent methods");
-    estimatedImprovement += 15;
-  }
-  
-  if (analysis.standardDeviation > analysis.mean * 0.1) {
-    optimizations.push("Implement statistical process control");
-    implementationSteps.push("Set up real-time monitoring");
-    implementationSteps.push("Create control charts for key metrics");
-    estimatedImprovement += 20;
-  }
-  
-  if (insights.efficiency < 75) {
-    optimizations.push("Streamline workflow and eliminate waste");
-    implementationSteps.push("Conduct value stream mapping");
-    implementationSteps.push("Identify and eliminate non-value-added activities");
-    estimatedImprovement += 25;
-  }
-  
-  // Default optimization if none detected
-  if (optimizations.length === 0) {
-    optimizations.push("Continue monitoring for improvement opportunities");
-    implementationSteps.push("Maintain current performance levels");
-    implementationSteps.push("Look for emerging improvement opportunities");
-    estimatedImprovement = 5;
-  }
-  
+function calculateProjectedImpact(data: ProjectData[], metrics: ProjectMetrics[]) {
   return {
-    optimizations,
-    estimatedImprovement: Math.min(estimatedImprovement, 50), // Cap at 50%
-    implementationSteps
+    efficiencyGain: '15-25%',
+    costSavings: '$10K-$25K annually',
+    qualityImprovement: '20-30%',
+    timeReduction: '10-15%'
+  };
+}
+
+function createImplementationPlan(project: Project) {
+  return {
+    phase1: {
+      name: 'Assessment & Planning',
+      duration: '1-2 weeks',
+      activities: ['Baseline data collection', 'Stakeholder alignment', 'Resource planning']
+    },
+    phase2: {
+      name: 'Implementation',
+      duration: '3-4 weeks',
+      activities: ['Process changes', 'Training', 'Monitoring setup']
+    },
+    phase3: {
+      name: 'Validation & Optimization',
+      duration: '2-3 weeks',
+      activities: ['Results validation', 'Fine-tuning', 'Documentation']
+    }
   };
 }

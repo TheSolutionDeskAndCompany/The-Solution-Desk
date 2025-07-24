@@ -24,15 +24,25 @@ export default function Home() {
           alignItems: 'center',
           height: '70px'
         }}>
-          <h1 style={{
-            fontSize: '28px',
-            color: '#9333EA',
-            margin: '0',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: '700'
-          }}>
-            Systoro
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img 
+              src="/attached_assets/logo_1753331638873.png" 
+              alt="The Solution Desk Logo" 
+              style={{ 
+                height: '35px', 
+                width: 'auto'
+              }} 
+            />
+            <h1 style={{
+              fontSize: '28px',
+              color: '#9333EA',
+              margin: '0',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              Systoro
+            </h1>
+          </div>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <span style={{ color: '#CBD5E1', fontWeight: '500' }}>
               Welcome, {user?.firstName || user?.email || 'User'}!

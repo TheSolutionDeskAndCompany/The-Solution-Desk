@@ -20,15 +20,25 @@ export default function Landing() {
           alignItems: 'center',
           height: '70px'
         }}>
-          <h1 style={{
-            fontSize: '28px',
-            color: '#9333EA',
-            margin: '0',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: '700'
-          }}>
-            The Solution Desk
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img 
+              src="/attached_assets/logo_1753331638873.png" 
+              alt="The Solution Desk Logo" 
+              style={{ 
+                height: '40px', 
+                width: 'auto'
+              }} 
+            />
+            <h1 style={{
+              fontSize: '28px',
+              color: '#9333EA',
+              margin: '0',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              The Solution Desk
+            </h1>
+          </div>
           <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
             <a href="#about" style={{
               color: '#94A3B8',
@@ -83,20 +93,31 @@ export default function Landing() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Hero Section */}
           <section style={{ textAlign: 'center', marginBottom: '80px' }}>
-            <h1 style={{ 
-              fontSize: '56px', 
-              color: '#F1F5F9', 
-              marginBottom: '24px',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '800',
-              lineHeight: '1.2',
-              background: 'linear-gradient(135deg, #F1F5F9 0%, #A78BFA 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              Welcome to The Solution Desk
-            </h1>
+            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <img 
+                src="/attached_assets/logo_1753331638873.png" 
+                alt="The Solution Desk Logo" 
+                style={{ 
+                  height: '120px', 
+                  width: 'auto',
+                  marginBottom: '32px'
+                }} 
+              />
+              <h1 style={{ 
+                fontSize: '56px', 
+                color: '#F1F5F9', 
+                margin: '0',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '800',
+                lineHeight: '1.2',
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #A78BFA 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                Welcome to The Solution Desk
+              </h1>
+            </div>
             <p style={{ 
               fontSize: '24px', 
               color: '#94A3B8', 

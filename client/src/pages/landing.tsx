@@ -100,30 +100,37 @@ export default function Landing() {
             textAlign: 'center',
             border: '1px solid #F3F4F6'
           }}>
-            <div style={{
-              display: 'inline-block',
-              background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
-              color: 'white',
-              padding: '10px 24px',
-              borderRadius: '25px',
-              fontSize: '14px',
-              fontWeight: '700',
-              marginBottom: '32px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px'
-            }}>
-              Featured Product
-            </div>
-            
-            <h2 style={{
-              fontSize: '48px',
-              color: '#1F2937',
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              gap: '20px',
               marginBottom: '24px',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '800'
+              flexWrap: 'wrap'
             }}>
-              Systoro
-            </h2>
+              <h2 style={{
+                fontSize: '48px',
+                color: '#1F2937',
+                margin: '0',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '800'
+              }}>
+                Systoro
+              </h2>
+              <div style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                color: 'white',
+                padding: '8px 20px',
+                borderRadius: '25px',
+                fontSize: '12px',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}>
+                Featured Product
+              </div>
+            </div>
             
             <p style={{
               fontSize: '20px',

@@ -8,14 +8,37 @@ export default function Home() {
     <div style={{ 
       minHeight: '100vh', 
       background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+      position: 'relative'
     }}>
+      {/* Fixed Background Logo */}
+      <div style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 1,
+        opacity: 0.06,
+        pointerEvents: 'none'
+      }}>
+        <img 
+          src={logoImage} 
+          alt="Background Logo" 
+          style={{ 
+            height: '500px', 
+            width: 'auto',
+            filter: 'brightness(2) saturate(0.3)'
+          }} 
+        />
+      </div>
       {/* Navigation */}
       <header style={{
         backgroundColor: 'rgba(11, 20, 38, 0.95)',
         borderBottom: '1px solid #334155',
         padding: '0 20px',
-        backdropFilter: 'blur(10px)'
+        backdropFilter: 'blur(10px)',
+        position: 'relative',
+        zIndex: 10
       }}>
         <div style={{
           maxWidth: '1200px',
@@ -71,7 +94,7 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main style={{ padding: '40px 20px' }}>
+      <main style={{ padding: '40px 20px', position: 'relative', zIndex: 10 }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Dashboard Stats */}
           <div style={{ 

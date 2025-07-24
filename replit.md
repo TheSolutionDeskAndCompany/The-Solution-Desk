@@ -1,8 +1,15 @@
-# Process Excellence Platform
+# Systoro - Continuous Improvement Suite
 
 ## Overview
 
-This is a full-stack web application for business process optimization and excellence management. The platform helps organizations streamline operations, reduce costs, and improve quality through data-driven insights and statistical analysis tools. It's built as a SaaS platform with subscription-based access and integrates with Stripe for payment processing.
+Systoro is a comprehensive software suite designed to help teams analyze, improve, and control their business processes efficiently. The platform automates key steps of continuous improvement so teams can focus on results, not complexity. Built as a modern SaaS solution with tiered pricing that scales with team growth.
+
+## Brand Identity
+- **Product Name**: Systoro
+- **Tagline**: "Streamline Your Path to Better Processes"
+- **Focus**: Continuous improvement, process excellence, smart automation
+- **Positioning**: All-in-one tool suite with simple tiered pricing
+- **Target**: Teams focused on results without complexity
 
 ## User Preferences
 

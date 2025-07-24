@@ -192,7 +192,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>94%</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                backgroundImage: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

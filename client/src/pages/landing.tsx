@@ -1,4 +1,4 @@
-import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
+import logoImage from "@assets/assets_task_01k0xxcddae2ztf238qpfhf1w6_1753350666_img_1_1753350706829.webp";
 
 export default function Landing() {
   return (
@@ -29,11 +29,13 @@ export default function Landing() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
               src={logoImage} 
-              alt="The Solution Desk Logo" 
+              alt="The Solution Desk - Systoro Logo" 
               style={{ 
                 height: '80px', 
                 width: 'auto',
-                filter: 'brightness(1.3) saturate(1.2)'
+                filter: 'brightness(1.1) contrast(1.05)',
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(236, 72, 153, 0.3)'
               }} 
             />
             <h1 style={{
@@ -234,6 +236,27 @@ export default function Landing() {
               into one seamless platform. Get all your improvement tools in one place — no confusing add-ons, 
               just results-focused simplicity that scales with your team.
             </p>
+
+            {/* Hero Product Image */}
+            <div style={{ 
+              textAlign: 'center', 
+              marginBottom: '40px',
+              position: 'relative'
+            }}>
+              <img 
+                src={logoImage} 
+                alt="Systoro - Advanced Process Optimization with The Solution Desk"
+                style={{ 
+                  maxWidth: '300px', 
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '16px',
+                  boxShadow: '0 20px 60px rgba(236, 72, 153, 0.4), 0 20px 60px rgba(34, 211, 238, 0.3)',
+                  border: '2px solid rgba(236, 72, 153, 0.6)',
+                  filter: 'brightness(1.1) contrast(1.05)'
+                }}
+              />
+            </div>
 
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button 

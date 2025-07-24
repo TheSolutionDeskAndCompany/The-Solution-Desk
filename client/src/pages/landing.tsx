@@ -1,4 +1,4 @@
-import logoImage from "@assets/logo-no-text.svg";
+import logoImage from "@assets/logo_1753331638873.png";
 
 export default function Landing() {
   return (
@@ -23,7 +23,8 @@ export default function Landing() {
           style={{ 
             height: '120px', 
             width: 'auto',
-            filter: 'brightness(1.5) saturate(0.8)'
+            filter: 'brightness(1.5) saturate(0.8)',
+            clipPath: 'inset(0 0 35% 0)'
           }} 
         />
       </div>

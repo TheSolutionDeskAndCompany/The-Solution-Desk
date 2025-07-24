@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import logoImage from "@assets/logo-no-text.svg";
+import logoImage from "@assets/logo_1753331638873.png";
 
 export default function Home() {
   const { user } = useAuth();
@@ -26,7 +26,8 @@ export default function Home() {
           style={{ 
             height: '100px', 
             width: 'auto',
-            filter: 'brightness(1.2) saturate(0.8)'
+            filter: 'brightness(1.2) saturate(0.8)',
+            clipPath: 'inset(0 0 35% 0)'
           }} 
         />
       </div>

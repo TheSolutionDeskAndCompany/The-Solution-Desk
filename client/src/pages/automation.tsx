@@ -112,10 +112,14 @@ export default function AutomationPage() {
   const runAutomationTool = async (tool: AutomationTool) => {
     if (!canAccessTool(tool)) {
       toast({
-        title: "Upgrade Required",
-        description: `${tool.name} requires a ${tool.tier} subscription. Please upgrade to access this feature.`,
+        title: "🔒 Professional Feature",
+        description: `${tool.name} requires a ${tool.tier} subscription. Upgrade now to unlock advanced automation!`,
         variant: "destructive",
       });
+      // Redirect to upgrade page after showing toast
+      setTimeout(() => {
+        window.location.href = '/subscribe';
+      }, 2000);
       return;
     }
 
@@ -223,9 +227,34 @@ export default function AutomationPage() {
               {subscription?.plan?.toUpperCase() || 'FREE'}
             </Badge>
             {subscription?.plan === 'free' && (
-              <Button variant="outline" className="ml-4" onClick={() => window.location.href = '/subscribe'}>
-                Upgrade Now
-              </Button>
+              <button 
+                style={{
+                  background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #DC2626 100%)',
+                  color: 'white',
+                  padding: '12px 24px',
+                  fontSize: '16px',
+                  fontWeight: '700',
+                  border: 'none',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  boxShadow: '0 8px 20px rgba(245, 158, 11, 0.4)',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                  animation: 'pulse 2s infinite'
+                }}
+                onClick={() => window.location.href = '/subscribe'}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(245, 158, 11, 0.6)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(245, 158, 11, 0.4)';
+                }}
+              >
+                🚀 Upgrade to Professional
+              </button>
             )}
           </div>
         </div>
@@ -336,6 +365,39 @@ export default function AutomationPage() {
         {/* Tier comparison */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-white mb-6">Unlock More Tools with Higher Tiers</h2>
+          {subscription?.plan === 'free' && (
+            <div style={{
+              background: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)',
+              padding: '20px',
+              borderRadius: '16px',
+              marginBottom: '32px',
+              border: '2px solid #F59E0B',
+              boxShadow: '0 8px 24px rgba(245, 158, 11, 0.3)'
+            }}>
+              <h3 className="text-white text-xl font-bold mb-2">⚡ Limited Access Detected</h3>
+              <p className="text-white/90 mb-4">You're currently on the Free plan. Upgrade to Professional for $29/month to unlock all automation tools!</p>
+              <button 
+                style={{
+                  background: 'white',
+                  color: '#DC2626',
+                  padding: '14px 32px',
+                  fontSize: '18px',
+                  fontWeight: '800',
+                  border: 'none',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  transition: 'all 0.3s ease'
+                }}
+                onClick={() => window.location.href = '/subscribe'}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                🚀 Upgrade to Professional Now
+              </button>
+            </div>
+          )}
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {['Free', 'Professional', 'Enterprise'].map((tier) => (
               <Card key={tier} className={`border-2 ${

@@ -599,7 +599,7 @@ export default function Landing() {
                     width: '100%',
                     transition: 'all 0.2s ease'
                   }}
-                  onClick={() => window.location.href = 'mailto:sales@thesolutiondesk.com'}
+                  onClick={() => window.location.href = '/contact'}
                 >
                   Contact Sales
                 </button>

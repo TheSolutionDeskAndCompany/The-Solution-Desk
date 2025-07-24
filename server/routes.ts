@@ -5,7 +5,7 @@ import { setupAuth, isAuthenticated } from "./replitAuth";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
 import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
-import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess } from "./automation";
+import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess, checkUserTierAccess, TIER_FEATURES } from "./automation";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -22,7 +22,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
-      res.json(user);
+      
+      // Add tier information for frontend
+      const tier = await checkUserTierAccess(userId);
+      const userWithTier = {
+        ...user,
+        currentTier: tier,
+        features: TIER_FEATURES[tier]
+      };
+      
+      res.json(userWithTier);
     } catch (error) {
       console.error("Error fetching user:", error);
       res.status(500).json({ message: "Failed to fetch user" });
@@ -174,6 +183,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       console.error("Error adding project metrics:", error);
       res.status(500).json({ message: "Failed to add project metrics" });
+    }
+  });
+
+  // Admin route to check current tier (useful for debugging)
+  app.get('/api/admin/tier-status', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      const tier = await checkUserTierAccess(userId);
+      
+      res.json({ 
+        email: user?.email,
+        currentTier: tier,
+        features: TIER_FEATURES[tier],
+        isAdmin: user?.email && ['admin@thesolutiondesk.ca', 'test@thesolutiondesk.ca'].includes(user.email.toLowerCase())
+      });
+    } catch (error: any) {
+      console.error("Tier status error:", error);
+      res.status(500).json({ error: { message: error.message } });
     }
   });
 

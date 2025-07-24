@@ -28,14 +28,13 @@ export default function Landing() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-20 bg-accent/20 rounded-lg mx-4 mb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
-            Your Smart Suite for Continuous Improvement and Operational Excellence
+            Systoro: Your Smart Suite for Continuous Improvement and Operational Excellence
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto font-medium">
-            Simplify process improvement with powerful, easy-to-use tools. 
-            Automate analysis, track progress, and sustain success — all in one intuitive platform.
+            All the tools your team needs — simplified, automated, and bundled for easy growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -48,11 +47,40 @@ export default function Landing() {
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-lg px-8 py-3 rounded-lg border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="text-lg px-8 py-3 rounded-lg border-secondary text-secondary hover:bg-secondary hover:text-primary-foreground"
             >
               Request a Demo
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* About The Solution Desk */}
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-primary mb-4">
+            About The Solution Desk
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            We help teams streamline their process improvement efforts with intuitive software tools designed to boost operational excellence.
+          </p>
+        </div>
+
+        {/* Featured Product */}
+        <div className="bg-card rounded-lg p-8 shadow-sm border mb-8">
+          <h3 className="text-2xl font-bold text-primary mb-4">Featured Product: Systoro</h3>
+          <p className="text-muted-foreground mb-4">
+            Systoro combines powerful tools for process analysis, planning, and performance tracking into one seamless platform.
+          </p>
+          <p className="text-lg font-semibold text-secondary mb-4">
+            Get all your improvement tools in one place — no confusing add-ons.
+          </p>
+          <Button 
+            variant="outline" 
+            className="border-secondary text-secondary hover:bg-secondary hover:text-primary-foreground"
+          >
+            Explore Systoro →
+          </Button>
         </div>
       </section>
 
@@ -255,41 +283,44 @@ export default function Landing() {
       </section>
 
       {/* Why Choose Systoro Section */}
-      <section className="py-20 bg-card">
+      <section className="py-20 bg-accent/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-primary mb-4">
               Why Choose Systoro?
             </h2>
+            <p className="text-lg text-muted-foreground">
+              Everything you need for continuous improvement in one simple platform
+            </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <Users className="h-8 w-8 text-secondary mx-auto mb-4" />
+            <div className="text-center bg-card p-6 rounded-lg shadow-sm">
+              <Users className="h-10 w-10 text-secondary mx-auto mb-4" />
               <h3 className="font-semibold mb-2 text-primary">Easy-to-use</h3>
-              <p className="text-muted-foreground">Designed for teams of any size and industry</p>
+              <p className="text-muted-foreground text-sm">Designed for teams of any size and industry</p>
             </div>
-            <div className="text-center">
-              <Zap className="h-8 w-8 text-secondary mx-auto mb-4" />
+            <div className="text-center bg-card p-6 rounded-lg shadow-sm">
+              <Zap className="h-10 w-10 text-secondary mx-auto mb-4" />
               <h3 className="font-semibold mb-2 text-primary">All-in-One Bundle</h3>
-              <p className="text-muted-foreground">Every essential tool in one simple plan</p>
+              <p className="text-muted-foreground text-sm">Every essential tool in one simple plan</p>
             </div>
-            <div className="text-center">
-              <BarChart3 className="h-8 w-8 text-secondary mx-auto mb-4" />
+            <div className="text-center bg-card p-6 rounded-lg shadow-sm">
+              <BarChart3 className="h-10 w-10 text-secondary mx-auto mb-4" />
               <h3 className="font-semibold mb-2 text-primary">Scales with Your Team</h3>
-              <p className="text-muted-foreground">No confusing add-ons or hidden fees</p>
+              <p className="text-muted-foreground text-sm">No confusing add-ons or hidden fees</p>
             </div>
-            <div className="text-center">
-              <Award className="h-8 w-8 text-secondary mx-auto mb-4" />
+            <div className="text-center bg-card p-6 rounded-lg shadow-sm">
+              <Award className="h-10 w-10 text-secondary mx-auto mb-4" />
               <h3 className="font-semibold mb-2 text-primary">Focus on Results</h3>
-              <p className="text-muted-foreground">Automates tasks so teams focus on outcomes</p>
+              <p className="text-muted-foreground text-sm">Automates tasks so teams focus on outcomes</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      {/* Final CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground mx-4 rounded-lg mb-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ready to Transform Your Process Improvement?
@@ -300,18 +331,17 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              variant="secondary"
               onClick={() => window.location.href = '/api/login'}
-              className="text-lg px-8 py-3 bg-secondary hover:bg-accent text-primary rounded-lg"
+              className="text-xl px-12 py-4 bg-secondary hover:bg-accent text-primary rounded-lg font-semibold"
             >
-              Start Free Trial
+              Start Your Free Trial Today
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="text-lg px-8 py-3 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary rounded-lg"
+              className="text-lg px-8 py-4 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary rounded-lg"
             >
-              Request a Demo
+              Contact Sales
             </Button>
           </div>
         </div>

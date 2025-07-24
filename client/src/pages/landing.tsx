@@ -304,16 +304,20 @@ export default function Landing() {
             }}>
               {/* Free Plan */}
               <div style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.6)',
+                background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(70, 130, 180, 0.15) 100%)',
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
                 borderRadius: '20px',
                 padding: '40px 24px',
-                border: '1px solid #334155',
-                backdropFilter: 'blur(10px)',
+                border: '2px solid #22D3EE',
+                backdropFilter: 'blur(15px)',
+                boxShadow: '0 8px 32px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                 textAlign: 'center',
                 minHeight: '520px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                position: 'relative',
+                overflow: 'hidden'
               }}>
                 <div>
                   <h3 style={{ 
@@ -382,15 +386,16 @@ export default function Landing() {
                 </div>
                 <button 
                   style={{
-                    backgroundColor: 'transparent',
-                    color: '#0EA5E9',
+                    background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+                    color: 'white',
                     padding: '12px 24px',
                     fontSize: '16px',
-                    border: '2px solid #0EA5E9',
+                    border: 'none',
                     borderRadius: '8px',
                     cursor: 'pointer',
                     fontWeight: '600',
                     width: '100%',
+                    boxShadow: '0 4px 12px rgba(34, 211, 238, 0.3)',
                     transition: 'all 0.2s ease'
                   }}
                   onClick={() => window.location.href = '/api/login'}
@@ -401,17 +406,21 @@ export default function Landing() {
 
               {/* Professional Plan */}
               <div style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(168, 85, 247, 0.2) 50%, rgba(192, 132, 252, 0.2) 100%)',
+                backgroundColor: 'rgba(30, 41, 59, 0.9)',
                 borderRadius: '20px',
                 padding: '40px 24px',
                 border: '2px solid #A78BFA',
-                backdropFilter: 'blur(10px)',
+                backdropFilter: 'blur(15px)',
+                boxShadow: '0 12px 40px rgba(167, 139, 250, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                 textAlign: 'center',
                 position: 'relative',
                 minHeight: '520px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                overflow: 'hidden',
+                transform: 'scale(1.05)'
               }}>
                 <div style={{
                   position: 'absolute',
@@ -511,16 +520,20 @@ export default function Landing() {
 
               {/* Enterprise Plan */}
               <div style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.6)',
+                background: 'linear-gradient(135deg, rgba(30, 144, 255, 0.15) 0%, rgba(65, 105, 225, 0.15) 50%, rgba(100, 149, 237, 0.15) 100%)',
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
                 borderRadius: '20px',
                 padding: '40px 24px',
-                border: '1px solid #1E90FF',
-                backdropFilter: 'blur(10px)',
+                border: '2px solid #1E90FF',
+                backdropFilter: 'blur(15px)',
+                boxShadow: '0 8px 32px rgba(30, 144, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                 textAlign: 'center',
                 minHeight: '520px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                position: 'relative',
+                overflow: 'hidden'
               }}>
                 <div>
                   <h3 style={{ 
@@ -585,18 +598,16 @@ export default function Landing() {
                 </div>
                 <button 
                   style={{
-                    backgroundColor: 'transparent',
-                    background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 100%)',
+                    color: 'white',
                     padding: '12px 24px',
                     fontSize: '16px',
-                    border: '2px solid #1E90FF',
+                    border: 'none',
                     borderRadius: '8px',
                     cursor: 'pointer',
                     fontWeight: '600',
                     width: '100%',
+                    boxShadow: '0 4px 12px rgba(30, 144, 255, 0.3)',
                     transition: 'all 0.2s ease'
                   }}
                   onClick={() => {

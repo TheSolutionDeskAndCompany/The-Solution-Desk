@@ -97,7 +97,7 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            marginBottom: '32px',
+            marginBottom: '24px',
             textAlign: 'center'
           }}>
             {planType === 'enterprise' 
@@ -105,6 +105,29 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
               : 'Unlock unlimited projects and advanced features for $29/month'
             }
           </p>
+          
+          {/* Product visualization */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            marginBottom: '32px' 
+          }}>
+            <img 
+              src={planType === 'professional' 
+                ? "/attached_assets/professional-checkout-image.svg" 
+                : "/attached_assets/enterprise-checkout-image.svg"}
+              alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan Features`}
+              style={{ 
+                width: '200px', 
+                height: '150px',
+                border: `2px solid ${planType === 'professional' ? '#A855F7' : '#4169E1'}`,
+                borderRadius: '12px',
+                padding: '8px',
+                backgroundColor: 'rgba(30, 41, 59, 0.3)',
+                backdropFilter: 'blur(5px)'
+              }}
+            />
+          </div>
 
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '24px' }}>

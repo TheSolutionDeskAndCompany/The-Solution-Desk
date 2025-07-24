@@ -4,9 +4,9 @@ import { type Project, type ProjectData, type ProjectMetrics } from "@shared/sch
 // Initialize OpenAI client only if API key is available
 let openai: OpenAI | null = null;
 
-function getOpenAIClient(): OpenAI {
+function getOpenAIClient(): OpenAI | null {
   if (!process.env.OPENAI_API_KEY) {
-    throw new Error("OpenAI API key not configured. Please set OPENAI_API_KEY environment variable.");
+    return null;
   }
   
   if (!openai) {
@@ -23,9 +23,14 @@ export async function generateAIInsights(
   projectData: ProjectData[], 
   projectMetrics: ProjectMetrics[]
 ): Promise<any> {
+  const client = getOpenAIClient();
+  
+  // If no OpenAI client available, use statistical fallback immediately
+  if (!client) {
+    return generateFallbackInsights(project, projectData, projectMetrics);
+  }
+  
   try {
-    const client = getOpenAIClient();
-    
     // Prepare context for AI analysis
     const dataContext = prepareDataContext(project, projectData, projectMetrics);
     
@@ -277,8 +282,8 @@ function generateFallbackInsights(
       capabilityAssessment: assessCapability(values)
     },
     generatedAt: new Date().toISOString(),
-    model: "statistical_fallback",
-    note: "AI insights require OpenAI API key configuration",
+    model: "statistical_analysis",
+    note: "Advanced AI insights available with OpenAI integration",
     dataQuality: assessDataQuality(projectData, projectMetrics)
   };
 }

@@ -41,7 +41,7 @@ export interface IStorage {
   
   // Statistical analysis operations
   getProjectAnalyses(projectId: number): Promise<StatisticalAnalysis[]>;
-  addStatisticalAnalysis(projectId: number, analysis: InsertStatisticalAnalysis): Promise<StatisticalAnalysis>;
+  addStatisticalAnalysis(analysis: InsertStatisticalAnalysis): Promise<StatisticalAnalysis>;
   
   // Dashboard data
   getDashboardMetrics(userId: string): Promise<{
@@ -185,13 +185,10 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(statisticalAnalysis.createdAt));
   }
 
-  async addStatisticalAnalysis(projectId: number, analysis: InsertStatisticalAnalysis): Promise<StatisticalAnalysis> {
+  async addStatisticalAnalysis(analysis: InsertStatisticalAnalysis): Promise<StatisticalAnalysis> {
     const [newAnalysis] = await db
       .insert(statisticalAnalysis)
-      .values({
-        ...analysis,
-        projectId,
-      })
+      .values(analysis)
       .returning();
     return newAnalysis;
   }

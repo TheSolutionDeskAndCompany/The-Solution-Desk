@@ -163,7 +163,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const metricsData = insertProjectMetricsSchema.parse(req.body);
-      const newMetrics = await storage.addProjectMetrics(projectId, metricsData);
+      const newMetrics = await storage.addProjectMetrics(projectId, {
+        ...metricsData,
+        projectId
+      });
       res.json(newMetrics);
     } catch (error) {
       if (error instanceof z.ZodError) {

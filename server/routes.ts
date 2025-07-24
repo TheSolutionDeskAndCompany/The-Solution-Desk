@@ -273,23 +273,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userId = req.user.claims.sub;
       const { plan } = req.body;
       
+      if (!plan || !['professional', 'enterprise'].includes(plan)) {
+        return res.status(400).json({ message: "Invalid plan. Must be 'professional' or 'enterprise'" });
+      }
+      
       const result = await createSubscription(userId, plan);
       res.json(result);
     } catch (error: any) {
-      console.error("Subscription error:", error);
-      return res.status(400).json({ error: { message: error.message } });
+      console.error("Create subscription error:", error);
+      res.status(500).json({ error: { message: error.message } });
     }
   });
 
-  // Check subscription status
+  // Get subscription status
   app.get('/api/subscription-status', isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const status = await getSubscriptionStatus(userId);
       res.json(status);
     } catch (error: any) {
-      console.error("Subscription status error:", error);
-      res.status(500).json({ message: "Failed to check subscription status" });
+      console.error("Get subscription status error:", error);
+      res.status(500).json({ error: { message: error.message } });
     }
   });
 
@@ -301,7 +305,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(result);
     } catch (error: any) {
       console.error("Cancel subscription error:", error);
-      res.status(500).json({ message: "Failed to cancel subscription" });
+      res.status(500).json({ error: { message: error.message } });
     }
   });
 

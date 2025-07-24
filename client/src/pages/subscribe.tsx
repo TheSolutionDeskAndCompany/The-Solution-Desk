@@ -11,7 +11,7 @@ if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
 }
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-const SubscribeForm = () => {
+const SubscribeForm = ({ planType }: { planType: string }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { toast } = useToast();
@@ -139,11 +139,25 @@ export default function Subscribe() {
       })
       .catch(err => {
         console.error("Error creating subscription:", err);
-        toast({
-          title: "Error",
-          description: "Failed to initialize payment. Please try again.",
-          variant: "destructive",
-        });
+        const errorMessage = err.message || "Unable to set up subscription. Please try again.";
+        
+        // Check if it's an authentication error
+        if (errorMessage.includes("Unauthorized")) {
+          toast({
+            title: "Authentication Required",
+            description: "Please log in to subscribe to a plan.",
+            variant: "destructive",
+          });
+          setTimeout(() => {
+            window.location.href = '/api/login';
+          }, 2000);
+        } else {
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
+        }
         setLoading(false);
       });
   }, []);
@@ -221,7 +235,7 @@ export default function Subscribe() {
 
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <SubscribeForm />
+      <SubscribeForm planType={planType} />
     </Elements>
   );
 }

@@ -115,15 +115,24 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDF6E3] flex">
+    <div className="min-h-screen bg-[#FDF6E3] flex" role="main">
+      {/* Skip to main content link for screen readers */}
+      <a 
+        href="#auth-form" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#1D3557] text-white px-4 py-2 rounded z-50"
+        aria-label="Skip to authentication form"
+      >
+        Skip to main content
+      </a>
+      
       {/* Left side - Form */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <Card className="w-full max-w-md">
+      <div className="flex-1 flex items-center justify-center p-8" role="region" aria-label="Authentication form">
+        <Card className="w-full max-w-md" role="form" aria-labelledby="auth-title">
           <CardHeader>
-            <CardTitle className="text-2xl text-center text-[#1D3557]">
+            <CardTitle id="auth-title" className="text-2xl text-center text-[#1D3557]">
               {isLogin ? "Welcome Back" : "Create Account"}
             </CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription className="text-center" id="auth-description">
               {isLogin 
                 ? "Sign in to access your Systoro dashboard" 
                 : "Get started with your continuous improvement journey"
@@ -131,60 +140,108 @@ export default function AuthPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form 
+              id="auth-form"
+              onSubmit={handleSubmit} 
+              className="space-y-4"
+              aria-describedby="auth-description"
+              noValidate
+            >
+              {/* Live region for form status announcements */}
+              <div 
+                role="status" 
+                aria-live="polite" 
+                aria-atomic="true" 
+                className="sr-only"
+                id="form-status"
+              >
+                {loginMutation.isPending && "Signing in..."}
+                {registerMutation.isPending && "Creating account..."}
+              </div>
+
               {!isLogin && (
-                <div className="grid grid-cols-2 gap-4">
+                <fieldset className="grid grid-cols-2 gap-4">
+                  <legend className="sr-only">Personal Information</legend>
                   <div>
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
+                      name="firstName"
                       type="text"
                       value={formData.firstName}
                       onChange={(e) =>
                         setFormData({ ...formData, firstName: e.target.value })
                       }
                       required
+                      aria-describedby="firstName-error"
+                      aria-invalid={false}
+                      autoComplete="given-name"
                     />
+                    <div id="firstName-error" className="sr-only" role="alert" aria-live="polite"></div>
                   </div>
                   <div>
                     <Label htmlFor="lastName">Last Name</Label>
                     <Input
                       id="lastName"
+                      name="lastName"
                       type="text"
                       value={formData.lastName}
                       onChange={(e) =>
                         setFormData({ ...formData, lastName: e.target.value })
                       }
                       required
+                      aria-describedby="lastName-error"
+                      aria-invalid={false}
+                      autoComplete="family-name"
                     />
+                    <div id="lastName-error" className="sr-only" role="alert" aria-live="polite"></div>
                   </div>
-                </div>
+                </fieldset>
               )}
               
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
+                  aria-describedby="email-error email-help"
+                  aria-invalid={false}
+                  autoComplete="email"
+                  placeholder="Enter your email address"
                 />
+                <div id="email-help" className="text-sm text-gray-600 mt-1">
+                  We'll use this email for your account access
+                </div>
+                <div id="email-error" className="sr-only" role="alert" aria-live="polite"></div>
               </div>
               
               <div>
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   value={formData.password}
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }
                   required
+                  aria-describedby="password-error password-help"
+                  aria-invalid={false}
+                  autoComplete={isLogin ? "current-password" : "new-password"}
+                  placeholder="Enter your password"
+                  minLength={6}
                 />
+                <div id="password-help" className="text-sm text-gray-600 mt-1">
+                  {isLogin ? "Enter your account password" : "Password must be at least 6 characters long"}
+                </div>
+                <div id="password-error" className="sr-only" role="alert" aria-live="polite"></div>
               </div>
 
               <Button

@@ -51,7 +51,7 @@ export default function Landing() {
               color: '#94A3B8',
               textDecoration: 'none',
               fontWeight: '500',
-              fontSize: '16px',
+              fontSize: '20px',
               transition: 'color 0.2s ease'
             }}>
               About
@@ -60,7 +60,7 @@ export default function Landing() {
               color: '#0EA5E9',
               textDecoration: 'none',
               fontWeight: '600',
-              fontSize: '16px',
+              fontSize: '20px',
               transition: 'color 0.2s ease'
             }}>
               Systoro
@@ -69,7 +69,7 @@ export default function Landing() {
               color: '#94A3B8',
               textDecoration: 'none',
               fontWeight: '500',
-              fontSize: '16px',
+              fontSize: '20px',
               transition: 'color 0.2s ease'
             }}>
               Pricing
@@ -154,27 +154,7 @@ export default function Landing() {
               Your trusted partner for process improvement and operational excellence solutions. 
               We help teams streamline their improvement efforts with smart, intuitive tools.
             </p>
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%)',
-              backgroundColor: 'rgba(30, 41, 59, 0.8)',
-              border: '2px solid rgba(14, 165, 233, 0.4)',
-              borderRadius: '16px',
-              padding: '20px',
-              maxWidth: '600px',
-              margin: '0 auto 40px auto',
-              fontSize: '14px',
-              color: '#94A3B8',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 8px 24px rgba(14, 165, 233, 0.2)'
-            }}>
-              <strong style={{ 
-                background: 'linear-gradient(135deg, #0EA5E9 0%, #A78BFA 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>Note:</strong> Currently using Replit Auth for development. 
-              Production version will include Google, Microsoft, and email/password login options.
-            </div>
+
           </section>
 
 

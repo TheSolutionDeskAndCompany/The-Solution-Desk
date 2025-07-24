@@ -60,7 +60,7 @@ export default function About() {
                 border: 'none',
                 textDecoration: 'none',
                 fontWeight: '500',
-                fontSize: '16px',
+                fontSize: '20px',
                 cursor: 'pointer',
                 transition: 'color 0.2s ease'
               }}
@@ -75,7 +75,7 @@ export default function About() {
                 border: 'none',
                 textDecoration: 'none',
                 fontWeight: '600',
-                fontSize: '16px',
+                fontSize: '20px',
                 cursor: 'pointer',
                 transition: 'color 0.2s ease'
               }}
@@ -90,7 +90,7 @@ export default function About() {
                 border: 'none',
                 textDecoration: 'none',
                 fontWeight: '500',
-                fontSize: '16px',
+                fontSize: '20px',
                 cursor: 'pointer',
                 transition: 'color 0.2s ease'
               }}

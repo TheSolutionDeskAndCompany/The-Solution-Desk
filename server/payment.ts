@@ -5,9 +5,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-06-20",
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function createSubscription(userId: string, plan: 'professional' | 'enterprise') {
   const user = await storage.getUser(userId);
@@ -83,7 +81,7 @@ export async function getSubscriptionStatus(userId: string) {
   return {
     status: subscription.status,
     plan: subscription.status === 'active' ? 'professional' : 'free',
-    current_period_end: subscription.current_period_end,
+    current_period_end: new Date(subscription.current_period_end * 1000),
     cancel_at_period_end: subscription.cancel_at_period_end
   };
 }
@@ -100,6 +98,6 @@ export async function cancelSubscription(userId: string) {
 
   return {
     message: "Subscription will be cancelled at the end of the current period",
-    cancel_at: subscription.current_period_end
+    cancel_at: new Date(subscription.current_period_end * 1000)
   };
 }

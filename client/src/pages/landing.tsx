@@ -2,22 +2,39 @@ import logoImage from "@assets/assets_task_01k0xxcddae2ztf238qpfhf1w6_1753350666
 
 export default function Landing() {
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-      position: 'relative'
-    }}>
+    <div 
+      style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        position: 'relative'
+      }}
+      role="main"
+      aria-label="Systoro - The Solution Desk homepage"
+    >
+
+      {/* Skip to main content for screen readers */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#1D3557] text-white px-4 py-2 rounded z-50"
+        style={{ position: 'absolute', top: '16px', left: '16px', zIndex: 9999 }}
+      >
+        Skip to main content
+      </a>
 
       {/* Navigation */}
-      <header style={{
-        backgroundColor: 'rgba(11, 20, 38, 0.95)',
-        borderBottom: '1px solid #334155',
-        padding: '0 20px',
-        backdropFilter: 'blur(10px)',
-        position: 'relative',
-        zIndex: 10
-      }}>
+      <header 
+        style={{
+          backgroundColor: 'rgba(11, 20, 38, 0.95)',
+          borderBottom: '1px solid #334155',
+          padding: '0 20px',
+          backdropFilter: 'blur(10px)',
+          position: 'relative',
+          zIndex: 10
+        }}
+        role="banner"
+        aria-label="Site header"
+      >
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -96,7 +113,12 @@ export default function Landing() {
       </header>
 
       {/* Main Content */}
-      <main style={{ padding: '60px 20px', position: 'relative', zIndex: 10 }}>
+      <main 
+        id="main-content"
+        style={{ padding: '60px 20px', position: 'relative', zIndex: 10 }}
+        role="main"
+        aria-label="Main content"
+      >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Hero Section */}
           <section style={{ 

@@ -112,7 +112,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>7</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
+                background: 'linear-gradient(135deg, #39FF14 0%, #00FF7F 50%, #32CD32 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -149,7 +149,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>$127K</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
+                background: 'linear-gradient(135deg, #39FF14 0%, #00FF7F 50%, #32CD32 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

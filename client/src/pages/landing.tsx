@@ -317,7 +317,7 @@ export default function Landing() {
               }}>
                 <div>
                   <h3 style={{ 
-                    background: 'linear-gradient(135deg, #00FF00 0%, #32CD32 50%, #90EE90 100%)',
+                    background: 'linear-gradient(135deg, #39FF14 0%, #00FF7F 50%, #32CD32 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',

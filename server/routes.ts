@@ -15,8 +15,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Auth middleware - temporarily disabled for debugging
-  // await setupAuth(app);
+  // Auth middleware
+  await setupAuth(app);
 
   // Debug middleware to catch all requests
   app.use('/api', (req, res, next) => {
@@ -24,17 +24,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     next();
   });
 
-  // Simple test route
-  app.get('/api/test', (req, res) => {
-    console.log('[DEBUG] Test route hit');
-    res.json({ message: 'Server is working' });
-  });
-
-  // Auth routes - temporarily disabled auth middleware for debugging  
-  app.get('/api/auth/user', async (req: any, res) => {
+  // Auth routes
+  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
-      // Temporarily return test data
-      res.json({ message: "Auth temporarily disabled for debugging" });
+      const userId = req.user.claims.sub;
+      const user = await storage.getUser(userId);
+      res.json(user);
     } catch (error) {
       console.error("Error fetching user:", error);
       res.status(500).json({ message: "Failed to fetch user" });

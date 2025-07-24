@@ -103,7 +103,10 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <h1 style={{ 
                 fontSize: '56px', 
-                color: '#F1F5F9', 
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
                 margin: '0 0 16px 0',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800',
@@ -171,7 +174,10 @@ export default function Landing() {
             }}>
               <h2 style={{
                 fontSize: '48px',
-                color: '#F1F5F9',
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
                 margin: '0',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800'
@@ -255,7 +261,10 @@ export default function Landing() {
           <section id="pricing" style={{ textAlign: 'center' }}>
             <h2 style={{
               fontSize: '36px',
-              color: '#F1F5F9',
+              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '16px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700',

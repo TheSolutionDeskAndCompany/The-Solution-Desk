@@ -153,7 +153,10 @@ export default function Demo() {
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <h2 style={{ 
               fontSize: '36px', 
-              color: '#F1F5F9', 
+              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '16px',
               fontWeight: '700'
             }}>

@@ -152,7 +152,10 @@ export default function Home() {
           }}>
             <h2 style={{
               fontSize: '24px',
-              color: '#F1F5F9',
+              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '24px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700'
@@ -281,7 +284,10 @@ export default function Home() {
           }}>
             <h2 style={{
               fontSize: '24px',
-              color: '#F1F5F9',
+              background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               marginBottom: '24px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700'

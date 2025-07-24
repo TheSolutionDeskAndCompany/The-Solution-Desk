@@ -104,7 +104,7 @@ export default function Home() {
                 Active Projects
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
+                background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -141,7 +141,7 @@ export default function Home() {
                 Cost Savings
               </h3>
               <div style={{ 
-                background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%)',
+                background: 'linear-gradient(135deg, #F4D03F 0%, #F1C40F 50%, #D4AF37 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

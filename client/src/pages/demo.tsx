@@ -213,24 +213,48 @@ export default function Demo() {
           }}>
             <h3 style={{ 
               fontSize: '28px', 
-              color: '#9333EA', 
+              background: 'linear-gradient(135deg, #9333EA 0%, #7C3AED 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
               margin: '0 0 16px 0',
               fontWeight: '700'
             }}>
               Currently Viewing: {currentData.name}
             </h3>
             {selectedTier === 'free' && (
-              <p style={{ color: '#EF4444', fontSize: '16px', margin: '0' }}>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '16px', 
+                margin: '0' 
+              }}>
                 Limited features - Upgrade to unlock full potential
               </p>
             )}
             {selectedTier === 'professional' && (
-              <p style={{ color: '#10B981', fontSize: '16px', margin: '0' }}>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '16px', 
+                margin: '0' 
+              }}>
                 Most Popular - Perfect for growing teams
               </p>
             )}
             {selectedTier === 'enterprise' && (
-              <p style={{ color: '#F59E0B', fontSize: '16px', margin: '0' }}>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '16px', 
+                margin: '0' 
+              }}>
                 Enterprise-grade - Built for large organizations
               </p>
             )}
@@ -252,7 +276,10 @@ export default function Demo() {
                 textAlign: 'center'
               }}>
                 <h4 style={{ 
-                  color: '#94A3B8', 
+                  background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                   fontSize: '14px', 
                   margin: '0 0 8px 0',
                   textTransform: 'uppercase',
@@ -261,7 +288,10 @@ export default function Demo() {
                   {key.replace(/([A-Z])/g, ' $1').trim()}
                 </h4>
                 <p style={{ 
-                  color: '#F1F5F9', 
+                  background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                   fontSize: '24px', 
                   fontWeight: '700',
                   margin: '0'

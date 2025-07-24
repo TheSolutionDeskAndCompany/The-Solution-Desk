@@ -317,7 +317,10 @@ export default function Landing() {
               }}>
                 <div>
                   <h3 style={{ 
-                    color: '#F1F5F9', 
+                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
                     fontSize: '24px', 
                     fontWeight: '700', 
                     marginBottom: '20px',
@@ -328,12 +331,18 @@ export default function Landing() {
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
-                      color: '#F1F5F9', 
+                      background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       fontWeight: '800',
                       textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
                     }}>$0</span>
                     <span style={{ 
-                      color: '#94A3B8', 
+                      background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       fontSize: '16px',
                       textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
                     }}>/month</span>
@@ -345,7 +354,15 @@ export default function Landing() {
                     color: '#94A3B8',
                     padding: '0'
                   }}>
-                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <li style={{ 
+                      marginBottom: '12px', 
+                      display: 'flex', 
+                      alignItems: 'center',
+                      background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>
                       <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Up to 3 projects
                     </li>

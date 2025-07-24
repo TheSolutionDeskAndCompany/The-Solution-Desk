@@ -91,11 +91,34 @@ export default function Home() {
               border: '1px solid #334155',
               backdropFilter: 'blur(10px)'
             }}>
-              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <h3 style={{ 
+                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '14px', 
+                fontWeight: '600', 
+                marginBottom: '8px', 
+                textTransform: 'uppercase' 
+              }}>
                 Active Projects
               </h3>
-              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>7</div>
-              <p style={{ color: '#22D3EE', fontSize: '12px', marginTop: '8px' }}>+2 this month</p>
+              <div style={{ 
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '32px', 
+                fontWeight: '800' 
+              }}>7</div>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #22D3EE 0%, #0EA5E9 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '12px', 
+                marginTop: '8px' 
+              }}>+2 this month</p>
             </div>
 
             <div style={{
@@ -105,11 +128,34 @@ export default function Home() {
               border: '1px solid #334155',
               backdropFilter: 'blur(10px)'
             }}>
-              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <h3 style={{ 
+                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '14px', 
+                fontWeight: '600', 
+                marginBottom: '8px', 
+                textTransform: 'uppercase' 
+              }}>
                 Cost Savings
               </h3>
-              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>$127K</div>
-              <p style={{ color: '#10B981', fontSize: '12px', marginTop: '8px' }}>+23% from last quarter</p>
+              <div style={{ 
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '32px', 
+                fontWeight: '800' 
+              }}>$127K</div>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '12px', 
+                marginTop: '8px' 
+              }}>+23% from last quarter</p>
             </div>
 
             <div style={{
@@ -119,11 +165,34 @@ export default function Home() {
               border: '1px solid #334155',
               backdropFilter: 'blur(10px)'
             }}>
-              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <h3 style={{ 
+                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '14px', 
+                fontWeight: '600', 
+                marginBottom: '8px', 
+                textTransform: 'uppercase' 
+              }}>
                 Efficiency Score
               </h3>
-              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>94%</div>
-              <p style={{ color: '#22D3EE', fontSize: '12px', marginTop: '8px' }}>Above target</p>
+              <div style={{ 
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '32px', 
+                fontWeight: '800' 
+              }}>94%</div>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #22D3EE 0%, #0EA5E9 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '12px', 
+                marginTop: '8px' 
+              }}>Above target</p>
             </div>
 
             <div style={{
@@ -133,11 +202,34 @@ export default function Home() {
               border: '1px solid #334155',
               backdropFilter: 'blur(10px)'
             }}>
-              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <h3 style={{ 
+                background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '14px', 
+                fontWeight: '600', 
+                marginBottom: '8px', 
+                textTransform: 'uppercase' 
+              }}>
                 Quality Index
               </h3>
-              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>4.8</div>
-              <p style={{ color: '#10B981', fontSize: '12px', marginTop: '8px' }}>Excellent rating</p>
+              <div style={{ 
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '32px', 
+                fontWeight: '800' 
+              }}>4.8</div>
+              <p style={{ 
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '12px', 
+                marginTop: '8px' 
+              }}>Excellent rating</p>
             </div>
           </div>
 
@@ -210,7 +302,15 @@ export default function Home() {
                 alignItems: 'center'
               }}>
                 <div>
-                  <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
+                  <h3 style={{ 
+                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontSize: '18px', 
+                    fontWeight: '600', 
+                    marginBottom: '4px' 
+                  }}>
                     Customer Service Process Review
                   </h3>
                   <p style={{ 
@@ -253,7 +353,15 @@ export default function Home() {
                 alignItems: 'center'
               }}>
                 <div>
-                  <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
+                  <h3 style={{ 
+                    background: 'linear-gradient(135deg, #F1F5F9 0%, #94A3B8 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontSize: '18px', 
+                    fontWeight: '600', 
+                    marginBottom: '4px' 
+                  }}>
                     Inventory Management Improvement
                   </h3>
                   <p style={{ 

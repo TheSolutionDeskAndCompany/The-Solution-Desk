@@ -15,28 +15,27 @@ export default function Landing() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
-        opacity: 0.25,
+        opacity: 0.18,
         pointerEvents: 'none'
       }}>
         <img 
           src={logoImage} 
           alt="Background Logo" 
           style={{ 
-            height: '800px', 
+            height: '650px', 
             width: 'auto',
-            filter: 'brightness(3) saturate(1.2)'
+            filter: 'brightness(2) saturate(0.7)'
           }} 
         />
       </div>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'rgba(11, 20, 38, 0.98)',
+        backgroundColor: 'rgba(11, 20, 38, 0.95)',
         borderBottom: '1px solid #334155',
         padding: '0 20px',
-        backdropFilter: 'blur(20px)',
+        backdropFilter: 'blur(10px)',
         position: 'relative',
-        zIndex: 10,
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+        zIndex: 10
       }}>
         <div style={{
           maxWidth: '1200px',
@@ -123,16 +122,12 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <h1 style={{ 
                 fontSize: '56px', 
-                color: '#FFFFFF', 
+                color: '#F1F5F9', 
                 margin: '0 0 16px 0',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800',
                 lineHeight: '1.1',
-                textShadow: '0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6)',
-                background: 'linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                textShadow: '0 2px 8px rgba(0, 0, 0, 0.4)'
               }}>
                 Welcome to The Solution Desk
               </h1>
@@ -147,17 +142,12 @@ export default function Landing() {
             </div>
             <p style={{ 
               fontSize: '24px', 
-              color: '#F1F5F9', 
+              color: '#94A3B8', 
               maxWidth: '800px',
               margin: '0 auto 40px auto',
               lineHeight: '1.6',
               fontWeight: '400',
-              textShadow: '0 2px 12px rgba(0, 0, 0, 0.7)',
-              backgroundColor: 'rgba(11, 20, 38, 0.6)',
-              padding: '20px 30px',
-              borderRadius: '16px',
-              border: '1px solid rgba(148, 163, 184, 0.2)',
-              backdropFilter: 'blur(10px)'
+              textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)'
             }}>
               Your trusted partner for process improvement and operational excellence solutions. 
               We help teams streamline their improvement efforts with smart, intuitive tools.
@@ -281,31 +271,24 @@ export default function Landing() {
           </section>
 
           {/* Pricing Section */}
-          <section id="pricing" style={{ 
-            textAlign: 'center',
-            backgroundColor: 'rgba(11, 20, 38, 0.7)',
-            padding: '60px 40px',
-            borderRadius: '24px',
-            border: '1px solid rgba(148, 163, 184, 0.2)',
-            backdropFilter: 'blur(15px)'
-          }}>
+          <section id="pricing" style={{ textAlign: 'center' }}>
             <h2 style={{
               fontSize: '36px',
-              color: '#FFFFFF',
+              color: '#F1F5F9',
               marginBottom: '16px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700',
-              textShadow: '0 4px 16px rgba(0, 0, 0, 0.8)'
+              textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
             }}>
               Choose Your Plan
             </h2>
             <p style={{
               fontSize: '18px',
-              color: '#F1F5F9',
+              color: '#94A3B8',
               marginBottom: '48px',
               maxWidth: '600px',
               margin: '0 auto 48px auto',
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)'
+              textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
             }}>
               Start free and scale as your team grows. All plans include core process improvement tools.
             </p>
@@ -319,65 +302,61 @@ export default function Landing() {
             }}>
               {/* Free Plan */}
               <div style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                backgroundColor: 'rgba(30, 41, 59, 0.6)',
                 borderRadius: '20px',
                 padding: '40px 24px',
-                border: '1px solid #475569',
-                backdropFilter: 'blur(20px)',
+                border: '1px solid #334155',
+                backdropFilter: 'blur(10px)',
                 textAlign: 'center',
                 minHeight: '520px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)'
+                justifyContent: 'space-between'
               }}>
                 <div>
                   <h3 style={{ 
-                    color: '#FFFFFF', 
+                    color: '#F1F5F9', 
                     fontSize: '24px', 
                     fontWeight: '700', 
                     marginBottom: '20px',
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)'
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Free
                   </h3>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
-                      color: '#FFFFFF', 
+                      color: '#F1F5F9', 
                       fontWeight: '800',
-                      textShadow: '0 3px 12px rgba(0, 0, 0, 0.8)'
+                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
                     }}>$0</span>
                     <span style={{ 
-                      color: '#E2E8F0', 
+                      color: '#94A3B8', 
                       fontSize: '16px',
-                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.6)'
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
                     }}>/month</span>
                   </div>
                   <ul style={{ 
                     listStyle: 'none', 
                     marginBottom: '32px',
                     textAlign: 'left',
-                    color: '#F1F5F9',
-                    textShadow: '0 2px 6px rgba(0, 0, 0, 0.7)',
-                    backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                    borderRadius: '12px',
-                    padding: '20px'
+                    color: '#94A3B8',
+                    padding: '0'
                   }}>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#10B981', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Up to 3 projects
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#10B981', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Basic analytics
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#10B981', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Essential tools
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#10B981', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Community support
                     </li>
                   </ul>
@@ -432,55 +411,52 @@ export default function Landing() {
                 </div>
                 <div>
                   <h3 style={{ 
-                    color: '#FFFFFF', 
+                    color: '#F1F5F9', 
                     fontSize: '24px', 
                     fontWeight: '700', 
                     marginBottom: '20px',
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)'
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Professional
                   </h3>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
-                      color: '#FFFFFF', 
+                      color: '#F1F5F9', 
                       fontWeight: '800',
-                      textShadow: '0 3px 12px rgba(0, 0, 0, 0.8)'
+                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
                     }}>$29</span>
                     <span style={{ 
-                      color: '#E2E8F0', 
+                      color: '#94A3B8', 
                       fontSize: '16px',
-                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.6)'
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
                     }}>/month</span>
                   </div>
                   <ul style={{ 
                     listStyle: 'none', 
                     marginBottom: '32px',
                     textAlign: 'left',
-                    color: '#F1F5F9',
-                    textShadow: '0 2px 6px rgba(0, 0, 0, 0.7)',
-                    backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                    borderRadius: '12px',
-                    padding: '20px'
+                    color: '#94A3B8',
+                    padding: '0'
                   }}>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#A78BFA', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Unlimited projects
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#A78BFA', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Advanced analytics & reporting
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#A78BFA', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Full Six Sigma & Lean toolkit
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#A78BFA', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Team collaboration
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#A78BFA', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Priority support
                     </li>
                   </ul>
@@ -507,69 +483,65 @@ export default function Landing() {
 
               {/* Enterprise Plan */}
               <div style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                backgroundColor: 'rgba(30, 41, 59, 0.6)',
                 borderRadius: '20px',
                 padding: '40px 24px',
                 border: '1px solid #F59E0B',
-                backdropFilter: 'blur(20px)',
+                backdropFilter: 'blur(10px)',
                 textAlign: 'center',
                 minHeight: '520px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)'
+                justifyContent: 'space-between'
               }}>
                 <div>
                   <h3 style={{ 
-                    color: '#FFFFFF', 
+                    color: '#F1F5F9', 
                     fontSize: '24px', 
                     fontWeight: '700', 
                     marginBottom: '20px',
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)'
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Enterprise
                   </h3>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '32px', 
-                      color: '#FFFFFF', 
+                      color: '#F1F5F9', 
                       fontWeight: '800',
-                      textShadow: '0 3px 12px rgba(0, 0, 0, 0.8)'
+                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
                     }}>Custom</span>
                     <span style={{ 
-                      color: '#E2E8F0', 
+                      color: '#94A3B8', 
                       fontSize: '16px',
-                      textShadow: '0 2px 6px rgba(0, 0, 0, 0.6)'
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
                     }}> pricing</span>
                   </div>
                   <ul style={{ 
                     listStyle: 'none', 
                     marginBottom: '32px',
                     textAlign: 'left',
-                    color: '#F1F5F9',
-                    textShadow: '0 2px 6px rgba(0, 0, 0, 0.7)',
-                    backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                    borderRadius: '12px',
-                    padding: '20px'
+                    color: '#94A3B8',
+                    padding: '0'
                   }}>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#F59E0B', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Everything in Professional
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#F59E0B', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Custom integrations
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#F59E0B', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       Dedicated account manager
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#F59E0B', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       On-premise deployment
                     </li>
                     <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                      <span style={{ color: '#F59E0B', marginRight: '8px', fontWeight: 'bold' }}>✓</span>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
                       24/7 phone support
                     </li>
                   </ul>

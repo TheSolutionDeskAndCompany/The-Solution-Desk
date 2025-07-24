@@ -6,14 +6,15 @@ export default function Home() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #FAFBFC 0%, #F3F4F6 100%)', 
+      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'white',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '0 20px'
+        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        borderBottom: '1px solid #334155',
+        padding: '0 20px',
+        backdropFilter: 'blur(10px)'
       }}>
         <div style={{
           maxWidth: '1200px',
@@ -25,7 +26,7 @@ export default function Home() {
         }}>
           <h1 style={{
             fontSize: '28px',
-            color: '#6366F1',
+            color: '#A78BFA',
             margin: '0',
             fontFamily: 'Inter, sans-serif',
             fontWeight: '700'
@@ -33,7 +34,7 @@ export default function Home() {
             Systoro
           </h1>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <span style={{ color: '#374151', fontWeight: '500' }}>
+            <span style={{ color: '#CBD5E1', fontWeight: '500' }}>
               Welcome, {user?.firstName || user?.email || 'User'}!
             </span>
             <button 
@@ -60,54 +61,235 @@ export default function Home() {
       {/* Main Content */}
       <main style={{ padding: '40px 20px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {/* Dashboard Stats */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '24px',
+            marginBottom: '40px'
+          }}>
+            <div style={{
+              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #334155',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Active Projects
+              </h3>
+              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>7</div>
+              <p style={{ color: '#22D3EE', fontSize: '12px', marginTop: '8px' }}>+2 this month</p>
+            </div>
+
+            <div style={{
+              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #334155',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Cost Savings
+              </h3>
+              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>$127K</div>
+              <p style={{ color: '#10B981', fontSize: '12px', marginTop: '8px' }}>+23% from last quarter</p>
+            </div>
+
+            <div style={{
+              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #334155',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Efficiency Score
+              </h3>
+              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>94%</div>
+              <p style={{ color: '#22D3EE', fontSize: '12px', marginTop: '8px' }}>Above target</p>
+            </div>
+
+            <div style={{
+              backgroundColor: 'rgba(30, 41, 59, 0.5)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #334155',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <h3 style={{ color: '#94A3B8', fontSize: '14px', fontWeight: '600', marginBottom: '8px', textTransform: 'uppercase' }}>
+                Quality Index
+              </h3>
+              <div style={{ color: '#F1F5F9', fontSize: '32px', fontWeight: '800' }}>4.8</div>
+              <p style={{ color: '#10B981', fontSize: '12px', marginTop: '8px' }}>Excellent rating</p>
+            </div>
+          </div>
+
+          {/* Recent Projects */}
           <div style={{
-            backgroundColor: 'white',
+            backgroundColor: 'rgba(30, 41, 59, 0.5)',
             borderRadius: '20px',
-            padding: '50px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
-            textAlign: 'center',
-            border: '1px solid #F3F4F6'
+            padding: '32px',
+            border: '1px solid #334155',
+            backdropFilter: 'blur(10px)',
+            marginBottom: '40px'
           }}>
             <h2 style={{
-              fontSize: '36px',
-              color: '#1F2937',
+              fontSize: '24px',
+              color: '#F1F5F9',
               marginBottom: '24px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700'
             }}>
-              Welcome to Systoro
+              Recent Projects
             </h2>
             
-            <p style={{
-              fontSize: '18px',
-              color: '#6B7280',
-              marginBottom: '32px',
-              maxWidth: '600px',
-              margin: '0 auto 40px auto',
-              lineHeight: '1.6'
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                borderRadius: '12px',
+                padding: '20px',
+                border: '1px solid #475569',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
+                    Manufacturing Line Optimization
+                  </h3>
+                  <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '8px' }}>
+                    Reduce cycle time and improve throughput using Lean principles
+                  </p>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <span style={{
+                      backgroundColor: '#10B981',
+                      color: 'white',
+                      padding: '4px 12px',
+                      borderRadius: '12px',
+                      fontSize: '12px',
+                      fontWeight: '600'
+                    }}>
+                      Active
+                    </span>
+                    <span style={{ color: '#94A3B8', fontSize: '12px' }}>85% Complete</span>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ color: '#22D3EE', fontSize: '20px', fontWeight: '700' }}>$45K</div>
+                  <div style={{ color: '#94A3B8', fontSize: '12px' }}>Est. Savings</div>
+                </div>
+              </div>
+
+              <div style={{
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                borderRadius: '12px',
+                padding: '20px',
+                border: '1px solid #475569',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
+                    Customer Service Process Review
+                  </h3>
+                  <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '8px' }}>
+                    Six Sigma DMAIC approach to reduce response time
+                  </p>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <span style={{
+                      backgroundColor: '#F59E0B',
+                      color: 'white',
+                      padding: '4px 12px',
+                      borderRadius: '12px',
+                      fontSize: '12px',
+                      fontWeight: '600'
+                    }}>
+                      Analyze
+                    </span>
+                    <span style={{ color: '#94A3B8', fontSize: '12px' }}>45% Complete</span>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ color: '#22D3EE', fontSize: '20px', fontWeight: '700' }}>$28K</div>
+                  <div style={{ color: '#94A3B8', fontSize: '12px' }}>Est. Savings</div>
+                </div>
+              </div>
+
+              <div style={{
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                borderRadius: '12px',
+                padding: '20px',
+                border: '1px solid #475569',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '18px', fontWeight: '600', marginBottom: '4px' }}>
+                    Inventory Management Improvement
+                  </h3>
+                  <p style={{ color: '#94A3B8', fontSize: '14px', marginBottom: '8px' }}>
+                    Implement just-in-time principles to reduce waste
+                  </p>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <span style={{
+                      backgroundColor: '#8B5CF6',
+                      color: 'white',
+                      padding: '4px 12px',
+                      borderRadius: '12px',
+                      fontSize: '12px',
+                      fontWeight: '600'
+                    }}>
+                      Complete
+                    </span>
+                    <span style={{ color: '#94A3B8', fontSize: '12px' }}>100% Complete</span>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ color: '#10B981', fontSize: '20px', fontWeight: '700' }}>$54K</div>
+                  <div style={{ color: '#94A3B8', fontSize: '12px' }}>Realized Savings</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tools Section */}
+          <div style={{
+            backgroundColor: 'rgba(30, 41, 59, 0.5)',
+            borderRadius: '20px',
+            padding: '32px',
+            border: '1px solid #334155',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h2 style={{
+              fontSize: '24px',
+              color: '#F1F5F9',
+              marginBottom: '24px',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
             }}>
-              Your continuous improvement journey starts here. Access powerful tools for process analysis, 
-              project management, and performance tracking all in one place.
-            </p>
+              Available Tools
+            </h2>
 
             <div style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-              gap: '24px',
-              marginTop: '40px'
+              gap: '24px'
             }}>
               <div style={{
-                background: 'linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)',
-                padding: '32px 24px',
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                padding: '24px',
                 borderRadius: '16px',
                 textAlign: 'center',
-                border: '1px solid #E2E8F0',
+                border: '1px solid #475569',
                 transition: 'all 0.2s ease'
               }}>
                 <div style={{
                   width: '48px',
                   height: '48px',
-                  background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                   borderRadius: '12px',
                   margin: '0 auto 16px auto',
                   display: 'flex',
@@ -116,44 +298,18 @@ export default function Home() {
                 }}>
                   <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>📊</span>
                 </div>
-                <h3 style={{ color: '#1F2937', marginBottom: '12px', fontWeight: '600' }}>Projects</h3>
-                <p style={{ color: '#6B7280', fontSize: '14px', lineHeight: '1.5' }}>
-                  Manage your improvement initiatives with structured workflows
+                <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Control Charts</h3>
+                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: '1.5' }}>
+                  Monitor process stability with statistical control charts
                 </p>
               </div>
 
               <div style={{
-                background: 'linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%)',
-                padding: '32px 24px',
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                padding: '24px',
                 borderRadius: '16px',
                 textAlign: 'center',
-                border: '1px solid #BBF7D0',
-                transition: 'all 0.2s ease'
-              }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-                  borderRadius: '12px',
-                  margin: '0 auto 16px auto',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>📈</span>
-                </div>
-                <h3 style={{ color: '#1F2937', marginBottom: '12px', fontWeight: '600' }}>Analytics</h3>
-                <p style={{ color: '#6B7280', fontSize: '14px', lineHeight: '1.5' }}>
-                  Track performance metrics and visualize progress
-                </p>
-              </div>
-
-              <div style={{
-                background: 'linear-gradient(135deg, #FEF3F2 0%, #FDF2F8 100%)',
-                padding: '32px 24px',
-                borderRadius: '16px',
-                textAlign: 'center',
-                border: '1px solid #FECACA',
+                border: '1px solid #475569',
                 transition: 'all 0.2s ease'
               }}>
                 <div style={{
@@ -166,11 +322,37 @@ export default function Home() {
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
+                  <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>📈</span>
+                </div>
+                <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>Pareto Analysis</h3>
+                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: '1.5' }}>
+                  Identify the vital few factors impacting your process
+                </p>
+              </div>
+
+              <div style={{
+                backgroundColor: 'rgba(15, 23, 42, 0.5)',
+                padding: '24px',
+                borderRadius: '16px',
+                textAlign: 'center',
+                border: '1px solid #475569',
+                transition: 'all 0.2s ease'
+              }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                  borderRadius: '12px',
+                  margin: '0 auto 16px auto',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
                   <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>🛠️</span>
                 </div>
-                <h3 style={{ color: '#1F2937', marginBottom: '12px', fontWeight: '600' }}>Tools</h3>
-                <p style={{ color: '#6B7280', fontSize: '14px', lineHeight: '1.5' }}>
-                  Access Six Sigma and Lean improvement methodologies
+                <h3 style={{ color: '#F1F5F9', marginBottom: '12px', fontWeight: '600' }}>DMAIC Framework</h3>
+                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: '1.5' }}>
+                  Structured Six Sigma approach for process improvement
                 </p>
               </div>
             </div>

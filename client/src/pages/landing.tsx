@@ -2,14 +2,15 @@ export default function Landing() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #FAFBFC 0%, #F3F4F6 100%)', 
+      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'white',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '0 20px'
+        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        borderBottom: '1px solid #334155',
+        padding: '0 20px',
+        backdropFilter: 'blur(10px)'
       }}>
         <div style={{
           maxWidth: '1200px',
@@ -21,7 +22,7 @@ export default function Landing() {
         }}>
           <h1 style={{
             fontSize: '28px',
-            color: '#6366F1',
+            color: '#A78BFA',
             margin: '0',
             fontFamily: 'Inter, sans-serif',
             fontWeight: '700'
@@ -29,6 +30,15 @@ export default function Landing() {
             The Solution Desk
           </h1>
           <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+            <a href="#about" style={{
+              color: '#94A3B8',
+              textDecoration: 'none',
+              fontWeight: '500',
+              fontSize: '16px',
+              transition: 'color 0.2s ease'
+            }}>
+              About
+            </a>
             <a href="#systoro" style={{
               color: '#22D3EE',
               textDecoration: 'none',
@@ -38,9 +48,18 @@ export default function Landing() {
             }}>
               Systoro
             </a>
+            <a href="#pricing" style={{
+              color: '#94A3B8',
+              textDecoration: 'none',
+              fontWeight: '500',
+              fontSize: '16px',
+              transition: 'color 0.2s ease'
+            }}>
+              Pricing
+            </a>
             <button 
               style={{
-                background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                 color: 'white',
                 padding: '12px 24px',
                 fontSize: '16px',
@@ -48,7 +67,7 @@ export default function Landing() {
                 borderRadius: '8px',
                 cursor: 'pointer',
                 fontWeight: '600',
-                boxShadow: '0 4px 12px rgba(99, 102, 241, 0.25)',
+                boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
                 transition: 'all 0.2s ease'
               }} 
               onClick={() => window.location.href = '/api/login'}
@@ -66,12 +85,12 @@ export default function Landing() {
           <section style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h1 style={{ 
               fontSize: '56px', 
-              color: '#1F2937', 
+              color: '#F1F5F9', 
               marginBottom: '24px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '800',
               lineHeight: '1.2',
-              background: 'linear-gradient(135deg, #1F2937 0%, #6366F1 100%)',
+              background: 'linear-gradient(135deg, #F1F5F9 0%, #A78BFA 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
@@ -80,7 +99,7 @@ export default function Landing() {
             </h1>
             <p style={{ 
               fontSize: '24px', 
-              color: '#6B7280', 
+              color: '#94A3B8', 
               maxWidth: '800px',
               margin: '0 auto 40px auto',
               lineHeight: '1.6',
@@ -91,14 +110,40 @@ export default function Landing() {
             </p>
           </section>
 
+          {/* About Section */}
+          <section id="about" style={{ marginBottom: '80px', textAlign: 'center' }}>
+            <h2 style={{
+              fontSize: '36px',
+              color: '#F1F5F9',
+              marginBottom: '24px',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              About The Solution Desk
+            </h2>
+            <p style={{
+              fontSize: '18px',
+              color: '#94A3B8',
+              maxWidth: '800px',
+              margin: '0 auto',
+              lineHeight: '1.7'
+            }}>
+              We specialize in creating software solutions that make process improvement accessible, 
+              efficient, and results-driven. Our tools are designed by practitioners, for practitioners, 
+              ensuring they solve real-world challenges while remaining intuitive and powerful.
+            </p>
+          </section>
+
           {/* Systoro Section */}
           <section id="systoro" style={{
-            backgroundColor: 'white',
+            backgroundColor: 'rgba(30, 41, 59, 0.5)',
             borderRadius: '20px',
             padding: '60px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
             textAlign: 'center',
-            border: '1px solid #F3F4F6'
+            border: '1px solid #334155',
+            backdropFilter: 'blur(10px)',
+            marginBottom: '80px'
           }}>
             <div style={{ 
               display: 'flex', 
@@ -110,7 +155,7 @@ export default function Landing() {
             }}>
               <h2 style={{
                 fontSize: '48px',
-                color: '#1F2937',
+                color: '#F1F5F9',
                 margin: '0',
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800'
@@ -134,7 +179,7 @@ export default function Landing() {
             
             <p style={{
               fontSize: '20px',
-              color: '#374151',
+              color: '#CBD5E1',
               marginBottom: '16px',
               fontWeight: '600'
             }}>
@@ -143,7 +188,7 @@ export default function Landing() {
             
             <p style={{
               fontSize: '18px',
-              color: '#6B7280',
+              color: '#94A3B8',
               maxWidth: '700px',
               margin: '0 auto 40px auto',
               lineHeight: '1.7'
@@ -156,7 +201,7 @@ export default function Landing() {
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button 
                 style={{
-                  background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
                   color: 'white',
                   padding: '16px 32px',
                   fontSize: '18px',
@@ -164,7 +209,7 @@ export default function Landing() {
                   borderRadius: '12px',
                   cursor: 'pointer',
                   fontWeight: '600',
-                  boxShadow: '0 8px 20px rgba(99, 102, 241, 0.3)',
+                  boxShadow: '0 8px 20px rgba(167, 139, 250, 0.3)',
                   transition: 'all 0.2s ease'
                 }} 
                 onClick={() => window.location.href = '/api/login'}
@@ -174,43 +219,184 @@ export default function Landing() {
               <button 
                 style={{
                   backgroundColor: 'transparent',
-                  color: '#6366F1',
+                  color: '#22D3EE',
                   padding: '16px 32px',
                   fontSize: '18px',
-                  border: '2px solid #6366F1',
+                  border: '2px solid #22D3EE',
                   borderRadius: '12px',
                   cursor: 'pointer',
                   fontWeight: '600',
                   transition: 'all 0.2s ease'
                 }}
               >
-                Learn More
+                View Demo
               </button>
             </div>
           </section>
 
-          {/* About Section */}
-          <section style={{ marginTop: '80px', textAlign: 'center' }}>
+          {/* Pricing Section */}
+          <section id="pricing" style={{ textAlign: 'center' }}>
             <h2 style={{
               fontSize: '36px',
-              color: '#1F2937',
-              marginBottom: '24px',
+              color: '#F1F5F9',
+              marginBottom: '16px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700'
             }}>
-              About The Solution Desk
+              Choose Your Plan
             </h2>
             <p style={{
               fontSize: '18px',
-              color: '#6B7280',
-              maxWidth: '800px',
-              margin: '0 auto',
-              lineHeight: '1.7'
+              color: '#94A3B8',
+              marginBottom: '48px',
+              maxWidth: '600px',
+              margin: '0 auto 48px auto'
             }}>
-              We specialize in creating software solutions that make process improvement accessible, 
-              efficient, and results-driven. Our tools are designed by practitioners, for practitioners, 
-              ensuring they solve real-world challenges while remaining intuitive and powerful.
+              Start free and scale as your team grows. All plans include core process improvement tools.
             </p>
+
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+              gap: '32px',
+              maxWidth: '1000px',
+              margin: '0 auto'
+            }}>
+              {/* Free Plan */}
+              <div style={{
+                backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                borderRadius: '20px',
+                padding: '40px 32px',
+                border: '1px solid #334155',
+                backdropFilter: 'blur(10px)',
+                textAlign: 'center'
+              }}>
+                <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>
+                  Free
+                </h3>
+                <div style={{ marginBottom: '24px' }}>
+                  <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$0</span>
+                  <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                </div>
+                <ul style={{ 
+                  listStyle: 'none', 
+                  padding: '0', 
+                  marginBottom: '32px',
+                  textAlign: 'left',
+                  color: '#94A3B8'
+                }}>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Up to 3 projects
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Basic analytics
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Essential tools
+                  </li>
+                </ul>
+                <button 
+                  style={{
+                    backgroundColor: 'transparent',
+                    color: '#22D3EE',
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    border: '2px solid #22D3EE',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    width: '100%',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onClick={() => window.location.href = '/api/login'}
+                >
+                  Get Started Free
+                </button>
+              </div>
+
+              {/* Professional Plan */}
+              <div style={{
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                borderRadius: '20px',
+                padding: '40px 32px',
+                border: '2px solid #A78BFA',
+                backdropFilter: 'blur(10px)',
+                textAlign: 'center',
+                position: 'relative'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                  color: 'white',
+                  padding: '6px 20px',
+                  borderRadius: '20px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  textTransform: 'uppercase'
+                }}>
+                  Most Popular
+                </div>
+                <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>
+                  Professional
+                </h3>
+                <div style={{ marginBottom: '24px' }}>
+                  <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$29</span>
+                  <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                </div>
+                <ul style={{ 
+                  listStyle: 'none', 
+                  padding: '0', 
+                  marginBottom: '32px',
+                  textAlign: 'left',
+                  color: '#94A3B8'
+                }}>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Unlimited projects
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Advanced analytics & reporting
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Full Six Sigma & Lean toolkit
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Team collaboration
+                  </li>
+                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: '#22D3EE', marginRight: '8px' }}>✓</span>
+                    Priority support
+                  </li>
+                </ul>
+                <button 
+                  style={{
+                    background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                    color: 'white',
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    width: '100%',
+                    boxShadow: '0 4px 12px rgba(167, 139, 250, 0.3)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onClick={() => window.location.href = '/subscribe'}
+                >
+                  Start Professional Plan
+                </button>
+              </div>
+            </div>
           </section>
         </div>
       </main>

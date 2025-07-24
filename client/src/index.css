@@ -3,32 +3,32 @@
 @tailwind utilities;
 
 :root {
-  /* Modern Professional Color Palette */
-  --background: hsl(240, 10%, 98%); /* Clean Light Gray #FAFBFC */
-  --foreground: hsl(240, 20%, 15%); /* Dark Charcoal #1F2937 */
-  --muted: hsl(240, 5%, 95%);
-  --muted-foreground: hsl(240, 8%, 45%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(240, 20%, 15%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(240, 20%, 15%);
-  --border: hsl(240, 10%, 90%);
-  --input: hsl(240, 10%, 95%);
-  --primary: hsl(262, 90%, 50%); /* Modern Purple #6366F1 */
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(193, 95%, 68%); /* Bright Blue #22D3EE */
-  --secondary-foreground: hsl(240, 20%, 15%);
-  --accent: hsl(193, 100%, 96%); /* Light Blue Accent */
-  --accent-foreground: hsl(240, 20%, 15%);
-  --destructive: hsl(0, 84%, 60%);
-  --destructive-foreground: hsl(0, 0%, 100%);
-  --ring: hsl(262, 90%, 50%);
-  --radius: 0.5rem; /* 8px rounded corners */
-  --chart-1: hsl(262, 90%, 50%);
-  --chart-2: hsl(193, 95%, 68%);
-  --chart-3: hsl(142, 76%, 36%);
-  --chart-4: hsl(45, 93%, 47%);
-  --chart-5: hsl(346, 87%, 43%);
+  /* Darker Professional Color Palette */
+  --background: hsl(240, 15%, 8%); /* Dark Background #0F172A */
+  --foreground: hsl(0, 0%, 95%); /* Light Text */
+  --muted: hsl(240, 15%, 12%);
+  --muted-foreground: hsl(240, 5%, 65%);
+  --popover: hsl(240, 15%, 10%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --card: hsl(240, 15%, 12%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --border: hsl(240, 15%, 20%);
+  --input: hsl(240, 15%, 15%);
+  --primary: hsl(262, 85%, 58%); /* Purple */
+  --primary-foreground: hsl(240, 15%, 8%);
+  --secondary: hsl(193, 85%, 60%); /* Cyan */
+  --secondary-foreground: hsl(240, 15%, 8%);
+  --accent: hsl(240, 15%, 18%);
+  --accent-foreground: hsl(0, 0%, 95%);
+  --destructive: hsl(0, 75%, 55%);
+  --destructive-foreground: hsl(0, 0%, 95%);
+  --ring: hsl(262, 85%, 58%);
+  --radius: 0.5rem;
+  --chart-1: hsl(262, 85%, 58%);
+  --chart-2: hsl(193, 85%, 60%);
+  --chart-3: hsl(142, 71%, 45%);
+  --chart-4: hsl(45, 88%, 55%);
+  --chart-5: hsl(346, 82%, 50%);
 }
 
 .dark {

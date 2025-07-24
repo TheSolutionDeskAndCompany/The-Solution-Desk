@@ -220,7 +220,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const subscription = await stripe.subscriptions.create({
         customer: customer.id,
         items: [{
-          price: process.env.STRIPE_PRICE_ID || 'price_1234567890',
+          price_data: {
+            currency: 'usd',
+            product_data: { name: 'Systoro Professional' },
+            unit_amount: 2900, // $29.00
+            recurring: { interval: 'month' }
+          }
         }],
         payment_behavior: 'default_incomplete',
         expand: ['latest_invoice.payment_intent'],

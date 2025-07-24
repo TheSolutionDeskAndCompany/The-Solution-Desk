@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
+import Subscribe from "@/pages/subscribe";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -35,9 +36,15 @@ function Router() {
   return (
     <Switch>
       {isAuthenticated ? (
-        <Route path="/" component={Home} />
+        <>
+          <Route path="/" component={Home} />
+          <Route path="/subscribe" component={Subscribe} />
+        </>
       ) : (
-        <Route path="/" component={Landing} />
+        <>
+          <Route path="/" component={Landing} />
+          <Route path="/subscribe" component={Subscribe} />
+        </>
       )}
       <Route path="*" component={NotFound} />
     </Switch>

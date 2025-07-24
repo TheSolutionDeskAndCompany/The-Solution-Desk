@@ -18,27 +18,28 @@ export default function Home() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
-        opacity: 0.12,
+        opacity: 0.22,
         pointerEvents: 'none'
       }}>
         <img 
           src={logoImage} 
           alt="Background Logo" 
           style={{ 
-            height: '650px', 
+            height: '750px', 
             width: 'auto',
-            filter: 'brightness(2.2) saturate(0.6)'
+            filter: 'brightness(2.8) saturate(1)'
           }} 
         />
       </div>
       {/* Navigation */}
       <header style={{
-        backgroundColor: 'rgba(11, 20, 38, 0.95)',
+        backgroundColor: 'rgba(11, 20, 38, 0.98)',
         borderBottom: '1px solid #334155',
         padding: '0 20px',
-        backdropFilter: 'blur(10px)',
+        backdropFilter: 'blur(20px)',
         position: 'relative',
-        zIndex: 10
+        zIndex: 10,
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
       }}>
         <div style={{
           maxWidth: '1200px',

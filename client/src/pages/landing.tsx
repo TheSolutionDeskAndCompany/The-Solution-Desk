@@ -15,16 +15,16 @@ export default function Landing() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
-        opacity: 0.08,
+        opacity: 0.15,
         pointerEvents: 'none'
       }}>
         <img 
           src={logoImage} 
           alt="Background Logo" 
           style={{ 
-            height: '400px', 
+            height: '600px', 
             width: 'auto',
-            filter: 'brightness(2) saturate(0.5)'
+            filter: 'brightness(2.5) saturate(0.8)'
           }} 
         />
       </div>

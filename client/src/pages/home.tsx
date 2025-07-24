@@ -18,16 +18,16 @@ export default function Home() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
-        opacity: 0.06,
+        opacity: 0.12,
         pointerEvents: 'none'
       }}>
         <img 
           src={logoImage} 
           alt="Background Logo" 
           style={{ 
-            height: '500px', 
+            height: '650px', 
             width: 'auto',
-            filter: 'brightness(2) saturate(0.3)'
+            filter: 'brightness(2.2) saturate(0.6)'
           }} 
         />
       </div>

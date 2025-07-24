@@ -99,11 +99,23 @@ export default function Landing() {
       <main style={{ padding: '60px 20px', position: 'relative', zIndex: 10 }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Hero Section */}
-          <section style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <section style={{ 
+            textAlign: 'center', 
+            marginBottom: '80px',
+            background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(30, 144, 255, 0.1) 100%)',
+            backgroundColor: 'rgba(30, 41, 59, 0.6)',
+            borderRadius: '24px',
+            padding: '60px 40px',
+            border: '2px solid rgba(34, 211, 238, 0.3)',
+            backdropFilter: 'blur(15px)',
+            boxShadow: '0 20px 40px rgba(34, 211, 238, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <h1 style={{ 
                 fontSize: '56px', 
-                background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
+                background: 'linear-gradient(135deg, #22D3EE 0%, #A78BFA 50%, #1E90FF 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -111,13 +123,16 @@ export default function Landing() {
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800',
                 lineHeight: '1.1',
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.4)'
+                textShadow: '0 4px 12px rgba(34, 211, 238, 0.3)'
               }}>
                 Welcome to The Solution Desk
               </h1>
               <div style={{
                 fontSize: '20px',
-                color: '#A78BFA',
+                background: 'linear-gradient(135deg, #A78BFA 0%, #22D3EE 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
                 fontWeight: '600',
                 letterSpacing: '0.5px'
               }}>
@@ -126,7 +141,7 @@ export default function Landing() {
             </div>
             <p style={{ 
               fontSize: '24px', 
-              background: 'linear-gradient(135deg, #00FFFF 0%, #1E90FF 50%, #9370DB 100%)',
+              background: 'linear-gradient(135deg, #22D3EE 0%, #1E90FF 50%, #A78BFA 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -134,22 +149,30 @@ export default function Landing() {
               margin: '0 auto 40px auto',
               lineHeight: '1.6',
               fontWeight: '400',
-              textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)'
+              textShadow: '0 2px 6px rgba(34, 211, 238, 0.2)'
             }}>
               Your trusted partner for process improvement and operational excellence solutions. 
               We help teams streamline their improvement efforts with smart, intuitive tools.
             </p>
             <div style={{
-              backgroundColor: 'rgba(14, 165, 233, 0.1)',
-              border: '1px solid rgba(14, 165, 233, 0.3)',
-              borderRadius: '12px',
-              padding: '16px',
+              background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%)',
+              backgroundColor: 'rgba(30, 41, 59, 0.8)',
+              border: '2px solid rgba(14, 165, 233, 0.4)',
+              borderRadius: '16px',
+              padding: '20px',
               maxWidth: '600px',
               margin: '0 auto 40px auto',
               fontSize: '14px',
-              color: '#94A3B8'
+              color: '#94A3B8',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 8px 24px rgba(14, 165, 233, 0.2)'
             }}>
-              <strong style={{ color: '#0EA5E9' }}>Note:</strong> Currently using Replit Auth for development. 
+              <strong style={{ 
+                background: 'linear-gradient(135deg, #0EA5E9 0%, #A78BFA 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>Note:</strong> Currently using Replit Auth for development. 
               Production version will include Google, Microsoft, and email/password login options.
             </div>
           </section>
@@ -158,14 +181,17 @@ export default function Landing() {
 
           {/* Systoro Section */}
           <section id="systoro" style={{
-            backgroundColor: 'rgba(30, 41, 59, 0.5)',
-            borderRadius: '20px',
+            background: 'linear-gradient(135deg, rgba(30, 144, 255, 0.15) 0%, rgba(147, 51, 234, 0.15) 50%, rgba(34, 211, 238, 0.15) 100%)',
+            backgroundColor: 'rgba(30, 41, 59, 0.8)',
+            borderRadius: '24px',
             padding: '60px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 24px 48px rgba(30, 144, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             textAlign: 'center',
-            border: '1px solid #334155',
-            backdropFilter: 'blur(10px)',
-            marginBottom: '80px'
+            border: '2px solid rgba(30, 144, 255, 0.3)',
+            backdropFilter: 'blur(15px)',
+            marginBottom: '80px',
+            position: 'relative',
+            overflow: 'hidden'
           }}>
             <div style={{ 
               display: 'flex', 
@@ -267,30 +293,41 @@ export default function Landing() {
           </section>
 
           {/* Pricing Section */}
-          <section id="pricing" style={{ textAlign: 'center' }}>
+          <section id="pricing" style={{ 
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, rgba(147, 51, 234, 0.08) 0%, rgba(34, 211, 238, 0.08) 50%, rgba(30, 144, 255, 0.08) 100%)',
+            backgroundColor: 'rgba(30, 41, 59, 0.4)',
+            borderRadius: '24px',
+            padding: '60px 40px',
+            border: '2px solid rgba(147, 51, 234, 0.3)',
+            backdropFilter: 'blur(15px)',
+            boxShadow: '0 20px 40px rgba(147, 51, 234, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
             <h2 style={{
-              fontSize: '36px',
-              background: 'linear-gradient(135deg, #00BFFF 0%, #1E90FF 50%, #4169E1 100%)',
+              fontSize: '48px',
+              background: 'linear-gradient(135deg, #A78BFA 0%, #22D3EE 50%, #1E90FF 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
               marginBottom: '16px',
               fontFamily: 'Inter, sans-serif',
               fontWeight: '700',
-              textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)'
+              textShadow: '0 4px 12px rgba(147, 51, 234, 0.3)'
             }}>
               Choose Your Plan
             </h2>
             <p style={{
-              fontSize: '18px',
-              background: 'linear-gradient(135deg, #00BFFF 0%, #87CEEB 50%, #4169E1 100%)',
+              fontSize: '20px',
+              background: 'linear-gradient(135deg, #22D3EE 0%, #A78BFA 50%, #1E90FF 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
               marginBottom: '48px',
               maxWidth: '600px',
               margin: '0 auto 48px auto',
-              textShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
+              textShadow: '0 2px 6px rgba(34, 211, 238, 0.2)'
             }}>
               Start free and scale as your team grows. All plans include core process improvement tools.
             </p>

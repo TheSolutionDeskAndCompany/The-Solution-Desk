@@ -87,33 +87,27 @@ export default function Demo() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f172a 100%)',
-      backgroundImage: `
-        /* Main circuit traces - matching logo's blue lines */
-        linear-gradient(135deg, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
-        linear-gradient(45deg, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
-        linear-gradient(vertical, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
-        linear-gradient(horizontal, transparent 48%, #1e40af 49%, #1e40af 51%, transparent 52%),
-        /* Glowing connection nodes - cyan dots like in logo */
-        radial-gradient(circle at 12% 18%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 28% 35%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 45% 15%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 65% 30%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 82% 22%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 15% 65%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 35% 78%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 58% 70%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 78% 85%, #06b6d4 0.5px, transparent 1px),
-        radial-gradient(circle at 90% 60%, #06b6d4 0.5px, transparent 1px)
+      background: `
+        radial-gradient(ellipse at center, #0f172a 0%, #1e293b 30%, #0f172a 100%),
+        linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, transparent 20%, rgba(30, 64, 175, 0.1) 40%, transparent 60%, rgba(30, 64, 175, 0.1) 80%, transparent 100%),
+        linear-gradient(45deg, rgba(30, 64, 175, 0.1) 0%, transparent 20%, rgba(30, 64, 175, 0.1) 40%, transparent 60%, rgba(30, 64, 175, 0.1) 80%, transparent 100%)
       `,
-      backgroundSize: '120px 120px, 100px 100px, 80px 80px, 90px 90px, 200px 200px, 180px 180px, 160px 160px, 220px 220px, 240px 240px, 190px 190px, 210px 210px, 170px 170px, 250px 250px, 140px 140px', 
+      backgroundImage: `
+        radial-gradient(circle at 18% 25%, rgba(6, 182, 212, 0.6) 1px, transparent 2px),
+        radial-gradient(circle at 82% 15%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 35% 75%, rgba(6, 182, 212, 0.5) 1px, transparent 2px),
+        radial-gradient(circle at 75% 65%, rgba(6, 182, 212, 0.3) 1px, transparent 2px),
+        radial-gradient(circle at 12% 80%, rgba(6, 182, 212, 0.4) 1px, transparent 2px),
+        radial-gradient(circle at 88% 85%, rgba(6, 182, 212, 0.5) 1px, transparent 2px)
+      `,
+      backgroundSize: '200px 200px, 300px 300px, 250px 250px, 180px 180px, 220px 220px, 160px 160px, 240px 240px, 280px 280px', 
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
       {/* Logo Banner */}
       <div style={{
         position: 'fixed',
-        top: '20px',
+        top: '80px',
         right: '20px',
         zIndex: 5,
         opacity: 0.42,

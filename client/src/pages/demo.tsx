@@ -114,7 +114,7 @@ export default function Demo() {
               src={logoImage} 
               alt="The Solution Desk Logo" 
               style={{ 
-                height: '52px', 
+                height: '64px', 
                 width: 'auto',
                 filter: 'brightness(1.3) saturate(1.2)'
               }} 

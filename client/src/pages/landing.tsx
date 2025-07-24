@@ -345,11 +345,20 @@ export default function Landing() {
                     backgroundClip: 'text',
                     fontSize: '24px', 
                     fontWeight: '700', 
-                    marginBottom: '20px',
+                    marginBottom: '8px',
                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Free
                   </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#64748B',
+                    marginBottom: '16px',
+                    lineHeight: '1.5'
+                  }}>
+                    Perfect for individuals and small teams getting started with process improvement. 
+                    Includes essential statistical tools and basic project tracking.
+                  </p>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
@@ -463,11 +472,20 @@ export default function Landing() {
                     backgroundClip: 'text',
                     fontSize: '24px', 
                     fontWeight: '700', 
-                    marginBottom: '20px',
+                    marginBottom: '8px',
                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Professional
                   </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#64748B',
+                    marginBottom: '16px',
+                    lineHeight: '1.5'
+                  }}>
+                    Designed for growing teams and departments focused on measurable improvement. 
+                    Advanced automation, unlimited projects, and comprehensive analytics.
+                  </p>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 
@@ -561,11 +579,20 @@ export default function Landing() {
                     backgroundClip: 'text',
                     fontSize: '24px', 
                     fontWeight: '700', 
-                    marginBottom: '20px',
+                    marginBottom: '8px',
                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)'
                   }}>
                     Enterprise
                   </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#64748B',
+                    marginBottom: '16px',
+                    lineHeight: '1.5'
+                  }}>
+                    Complete solution for large organizations with complex processes. 
+                    Custom integrations, dedicated support, and enterprise-grade security.
+                  </p>
                   <div style={{ marginBottom: '32px' }}>
                     <span style={{ 
                       fontSize: '48px', 

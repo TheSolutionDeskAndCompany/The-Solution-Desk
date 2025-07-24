@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logoImage from "@assets/logo_1753331638873.png";
+import logoImage from "@assets/logo-no-text.svg";
 
 export default function Demo() {
   const [selectedTier, setSelectedTier] = useState<'free' | 'professional' | 'enterprise'>('free');

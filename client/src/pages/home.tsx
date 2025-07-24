@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import logoImage from "@assets/logo_1753331638873.png";
+import logoImage from "@assets/logo-no-text.svg";
 
 export default function Home() {
   const { user } = useAuth();

@@ -463,6 +463,22 @@ export default function Demo() {
                 Start Free Trial
               </button>
               <button 
+                onClick={() => window.location.href = '/subscribe'}
+                style={{
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '16px 32px',
+                  borderRadius: '12px',
+                  fontSize: '18px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(167, 139, 250, 0.3)'
+                }}
+              >
+                Upgrade to Professional ($29/mo)
+              </button>
+              <button 
                 onClick={() => window.location.href = '/#pricing'}
                 style={{
                   backgroundColor: 'transparent',
@@ -475,7 +491,7 @@ export default function Demo() {
                   cursor: 'pointer'
                 }}
               >
-                View Pricing
+                View All Plans
               </button>
             </div>
           </div>

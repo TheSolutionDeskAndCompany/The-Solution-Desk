@@ -34,6 +34,9 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
   - Improved pricing card formatting with consistent heights and aligned pricing displays
   - Made "View Demo" button functional by connecting to login flow
   - Added authentication system note explaining Replit Auth is for development only
+  - Enhanced payment flow with multiple upgrade paths and clear pricing visibility
+  - Added fixed background logo watermark effect across all pages for professional branding
+  - Created comprehensive live demo showing tier differences with interactive switching
 
 ## User Preferences
 

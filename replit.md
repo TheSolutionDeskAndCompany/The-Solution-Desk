@@ -30,6 +30,10 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
   - Added subscription management routes and database schema for Stripe integration
   - Integrated new cyberpunk-style logo with neon blue shield, desk lamp, and pink arrow across platform
   - Updated branding with modern tech aesthetic matching the darker professional theme
+  - Added three-tier pricing structure: Free ($0), Professional ($29/month), Enterprise (custom)
+  - Improved pricing card formatting with consistent heights and aligned pricing displays
+  - Made "View Demo" button functional by connecting to login flow
+  - Added authentication system note explaining Replit Auth is for development only
 
 ## User Preferences
 

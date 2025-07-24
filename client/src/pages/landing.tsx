@@ -129,6 +129,19 @@ export default function Landing() {
               Your trusted partner for process improvement and operational excellence solutions. 
               We help teams streamline their improvement efforts with smart, intuitive tools.
             </p>
+            <div style={{
+              backgroundColor: 'rgba(14, 165, 233, 0.1)',
+              border: '1px solid rgba(14, 165, 233, 0.3)',
+              borderRadius: '12px',
+              padding: '16px',
+              maxWidth: '600px',
+              margin: '0 auto 40px auto',
+              fontSize: '14px',
+              color: '#94A3B8'
+            }}>
+              <strong style={{ color: '#0EA5E9' }}>Note:</strong> Currently using Replit Auth for development. 
+              Production version will include Google, Microsoft, and email/password login options.
+            </div>
           </section>
 
 
@@ -227,6 +240,7 @@ export default function Landing() {
                   fontWeight: '600',
                   transition: 'all 0.2s ease'
                 }}
+                onClick={() => window.location.href = '/api/login'}
               >
                 View Demo
               </button>
@@ -258,45 +272,55 @@ export default function Landing() {
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
               gap: '32px',
-              maxWidth: '1000px',
+              maxWidth: '1200px',
               margin: '0 auto'
             }}>
               {/* Free Plan */}
               <div style={{
                 backgroundColor: 'rgba(30, 41, 59, 0.5)',
                 borderRadius: '20px',
-                padding: '40px 32px',
+                padding: '40px 24px',
                 border: '1px solid #334155',
                 backdropFilter: 'blur(10px)',
-                textAlign: 'center'
+                textAlign: 'center',
+                minHeight: '520px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
               }}>
-                <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>
-                  Free
-                </h3>
-                <div style={{ marginBottom: '24px' }}>
-                  <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$0</span>
-                  <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '20px' }}>
+                    Free
+                  </h3>
+                  <div style={{ marginBottom: '32px' }}>
+                    <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$0</span>
+                    <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                  </div>
+                  <ul style={{ 
+                    listStyle: 'none', 
+                    padding: '0', 
+                    marginBottom: '32px',
+                    textAlign: 'left',
+                    color: '#94A3B8'
+                  }}>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Up to 3 projects
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Basic analytics
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Essential tools
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Community support
+                    </li>
+                  </ul>
                 </div>
-                <ul style={{ 
-                  listStyle: 'none', 
-                  padding: '0', 
-                  marginBottom: '32px',
-                  textAlign: 'left',
-                  color: '#94A3B8'
-                }}>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Up to 3 projects
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Basic analytics
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Essential tools
-                  </li>
-                </ul>
                 <button 
                   style={{
                     backgroundColor: 'transparent',
@@ -320,11 +344,15 @@ export default function Landing() {
               <div style={{
                 backgroundColor: 'rgba(30, 41, 59, 0.8)',
                 borderRadius: '20px',
-                padding: '40px 32px',
+                padding: '40px 24px',
                 border: '2px solid #A78BFA',
                 backdropFilter: 'blur(10px)',
                 textAlign: 'center',
-                position: 'relative'
+                position: 'relative',
+                minHeight: '520px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
               }}>
                 <div style={{
                   position: 'absolute',
@@ -341,41 +369,43 @@ export default function Landing() {
                 }}>
                   Most Popular
                 </div>
-                <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>
-                  Professional
-                </h3>
-                <div style={{ marginBottom: '24px' }}>
-                  <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$29</span>
-                  <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '20px' }}>
+                    Professional
+                  </h3>
+                  <div style={{ marginBottom: '32px' }}>
+                    <span style={{ fontSize: '48px', color: '#F1F5F9', fontWeight: '800' }}>$29</span>
+                    <span style={{ color: '#94A3B8', fontSize: '16px' }}>/month</span>
+                  </div>
+                  <ul style={{ 
+                    listStyle: 'none', 
+                    padding: '0', 
+                    marginBottom: '32px',
+                    textAlign: 'left',
+                    color: '#94A3B8'
+                  }}>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Unlimited projects
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Advanced analytics & reporting
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Full Six Sigma & Lean toolkit
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Team collaboration
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Priority support
+                    </li>
+                  </ul>
                 </div>
-                <ul style={{ 
-                  listStyle: 'none', 
-                  padding: '0', 
-                  marginBottom: '32px',
-                  textAlign: 'left',
-                  color: '#94A3B8'
-                }}>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Unlimited projects
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Advanced analytics & reporting
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Full Six Sigma & Lean toolkit
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Team collaboration
-                  </li>
-                  <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
-                    Priority support
-                  </li>
-                </ul>
                 <button 
                   style={{
                     background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
@@ -393,6 +423,75 @@ export default function Landing() {
                   onClick={() => window.location.href = '/subscribe'}
                 >
                   Start Professional Plan
+                </button>
+              </div>
+
+              {/* Enterprise Plan */}
+              <div style={{
+                backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                borderRadius: '20px',
+                padding: '40px 24px',
+                border: '1px solid #F59E0B',
+                backdropFilter: 'blur(10px)',
+                textAlign: 'center',
+                minHeight: '520px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}>
+                <div>
+                  <h3 style={{ color: '#F1F5F9', fontSize: '24px', fontWeight: '700', marginBottom: '20px' }}>
+                    Enterprise
+                  </h3>
+                  <div style={{ marginBottom: '32px' }}>
+                    <span style={{ fontSize: '32px', color: '#F1F5F9', fontWeight: '800' }}>Custom</span>
+                    <span style={{ color: '#94A3B8', fontSize: '16px' }}> pricing</span>
+                  </div>
+                  <ul style={{ 
+                    listStyle: 'none', 
+                    padding: '0', 
+                    marginBottom: '32px',
+                    textAlign: 'left',
+                    color: '#94A3B8'
+                  }}>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Everything in Professional
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Custom integrations
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      Dedicated account manager
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      On-premise deployment
+                    </li>
+                    <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ color: '#0EA5E9', marginRight: '8px' }}>✓</span>
+                      24/7 phone support
+                    </li>
+                  </ul>
+                </div>
+                <button 
+                  style={{
+                    backgroundColor: 'transparent',
+                    color: '#F59E0B',
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    border: '2px solid #F59E0B',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    width: '100%',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onClick={() => window.location.href = 'mailto:sales@thesolutiondesk.com'}
+                >
+                  Contact Sales
                 </button>
               </div>
             </div>

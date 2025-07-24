@@ -1,4 +1,4 @@
-import logoImage from '@assets/logo_1753331638873.png';
+
 
 export default function About() {
   return (
@@ -8,25 +8,7 @@ export default function About() {
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
       position: 'relative'
     }}>
-      {/* Logo Banner */}
-      <div style={{
-        position: 'fixed',
-        top: '80px',
-        right: '20px',
-        zIndex: 5,
-        opacity: 0.4,
-        pointerEvents: 'none'
-      }}>
-        <img 
-          src={logoImage} 
-          alt="The Solution Desk Logo" 
-          style={{
-            height: '100px',
-            width: 'auto',
-            clipPath: 'inset(0 0 25% 0)'
-          }}
-        />
-      </div>
+
 
       {/* Navigation */}
       <header style={{
@@ -220,7 +202,10 @@ export default function About() {
               fontSize: '24px',
               fontWeight: '600',
               marginBottom: '16px',
-              color: '#F59E0B'
+              background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
             }}>
               Our Impact
             </h3>
@@ -231,7 +216,7 @@ export default function About() {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              Teams using our platform see average improvements of 30% in process efficiency, 25% reduction in operational costs, and 40% faster problem resolution. Real results through intelligent process optimization.
+              Our platform helps teams streamline their processes and identify improvement opportunities. Results vary by organization and implementation approach.
             </p>
           </div>
         </div>
@@ -303,7 +288,7 @@ export default function About() {
               <div style={{
                 width: '60px',
                 height: '60px',
-                backgroundColor: '#F59E0B',
+                backgroundColor: '#1E90FF',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',

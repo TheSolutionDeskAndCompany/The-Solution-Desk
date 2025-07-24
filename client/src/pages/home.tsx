@@ -223,7 +223,7 @@ export default function Home() {
                 fontWeight: '800' 
               }}>4.8</div>
               <p style={{ 
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -325,7 +325,7 @@ export default function Home() {
                   </p>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                     <span style={{
-                      backgroundColor: '#F59E0B',
+                      backgroundColor: '#9333EA',
                       color: 'white',
                       padding: '4px 12px',
                       borderRadius: '12px',
@@ -389,7 +389,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ color: '#10B981', fontSize: '20px', fontWeight: '700' }}>$54K</div>
+                  <div style={{ color: '#22D3EE', fontSize: '20px', fontWeight: '700' }}>$54K</div>
                   <div style={{ color: '#94A3B8', fontSize: '12px' }}>Realized Savings</div>
                 </div>
               </div>
@@ -499,7 +499,7 @@ export default function Home() {
                 <div style={{
                   width: '48px',
                   height: '48px',
-                  background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                  background: 'linear-gradient(135deg, #00FF7F 0%, #32CD32 50%, #228B22 100%)',
                   borderRadius: '12px',
                   margin: '0 auto 16px auto',
                   display: 'flex',

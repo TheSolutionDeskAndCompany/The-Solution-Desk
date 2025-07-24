@@ -340,7 +340,7 @@ export default function Demo() {
                       </h4>
                       <span style={{
                         backgroundColor: project.status === 'Active' ? '#10B981' : 
-                                       project.status === 'Review' ? '#F59E0B' :
+                                       project.status === 'Review' ? '#9333EA' :
                                        project.status === 'Planning' ? '#6366F1' : '#6B7280',
                         color: 'white',
                         padding: '4px 12px',

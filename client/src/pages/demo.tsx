@@ -105,28 +105,16 @@ export default function Demo() {
           alignItems: 'center',
           height: '70px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ 
-              width: '50px', 
-              height: '50px', 
-              borderRadius: '12px',
-              background: 'rgba(167, 139, 250, 0.1)',
-              border: '1px solid rgba(167, 139, 250, 0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '8px'
-            }}>
-              <img 
-                src={logoImage} 
-                alt="The Solution Desk Logo" 
-                style={{ 
-                  height: '32px', 
-                  width: 'auto',
-                  filter: 'brightness(1.2)'
-                }} 
-              />
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img 
+              src={logoImage} 
+              alt="The Solution Desk Logo" 
+              style={{ 
+                height: '40px', 
+                width: 'auto',
+                filter: 'brightness(1.3) saturate(1.2)'
+              }} 
+            />
             <h1 style={{
               fontSize: '28px',
               color: '#9333EA',

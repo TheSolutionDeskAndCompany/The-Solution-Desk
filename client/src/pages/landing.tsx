@@ -22,28 +22,16 @@ export default function Landing() {
           alignItems: 'center',
           height: '70px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ 
-              width: '50px', 
-              height: '50px', 
-              borderRadius: '12px',
-              background: 'rgba(167, 139, 250, 0.1)',
-              border: '1px solid rgba(167, 139, 250, 0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '8px'
-            }}>
-              <img 
-                src={logoImage} 
-                alt="The Solution Desk Logo" 
-                style={{ 
-                  height: '32px', 
-                  width: 'auto',
-                  filter: 'brightness(1.2)'
-                }} 
-              />
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img 
+              src={logoImage} 
+              alt="The Solution Desk Logo" 
+              style={{ 
+                height: '40px', 
+                width: 'auto',
+                filter: 'brightness(1.3) saturate(1.2)'
+              }} 
+            />
             <h1 style={{
               fontSize: '28px',
               color: '#9333EA',
@@ -108,64 +96,44 @@ export default function Landing() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Hero Section */}
           <section style={{ textAlign: 'center', marginBottom: '80px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
               <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '24px',
-                marginBottom: '32px',
-                padding: '20px 40px',
-                background: 'rgba(167, 139, 250, 0.05)',
-                border: '1px solid rgba(167, 139, 250, 0.2)',
-                borderRadius: '20px',
-                backdropFilter: 'blur(10px)'
+                position: 'relative',
+                display: 'inline-block',
+                marginBottom: '24px'
               }}>
-                <div style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '16px',
-                  background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)',
-                  border: '2px solid rgba(167, 139, 250, 0.4)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '12px'
-                }}>
-                  <img 
-                    src={logoImage} 
-                    alt="The Solution Desk Logo" 
-                    style={{ 
-                      height: '50px', 
-                      width: 'auto',
-                      filter: 'brightness(1.3) saturate(1.1)'
-                    }} 
-                  />
-                </div>
-                <div style={{ textAlign: 'left' }}>
-                  <h1 style={{ 
-                    fontSize: '56px', 
-                    color: '#F1F5F9', 
-                    margin: '0',
-                    fontFamily: 'Inter, sans-serif',
-                    fontWeight: '800',
-                    lineHeight: '1.1',
-                    background: 'linear-gradient(135deg, #F1F5F9 0%, #A78BFA 100%)',
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>
-                    The Solution Desk
-                  </h1>
-                  <div style={{
-                    fontSize: '18px',
-                    color: '#A78BFA',
-                    fontWeight: '600',
-                    marginTop: '8px',
-                    letterSpacing: '0.5px'
-                  }}>
-                    Process Excellence Platform
-                  </div>
-                </div>
+                <img 
+                  src={logoImage} 
+                  alt="The Solution Desk Logo" 
+                  style={{ 
+                    height: '64px', 
+                    width: 'auto',
+                    filter: 'brightness(1.4) saturate(1.3)',
+                    marginBottom: '16px'
+                  }} 
+                />
+              </div>
+              <h1 style={{ 
+                fontSize: '56px', 
+                color: '#F1F5F9', 
+                margin: '0 0 16px 0',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '800',
+                lineHeight: '1.1',
+                background: 'linear-gradient(135deg, #F1F5F9 0%, #A78BFA 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                Welcome to The Solution Desk
+              </h1>
+              <div style={{
+                fontSize: '20px',
+                color: '#A78BFA',
+                fontWeight: '600',
+                letterSpacing: '0.5px'
+              }}>
+                Process Excellence Platform
               </div>
             </div>
             <p style={{ 

@@ -27,7 +27,7 @@ export default function Home() {
             height: '100px', 
             width: 'auto',
             filter: 'brightness(1.2) saturate(0.8)',
-            clipPath: 'inset(0 0 35% 0)'
+            clipPath: 'inset(0 0 25% 0)'
           }} 
         />
       </div>

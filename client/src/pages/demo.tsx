@@ -107,7 +107,7 @@ export default function Demo() {
             height: '110px', 
             width: 'auto',
             filter: 'brightness(1.3) saturate(0.8)',
-            clipPath: 'inset(0 0 35% 0)'
+            clipPath: 'inset(0 0 25% 0)'
           }} 
         />
       </div>

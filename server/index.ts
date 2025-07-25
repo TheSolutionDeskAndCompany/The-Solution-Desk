@@ -3,6 +3,31 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+
+// Force HTTPS for custom domain
+app.use((req, res, next) => {
+  // Check if request is from custom domain
+  const host = req.get('host');
+  const isCustomDomain = host && host.includes('thesolutiondesk.ca');
+  
+  // Force HTTPS for custom domain
+  if (isCustomDomain && req.header('x-forwarded-proto') !== 'https') {
+    return res.redirect(301, `https://${host}${req.url}`);
+  }
+  
+  // Set security headers for custom domain
+  if (isCustomDomain) {
+    res.set({
+      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+      'X-Frame-Options': 'DENY',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin'
+    });
+  }
+  
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

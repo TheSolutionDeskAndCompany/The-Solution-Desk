@@ -91,17 +91,17 @@ export default function Projects() {
       <div className="flex">
         <Sidebar />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6 md:ml-0 ml-0">
           {/* Projects Header */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-4">
+          <div className="mb-6 md:mb-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-3 sm:space-y-0">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Process Improvement Projects</h2>
-                <p className="text-gray-600">Manage and track all your optimization initiatives</p>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Process Improvement Projects</h2>
+                <p className="text-sm md:text-base text-gray-600">Manage and track all your optimization initiatives</p>
               </div>
               <Button 
                 onClick={() => setShowNewProjectModal(true)}
-                className="bg-primary text-white hover:bg-secondary flex items-center space-x-2"
+                className="bg-primary text-white hover:bg-secondary flex items-center space-x-2 w-full sm:w-auto"
               >
                 <Plus className="h-4 w-4" />
                 <span>New Project</span>
@@ -111,7 +111,7 @@ export default function Projects() {
 
           {/* Projects Grid */}
           {projectsLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <Card key={i} className="animate-pulse">
                   <CardHeader>
@@ -128,7 +128,7 @@ export default function Projects() {
               ))}
             </div>
           ) : projects && projects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {projects.map((project: any) => (
                 <Card key={project.id} className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardHeader>
@@ -167,7 +167,7 @@ export default function Projects() {
                     </div>
 
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                         <Button 
                           variant="outline" 
                           size="sm" 
@@ -179,7 +179,7 @@ export default function Projects() {
                           }}
                         >
                           <Database className="h-3 w-3 mr-1" />
-                          Add Data
+                          <span className="text-xs sm:text-sm">Add Data</span>
                         </Button>
                         <Button 
                           variant="outline" 
@@ -192,7 +192,7 @@ export default function Projects() {
                           }}
                         >
                           <TrendingUp className="h-3 w-3 mr-1" />
-                          Add Metric
+                          <span className="text-xs sm:text-sm">Add Metric</span>
                         </Button>
                       </div>
                     </div>

@@ -82,17 +82,17 @@ export default function Dashboard() {
       <div className="flex">
         <Sidebar />
         
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6 md:ml-0 ml-0">
           {/* Dashboard Header */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-4">
+          <div className="mb-6 md:mb-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-3 sm:space-y-0">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Process Improvement Dashboard</h2>
-                <p className="text-gray-600">Monitor your optimization projects and business impact</p>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Process Improvement Dashboard</h2>
+                <p className="text-sm md:text-base text-gray-600">Monitor your optimization projects and business impact</p>
               </div>
               <Button 
                 onClick={() => setShowNewProjectModal(true)}
-                className="bg-primary text-white hover:bg-secondary flex items-center space-x-2"
+                className="bg-primary text-white hover:bg-secondary flex items-center space-x-2 w-full sm:w-auto"
               >
                 <Plus className="h-4 w-4" />
                 <span>New Project</span>
@@ -107,7 +107,7 @@ export default function Dashboard() {
           />
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-8">
             {/* Process Workflow */}
             <div className="lg:col-span-2">
               <WorkflowSteps />

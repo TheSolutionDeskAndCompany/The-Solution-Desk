@@ -4,14 +4,33 @@ import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./auth";
 import { handleStripeWebhook } from "./webhooks";
 import express from "express";
+import { 
+  generalRateLimit, 
+  authRateLimit, 
+  apiRateLimit, 
+  webhookRateLimit,
+  securityHeaders,
+  validateInput,
+  requireAuth,
+  errorHandler,
+  requestLogger
+} from "./middleware/security";
+import { logger } from "./utils/logger";
+import { AnalyticsTracker } from "./analytics/events";
+import { getToolsForTier, canAccessTool, TIER_FEATURES } from "@shared/tool-config";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
 import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
-import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess, checkUserTierAccess, TIER_FEATURES, setTestingTier, clearTestingTier } from "./automation";
+import { runAutomatedAnalysis, generateProjectInsights, autoOptimizeProcess, checkUserTierAccess, setTestingTier, clearTestingTier } from "./automation";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
+
+  // Apply security middleware
+  app.use(securityHeaders);
+  app.use(requestLogger);
+  app.use(generalRateLimit);
 
   // API request logging
   app.use('/api', (req, res, next) => {
@@ -399,37 +418,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userId = req.user.id;
       const tier = await checkUserTierAccess(userId);
       
-      // Tool access mapping based on subscription tier
-      const toolAccess = {
-        free: [
-          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
-          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
-          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' }
-        ],
-        professional: [
-          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
-          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
-          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' },
-          { id: 'fmea', name: 'Risk Matrix Builder', category: 'Risk Assessment' },
-          { id: 'fishbone', name: 'Root Cause Explorer', category: 'Root Cause Analysis' },
-          { id: 'value-stream', name: 'Flow Analyzer', category: 'Process Optimization' }
-        ],
-        enterprise: [
-          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
-          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
-          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' },
-          { id: 'fmea', name: 'Risk Matrix Builder', category: 'Risk Assessment' },
-          { id: 'fishbone', name: 'Root Cause Explorer', category: 'Root Cause Analysis' },
-          { id: 'value-stream', name: 'Flow Analyzer', category: 'Process Optimization' },
-          { id: 'stability-tracker', name: 'Stability Tracker', category: 'Control Charts' },
-          { id: 'advanced-analytics', name: 'Advanced Analytics', category: 'Data Science' }
-        ]
-      };
+      // Get tools for user's tier using centralized configuration
+      const availableTools = getToolsForTier(tier as any);
 
       res.json({
         currentTier: tier,
-        availableTools: toolAccess[tier] || toolAccess.free,
-        features: TIER_FEATURES[tier]
+        availableTools,
+        features: TIER_FEATURES[tier as keyof typeof TIER_FEATURES] || TIER_FEATURES.free
       });
     } catch (error: any) {
       console.error("Tool access error:", error);

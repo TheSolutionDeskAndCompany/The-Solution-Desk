@@ -12,7 +12,9 @@ import {
   Activity,
   Download,
   Play,
-  BookOpen
+  BookOpen,
+  Clock,
+  CheckCircle
 } from "lucide-react";
 import Sidebar from "@/components/layout/sidebar";
 import Header from "@/components/layout/header";
@@ -21,13 +23,23 @@ import { useAuth } from "@/hooks/useAuth";
 interface ToolAccess {
   id: string;
   name: string;
+  description: string;
   category: string;
+  route: string;
+  requiredTier: string;
+  features: string[];
+  methodology: string[];
+  estimatedTime: string;
 }
 
 interface ToolDashboardData {
   currentTier: string;
   availableTools: ToolAccess[];
-  features: string[];
+  features: {
+    toolCount: number;
+    features: string[];
+    limitations: string[];
+  };
 }
 
 const toolIcons: Record<string, any> = {
@@ -165,15 +177,26 @@ export default function ToolDashboard() {
               return (
                 <Card key={tool.id} className="hover:shadow-lg transition-all duration-200">
                   <CardHeader>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 mb-2">
                       <div className="p-2 bg-primary/10 rounded-lg">
                         <IconComponent className="h-6 w-6 text-primary" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <CardTitle className="text-lg">{tool.name}</CardTitle>
                         <CardDescription className="text-sm">
                           {tool.category}
                         </CardDescription>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
+                    <div className="flex items-center gap-4 text-xs text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {tool.estimatedTime}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <CheckCircle className="h-3 w-3" />
+                        {tool.methodology.join(', ')}
                       </div>
                     </div>
                   </CardHeader>
@@ -226,6 +249,9 @@ export default function ToolDashboard() {
                     {toolData?.availableTools.length}
                   </div>
                   <p className="text-sm text-gray-600">Available Tools</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    of {toolData?.features.toolCount} total
+                  </p>
                 </div>
               </CardContent>
             </Card>

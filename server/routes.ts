@@ -11,9 +11,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
 
-  // Debug middleware to catch all requests
+  // API request logging
   app.use('/api', (req, res, next) => {
-    console.log(`[DEBUG] API Request: ${req.method} ${req.path}`);
+    console.log(`API: ${req.method} ${req.path}`);
     next();
   });
 

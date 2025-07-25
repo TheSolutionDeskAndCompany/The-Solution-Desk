@@ -21,11 +21,10 @@ export default function Header() {
   };
 
   const getDisplayName = () => {
-    const userObj = user as any;
-    if (userObj?.firstName || userObj?.lastName) {
-      return `${userObj.firstName || ""} ${userObj.lastName || ""}`.trim();
+    if (user?.firstName || user?.lastName) {
+      return `${user.firstName || ""} ${user.lastName || ""}`.trim();
     }
-    return userObj?.email?.split("@")[0] || "User";
+    return user?.email?.split("@")[0] || "User";
   };
 
   return (
@@ -56,11 +55,11 @@ export default function Header() {
                 <Button variant="ghost" className="flex items-center space-x-3 h-auto p-2">
                   <Avatar className="h-8 w-8">
                     <AvatarImage 
-                      src={(user as any)?.profileImageUrl} 
+                      src={user?.profileImageUrl || undefined} 
                       alt={getDisplayName()}
                     />
                     <AvatarFallback className="text-xs">
-                      {getInitials((user as any)?.firstName, (user as any)?.lastName)}
+                      {getInitials(user?.firstName || undefined, user?.lastName || undefined)}
                     </AvatarFallback>
                   </Avatar>
                   <span className="text-sm font-medium text-gray-700 hidden sm:block">

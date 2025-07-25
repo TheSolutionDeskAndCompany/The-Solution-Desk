@@ -55,7 +55,10 @@ export const projects = pgTable("projects", {
   currentPhase: varchar("current_phase").default("define"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
-});
+}, (table) => [
+  index("idx_projects_user_id").on(table.userId),
+  index("idx_projects_status").on(table.status),
+]);
 
 // Project data points for statistical analysis
 export const projectData = pgTable("project_data", {
@@ -65,7 +68,10 @@ export const projectData = pgTable("project_data", {
   value: decimal("value", { precision: 10, scale: 4 }).notNull(),
   collectedAt: timestamp("collected_at").defaultNow(),
   notes: text("notes"),
-});
+}, (table) => [
+  index("idx_project_data_project_id").on(table.projectId),
+  index("idx_project_data_collected_at").on(table.collectedAt),
+]);
 
 // Project metrics and KPIs
 export const projectMetrics = pgTable("project_metrics", {
@@ -76,7 +82,9 @@ export const projectMetrics = pgTable("project_metrics", {
   target: decimal("target", { precision: 10, scale: 4 }),
   unit: varchar("unit"),
   recordedAt: timestamp("recorded_at").defaultNow(),
-});
+}, (table) => [
+  index("idx_project_metrics_project_id").on(table.projectId),
+]);
 
 // Statistical analysis results
 export const statisticalAnalysis = pgTable("statistical_analysis", {

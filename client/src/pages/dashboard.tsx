@@ -46,7 +46,18 @@ export default function Dashboard() {
     enabled: isAuthenticated,
   });
 
-  const { data: projects, isLoading: projectsLoading } = useQuery<any[]>({
+  const { data: projects, isLoading: projectsLoading } = useQuery<Array<{
+    id: number;
+    name: string;
+    status: string;
+    processArea: string;
+    createdAt: string;
+    updatedAt: string;
+    template: string;
+    description?: string;
+    currentPhase?: string;
+    userId: number;
+  }>>({
     queryKey: ["/api/projects"],
     retry: false,
     enabled: isAuthenticated,

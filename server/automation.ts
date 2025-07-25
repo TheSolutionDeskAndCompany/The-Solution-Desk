@@ -1,5 +1,6 @@
 import { storage } from "./storage";
 import { type Project, type ProjectData, type ProjectMetrics } from "@shared/schema";
+import memoize from "memoizee";
 
 // Define automation capabilities by subscription tier
 export const TIER_FEATURES = {
@@ -672,3 +673,8 @@ function createImplementationPlan(project: Project) {
     }
   };
 }
+
+// Memoized statistical calculations for performance
+const memoizedCalculateStandardDeviation = memoize(calculateStandardDeviation, { max: 50, maxAge: 60000 });
+const memoizedCalculateMean = memoize(calculateMean, { max: 50, maxAge: 60000 });
+const memoizedIdentifyOutliers = memoize(identifyOutliers, { max: 50, maxAge: 60000 });

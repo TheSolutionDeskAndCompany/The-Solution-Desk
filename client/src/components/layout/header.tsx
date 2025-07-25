@@ -39,15 +39,52 @@ export default function Header() {
           
           <div className="flex items-center space-x-4">
             {/* Notifications */}
-            <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 relative">
-              <Bell className="h-5 w-5" />
-              <Badge 
-                variant="destructive" 
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-              >
-                3
-              </Badge>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 relative">
+                  <Bell className="h-5 w-5" />
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    3
+                  </Badge>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-80">
+                <div className="px-3 py-2 border-b">
+                  <p className="font-semibold text-sm">Notifications</p>
+                </div>
+                <div className="max-h-96 overflow-y-auto">
+                  <DropdownMenuItem className="p-3 cursor-pointer">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">Process Analysis Complete</p>
+                      <p className="text-xs text-gray-500">Your Supply Chain Optimization project analysis is ready</p>
+                      <p className="text-xs text-gray-400">2 hours ago</p>
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="p-3 cursor-pointer">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">Data Collection Reminder</p>
+                      <p className="text-xs text-gray-500">Manufacturing Process project needs updated metrics</p>
+                      <p className="text-xs text-gray-400">1 day ago</p>
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="p-3 cursor-pointer">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">Welcome to Systoro!</p>
+                      <p className="text-xs text-gray-500">Get started with your first process improvement project</p>
+                      <p className="text-xs text-gray-400">3 days ago</p>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+                <div className="px-3 py-2 border-t">
+                  <Button variant="ghost" size="sm" className="w-full text-xs">
+                    Mark all as read
+                  </Button>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             {/* User Menu */}
             <DropdownMenu>

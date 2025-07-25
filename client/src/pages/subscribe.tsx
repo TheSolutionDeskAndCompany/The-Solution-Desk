@@ -102,17 +102,23 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
             justifyContent: 'center',
             marginBottom: '16px'
           }}>
-            <img 
-              src={planType === 'professional' 
-                ? "/assets/professional-checkout-image.svg" 
-                : "/assets/enterprise-checkout-image.svg"}
-              alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan`}
-              style={{ 
-                width: '40px', 
-                height: '40px',
-                marginRight: '12px'
-              }}
-            />
+            <div style={{
+              width: '40px',
+              height: '40px',
+              marginRight: '12px',
+              background: planType === 'professional' 
+                ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px',
+              color: 'white',
+              fontWeight: 'bold'
+            }}>
+              {planType === 'professional' ? 'P' : 'E'}
+            </div>
             <h1 style={{
               fontSize: '32px',
               background: planType === 'professional' 
@@ -149,21 +155,48 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
             justifyContent: 'center', 
             marginBottom: '32px' 
           }}>
-            <img 
-              src={planType === 'professional' 
-                ? "/assets/professional-checkout-image.svg" 
-                : "/assets/enterprise-checkout-image.svg"}
-              alt={`${planType === 'professional' ? 'Professional' : 'Enterprise'} Plan Features`}
-              style={{ 
-                width: '200px', 
-                height: '150px',
-                border: `2px solid ${planType === 'professional' ? '#A855F7' : '#4169E1'}`,
-                borderRadius: '12px',
-                padding: '8px',
-                backgroundColor: 'rgba(30, 41, 59, 0.3)',
-                backdropFilter: 'blur(5px)'
-              }}
-            />
+            <div style={{
+              width: '200px',
+              height: '150px',
+              border: `2px solid ${planType === 'professional' ? '#A855F7' : '#4169E1'}`,
+              borderRadius: '12px',
+              padding: '24px',
+              backgroundColor: 'rgba(30, 41, 59, 0.3)',
+              backdropFilter: 'blur(5px)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                background: planType === 'professional' 
+                  ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                  : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                color: 'white',
+                fontWeight: 'bold',
+                marginBottom: '12px'
+              }}>
+                {planType === 'professional' ? 'PRO' : 'ENT'}
+              </div>
+              <div style={{
+                fontSize: '12px',
+                color: '#94A3B8',
+                lineHeight: '1.4'
+              }}>
+                {planType === 'professional' 
+                  ? 'Advanced Analytics & Unlimited Projects'
+                  : 'Enterprise Features & Priority Support'
+                }
+              </div>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit}>

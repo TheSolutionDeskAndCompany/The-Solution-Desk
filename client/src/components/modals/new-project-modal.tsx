@@ -101,9 +101,9 @@ export default function NewProjectModal({ open, onOpenChange }: NewProjectModalP
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-lg bg-white">
         <DialogHeader>
-          <DialogTitle>Create New Project</DialogTitle>
+          <DialogTitle className="text-gray-900">Create New Project</DialogTitle>
         </DialogHeader>
         
         <Form {...form}>

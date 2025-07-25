@@ -89,9 +89,13 @@ export default function WorkflowSteps() {
           {steps.map((step, index) => (
             <div 
               key={step.number} 
-              className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${
+              className={`flex items-center space-x-4 p-4 rounded-lg transition-colors cursor-pointer hover:bg-blue-50 ${
                 step.status === "pending" ? "bg-gray-50 opacity-60" : "bg-gray-50"
               }`}
+              onClick={() => {
+                // Navigate to detailed step view
+                console.log(`Opening details for step ${step.number}: ${step.title}`);
+              }}
             >
               <div className="flex-shrink-0">
                 <div className={`w-10 h-10 ${getStepColor(step.status)} text-white rounded-full flex items-center justify-center font-semibold`}>

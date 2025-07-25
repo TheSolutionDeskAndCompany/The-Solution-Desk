@@ -95,18 +95,20 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
 
   const handleRunTool = async (toolId: string) => {
     if (!projects || projects.length === 0) {
-      // Show message about needing projects
+      console.log("Error: No projects available to analyze");
       return;
     }
 
+    console.log(`Running ${toolId} analysis on project data...`);
     setIsRunning(true);
     setSelectedTool(toolId);
     
-    // Simulate tool execution
+    // Simulate tool execution with realistic timing
     setTimeout(() => {
       setIsRunning(false);
       setSelectedTool(null);
-    }, 2000);
+      console.log(`${toolId} analysis complete`);
+    }, 3000);
   };
 
   const getCategoryColor = (category: string) => {
@@ -204,6 +206,11 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
                       size="sm"
                       variant="outline"
                       disabled={isToolRunning}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log(`Opening settings for ${tool.name}`);
+                        // Add settings functionality here
+                      }}
                     >
                       <Settings className="h-3 w-3" />
                     </Button>

@@ -275,10 +275,10 @@ export class DatabaseStorage implements IStorage {
     }
 
     return {
-      activeProjects: activeProjects || 7, // Default sample data
-      costSavings: totalCostSavings || 127000, // Default sample data
-      efficiency: projectCount > 0 ? Math.round(totalEfficiency / projectCount) : 94, // Default sample data
-      qualityScore: totalQuality || 4.8, // Default sample data
+      activeProjects: activeProjects,
+      costSavings: totalCostSavings,
+      efficiency: projectCount > 0 ? Math.round(totalEfficiency / projectCount) : 0,
+      qualityScore: totalQuality,
     };
   }
 }

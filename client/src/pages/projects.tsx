@@ -7,14 +7,18 @@ import Header from "@/components/layout/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Calendar, Users, BarChart3 } from "lucide-react";
+import { Plus, Calendar, Users, BarChart3, Database, TrendingUp } from "lucide-react";
 import NewProjectModal from "@/components/modals/new-project-modal";
+import AddDataModal from "@/components/modals/add-data-modal";
 import { format } from "date-fns";
 
 export default function Projects() {
   const { toast } = useToast();
   const { isAuthenticated, isLoading } = useAuth();
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+  const [showAddDataModal, setShowAddDataModal] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+  const [dataModalMode, setDataModalMode] = useState<'data' | 'metrics'>('data');
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -163,9 +167,34 @@ export default function Projects() {
                     </div>
 
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <Button variant="outline" size="sm" className="w-full">
-                        View Details
-                      </Button>
+                      <div className="flex space-x-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1"
+                          onClick={() => {
+                            setSelectedProjectId(project.id);
+                            setDataModalMode('data');
+                            setShowAddDataModal(true);
+                          }}
+                        >
+                          <Database className="h-3 w-3 mr-1" />
+                          Add Data
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="flex-1"
+                          onClick={() => {
+                            setSelectedProjectId(project.id);
+                            setDataModalMode('metrics');
+                            setShowAddDataModal(true);
+                          }}
+                        >
+                          <TrendingUp className="h-3 w-3 mr-1" />
+                          Add Metric
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -198,6 +227,15 @@ export default function Projects() {
         open={showNewProjectModal}
         onOpenChange={setShowNewProjectModal}
       />
+      
+      {selectedProjectId && (
+        <AddDataModal
+          open={showAddDataModal}
+          onOpenChange={setShowAddDataModal}
+          projectId={selectedProjectId}
+          mode={dataModalMode}
+        />
+      )}
     </div>
   );
 }

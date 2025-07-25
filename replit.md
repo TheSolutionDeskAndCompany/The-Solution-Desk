@@ -18,6 +18,13 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
+- **July 25, 2025**: Data entry system implementation and hardcoded example data removal
+  - **Fixed Hardcoded Data Issue**: Removed all placeholder/example data from dashboard metrics and statistics
+  - **Created Real Data Entry System**: Built comprehensive AddDataModal component for inputting actual project data
+  - **Added Data Entry Interfaces**: Projects page now has "Add Data" and "Add Metric" buttons for each project
+  - **Enhanced User Experience**: Users can now input real measurements, defects, time, cost, and quality metrics
+  - **Database Integration**: All data entry properly connects to PostgreSQL storage with proper validation
+  - **Removed Mock Statistics**: Dashboard now shows zero values until users input real data instead of fake numbers
 - **July 25, 2025**: Authentication and billing system fixes
   - **Authentication Issues Resolved**: Fixed email/password registration and login functionality
   - **Payment System Repaired**: Subscription upgrades now create proper Stripe payment intents with client secrets

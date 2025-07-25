@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-// Using brand colors for visual background instead of screenshots
+import heroImage from "@assets/assets_task_01k0xxcddae2ztf238qpfhf1w6_1753350666_img_1_1753350706829.webp";
 
 export default function AuthPage() {
   const [, navigate] = useLocation();
@@ -530,53 +530,44 @@ export default function AuthPage() {
         </Card>
       </div>
 
-      {/* Right side - Brand Hero with Large Logo */}
+      {/* Right side - Hero with Full Logo Background */}
       <div className="flex-1 relative overflow-hidden" role="region" aria-label="Product information">
-        {/* Brand gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1D3557] via-[#2E4A64] to-[#A8DADC]">
-          {/* Neon glow effects */}
-          <div className="absolute inset-0">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          </div>
+        {/* Full hero image background */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Systoro Hero" 
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/30" />
         </div>
         
-        {/* Large centered logo design */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Systoro logo representation */}
-          <div className="relative">
-            {/* Shield/desk background */}
-            <div className="w-96 h-96 bg-gradient-to-br from-cyan-400/30 to-cyan-600/30 rounded-full flex items-center justify-center border-4 border-cyan-400/50 shadow-2xl shadow-cyan-400/30">
-              {/* Desk lamp icon */}
-              <div className="relative">
-                <div className="w-24 h-4 bg-gradient-to-r from-cyan-300 to-cyan-400 rounded-full shadow-lg shadow-cyan-400/50"></div>
-                <div className="w-3 h-32 bg-gradient-to-b from-cyan-300 to-cyan-500 mx-auto rounded-full shadow-lg shadow-cyan-400/50"></div>
-                <div className="w-16 h-16 bg-gradient-to-br from-cyan-200 to-cyan-400 rounded-full mx-auto -mt-8 shadow-xl shadow-cyan-400/60"></div>
-                {/* Growth arrow */}
-                <div className="absolute -top-8 -right-16">
-                  <div className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-12 border-b-pink-400 transform rotate-45 shadow-lg shadow-pink-400/60"></div>
-                  <div className="w-1 h-16 bg-gradient-to-t from-pink-300 to-pink-500 ml-1 -mt-2 shadow-lg shadow-pink-400/50"></div>
-                </div>
+        {/* Overlaid text content */}
+        <div className="relative z-10 h-full flex flex-col justify-center items-center p-12 text-white text-center">
+          <div className="max-w-2xl">
+            <h1 className="text-5xl font-bold mb-6 drop-shadow-lg" id="hero-title">
+              Streamline Your Path to Better Processes
+            </h1>
+            <p className="text-2xl mb-8 drop-shadow-md opacity-95" aria-describedby="hero-title">
+              Systoro automates the complex steps of continuous improvement so your team can focus on results, not complexity.
+            </p>
+            
+            <div className="space-y-6 text-lg" role="list" aria-label="Key features">
+              <div className="flex items-center justify-center space-x-4" role="listitem">
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
+                <span className="drop-shadow-sm">Automated process analysis and optimization</span>
+              </div>
+              <div className="flex items-center justify-center space-x-4" role="listitem">
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
+                <span className="drop-shadow-sm">Real-time performance tracking and insights</span>
+              </div>
+              <div className="flex items-center justify-center space-x-4" role="listitem">
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
+                <span className="drop-shadow-sm">Professional-grade statistical analysis tools</span>
               </div>
             </div>
-            
-            {/* Brand name */}
-            <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-              <h2 className="text-6xl font-bold text-white text-center drop-shadow-2xl tracking-wider">
-                <span className="bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">SYSTORO</span>
-              </h2>
-            </div>
           </div>
-        </div>
-        
-        {/* Overlaid tagline */}
-        <div className="absolute bottom-12 left-0 right-0 text-center px-12">
-          <h1 className="text-4xl font-bold mb-4 text-white drop-shadow-lg" id="hero-title">
-            Streamline Your Path to Better Processes
-          </h1>
-          <p className="text-xl text-white/90 drop-shadow-md max-w-2xl mx-auto" aria-describedby="hero-title">
-            Automate complex improvement steps so your team focuses on results, not complexity
-          </p>
         </div>
       </div>
     </div>

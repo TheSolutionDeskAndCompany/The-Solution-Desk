@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
@@ -15,6 +16,44 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { toast } = useToast();
+  const { user, isLoading, isAuthenticated } = useAuth();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to upgrade your plan",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/auth";
+      }, 1000);
+      return;
+    }
+  }, [isAuthenticated, isLoading, toast]);
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ color: 'white', fontSize: '18px' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -165,8 +204,29 @@ export default function Subscribe() {
   const [planType, setPlanType] = useState("professional");
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { user, isLoading: authLoading, isAuthenticated } = useAuth();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to upgrade your plan",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/auth";
+      }, 1000);
+      return;
+    }
+  }, [isAuthenticated, authLoading, toast]);
 
   useEffect(() => {
+    // Don't create subscription if not authenticated
+    if (authLoading || !isAuthenticated) {
+      return;
+    }
+
     // Get plan from URL params or default to professional
     const urlParams = new URLSearchParams(window.location.search);
     const selectedPlan = urlParams.get('plan') || 'professional';
@@ -191,8 +251,8 @@ export default function Subscribe() {
             variant: "destructive",
           });
           setTimeout(() => {
-            window.location.href = '/api/login';
-          }, 2000);
+            window.location.href = '/auth';
+          }, 1000);
         } else {
           toast({
             title: "Error",
@@ -202,7 +262,42 @@ export default function Subscribe() {
         }
         setLoading(false);
       });
-  }, []);
+  }, [authLoading, isAuthenticated, toast]);
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          color: '#F1F5F9',
+          fontSize: '18px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #334155',
+            borderTop: '4px solid #A78BFA',
+            borderRadius: '50%',
+            margin: '0 auto 16px auto',
+            animation: 'spin 1s linear infinite'
+          }} />
+          Checking authentication...
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   if (loading) {
     return (

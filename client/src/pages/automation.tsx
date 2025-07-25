@@ -150,9 +150,9 @@ export default function AutomationPage() {
         });
       } else {
         toast({
-          title: "Error",
-          description: `Failed to run ${tool.name}. This requires sample project data to analyze.`,
-          variant: "destructive",
+          title: "Create Projects First",
+          description: `${tool.name} needs project data to analyze. Create projects with data to unlock this tool.`,
+          variant: "default",
         });
       }
     } finally {

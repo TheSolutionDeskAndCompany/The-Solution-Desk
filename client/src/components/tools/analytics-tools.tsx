@@ -95,7 +95,7 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
 
   const handleRunTool = async (toolId: string) => {
     if (!projects || projects.length === 0) {
-      console.log("Error: No projects available to analyze");
+      console.log("Info: Create projects with data to run analysis tools");
       return;
     }
 
@@ -107,8 +107,8 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
     setTimeout(() => {
       setIsRunning(false);
       setSelectedTool(null);
-      console.log(`${toolId} analysis complete`);
-    }, 3000);
+      console.log(`${toolId} analysis complete - results would appear here in production`);
+    }, 2000);
   };
 
   const getCategoryColor = (category: string) => {

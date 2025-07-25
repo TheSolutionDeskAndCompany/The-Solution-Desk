@@ -85,7 +85,7 @@ export function setupAuth(app: Express) {
           clientSecret: process.env.GITHUB_CLIENT_SECRET,
           callbackURL: process.env.NODE_ENV === 'production' 
             ? "https://thesolutiondesk.ca/api/auth/github/callback"
-            : "/api/auth/github/callback",
+            : `${process.env.REPLIT_DEV_DOMAIN || 'http://localhost:5000'}/api/auth/github/callback`,
         },
         async (accessToken: string, refreshToken: string, profile: any, done: any) => {
           try {

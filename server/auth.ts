@@ -187,6 +187,57 @@ export function setupAuth(app: Express) {
     });
   });
 
+  // Password reset request
+  app.post("/api/auth/forgot-password", async (req, res) => {
+    try {
+      const { email } = req.body;
+      const user = await storage.getUserByEmail(email);
+      
+      if (!user) {
+        // Don't reveal if email exists or not for security
+        return res.json({ message: "If the email exists, a reset link has been sent." });
+      }
+      
+      const token = await createPasswordResetToken(user.id);
+      
+      // In a real app, you'd send this via email
+      // For testing, we'll just log it
+      console.log(`Password reset token for ${email}: ${token}`);
+      console.log(`Reset URL: ${req.protocol}://${req.get('host')}/auth?reset=${token}`);
+      
+      res.json({ 
+        message: "If the email exists, a reset link has been sent.",
+        // For testing purposes, include the token in response
+        ...(process.env.NODE_ENV === 'development' && { resetToken: token })
+      });
+    } catch (error) {
+      console.error("Password reset request error:", error);
+      res.status(500).json({ message: "Failed to process password reset request" });
+    }
+  });
+
+  // Password reset confirmation
+  app.post("/api/auth/reset-password", async (req, res) => {
+    try {
+      const { token, password } = req.body;
+      
+      if (!token || !password) {
+        return res.status(400).json({ message: "Token and password are required" });
+      }
+      
+      const success = await resetPassword(token, password);
+      
+      if (!success) {
+        return res.status(400).json({ message: "Invalid or expired reset token" });
+      }
+      
+      res.json({ message: "Password reset successful" });
+    } catch (error) {
+      console.error("Password reset error:", error);
+      res.status(500).json({ message: "Failed to reset password" });
+    }
+  });
+
   // GitHub OAuth routes
   app.get("/api/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
   
@@ -211,3 +262,36 @@ export const isAuthenticated = (req: any, res: any, next: any) => {
   }
   res.status(401).json({ message: "Unauthorized" });
 };
+
+// Password reset functions
+export function generateResetToken(): string {
+  return randomBytes(32).toString('hex');
+}
+
+export async function createPasswordResetToken(userId: number): Promise<string> {
+  const token = generateResetToken();
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+  
+  await storage.createPasswordResetToken({
+    userId,
+    token,
+    expiresAt,
+    used: false
+  });
+  
+  return token;
+}
+
+export async function resetPassword(token: string, newPassword: string): Promise<boolean> {
+  const resetToken = await storage.getPasswordResetToken(token);
+  
+  if (!resetToken || resetToken.used || new Date() > resetToken.expiresAt) {
+    return false;
+  }
+  
+  const hashedPassword = await hashPassword(newPassword);
+  await storage.updateUserPassword(resetToken.userId, hashedPassword);
+  await storage.markPasswordResetTokenAsUsed(token);
+  
+  return true;
+}

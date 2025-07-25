@@ -43,6 +43,19 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Password reset tokens table
+export const passwordResetTokens = pgTable("password_reset_tokens", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  token: varchar("token").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  used: boolean("used").default(false),
+}, (table) => [
+  index("idx_password_reset_tokens_token").on(table.token),
+  index("idx_password_reset_tokens_user_id").on(table.userId),
+]);
+
 // Projects table
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
@@ -147,6 +160,9 @@ export type ProjectMetrics = typeof projectMetrics.$inferSelect;
 export type InsertStatisticalAnalysis = typeof statisticalAnalysis.$inferInsert;
 export type StatisticalAnalysis = typeof statisticalAnalysis.$inferSelect;
 
+export type InsertPasswordResetToken = typeof passwordResetTokens.$inferInsert;
+export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+
 // Insert schemas
 export const insertProjectSchema = createInsertSchema(projects).omit({
   id: true,
@@ -165,4 +181,9 @@ export const insertProjectMetricsSchema = createInsertSchema(projectMetrics).omi
   id: true,
   projectId: true,
   recordedAt: true,
+});
+
+export const insertPasswordResetTokenSchema = createInsertSchema(passwordResetTokens).omit({
+  id: true,
+  createdAt: true,
 });

@@ -15,11 +15,16 @@ export default function AuthPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isLogin, setIsLogin] = useState(true);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [resetToken, setResetToken] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     firstName: "",
     lastName: "",
+    resetPassword: "",
+    confirmPassword: "",
   });
 
   // Redirect if already authenticated
@@ -99,6 +104,76 @@ export default function AuthPage() {
     },
   });
 
+  const forgotPasswordMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to send reset email");
+      }
+      
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Reset email sent",
+        description: data.message,
+      });
+      // In development, auto-fill the reset token for testing
+      if (data.resetToken) {
+        setResetToken(data.resetToken);
+        setShowResetPassword(true);
+        setShowForgotPassword(false);
+      }
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const resetPasswordMutation = useMutation({
+    mutationFn: async (data: { token: string; password: string }) => {
+      const response = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to reset password");
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Password reset successfully! You can now log in.",
+      });
+      setShowResetPassword(false);
+      setShowForgotPassword(false);
+      setIsLogin(true);
+      setFormData(prev => ({ ...prev, password: "", resetPassword: "", confirmPassword: "" }));
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Reset failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -114,6 +189,34 @@ export default function AuthPage() {
 
   const handleGitHubLogin = () => {
     window.location.href = "/api/auth/github";
+  };
+
+  const handleForgotPasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.email) {
+      forgotPasswordMutation.mutate(formData.email);
+    }
+  };
+
+  const handleResetPasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.resetPassword !== formData.confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+    resetPasswordMutation.mutate({
+      token: resetToken,
+      password: formData.resetPassword,
+    });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -132,23 +235,115 @@ export default function AuthPage() {
         <Card className="w-full max-w-md" role="form" aria-labelledby="auth-title">
           <CardHeader>
             <CardTitle id="auth-title" className="text-2xl text-center text-[#1D3557]">
-              {isLogin ? "Welcome Back" : "Create Account"}
+              {showForgotPassword 
+                ? "Reset Password" 
+                : showResetPassword 
+                ? "Create New Password"
+                : isLogin 
+                ? "Welcome Back" 
+                : "Create Account"
+              }
             </CardTitle>
             <CardDescription className="text-center" id="auth-description">
-              {isLogin 
+              {showForgotPassword 
+                ? "Enter your email to receive a reset link"
+                : showResetPassword
+                ? "Enter your new password"
+                : isLogin 
                 ? "Sign in to access your Systoro dashboard" 
                 : "Get started with your continuous improvement journey"
               }
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form 
-              id="auth-form"
-              onSubmit={handleSubmit} 
-              className="space-y-4"
-              aria-describedby="auth-description"
-              noValidate
-            >
+            {showForgotPassword ? (
+              <form 
+                id="auth-form"
+                onSubmit={handleForgotPasswordSubmit} 
+                className="space-y-4"
+                aria-describedby="auth-description"
+                noValidate
+              >
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#1D3557] hover:bg-[#1D3557]/90 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-lg"
+                  disabled={forgotPasswordMutation.isPending}
+                >
+                  {forgotPasswordMutation.isPending ? "Sending..." : "Send Reset Link"}
+                </Button>
+                
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full text-[#1D3557] hover:bg-[#1D3557]/10"
+                  onClick={() => setShowForgotPassword(false)}
+                >
+                  Back to Login
+                </Button>
+              </form>
+            ) : showResetPassword ? (
+              <form 
+                id="auth-form"
+                onSubmit={handleResetPasswordSubmit} 
+                className="space-y-4"
+                aria-describedby="auth-description"
+                noValidate
+              >
+                <div>
+                  <Label htmlFor="resetPassword">New Password</Label>
+                  <Input
+                    id="resetPassword"
+                    name="resetPassword"
+                    type="password"
+                    value={formData.resetPassword}
+                    onChange={handleInputChange}
+                    required
+                    autoComplete="new-password"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    required
+                    autoComplete="new-password"
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#1D3557] hover:bg-[#1D3557]/90 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-lg"
+                  disabled={resetPasswordMutation.isPending}
+                >
+                  {resetPasswordMutation.isPending ? "Resetting..." : "Reset Password"}
+                </Button>
+              </form>
+            ) : (
+              <form 
+                id="auth-form"
+                onSubmit={handleSubmit} 
+                className="space-y-4"
+                aria-describedby="auth-description"
+                noValidate
+              >
               {/* Live region for form status announcements */}
               <div 
                 role="status" 
@@ -258,9 +453,23 @@ export default function AuthPage() {
                   ? "Sign In"
                   : "Create Account"}
               </Button>
+              
+              {isLogin && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full mt-2 text-[#1D3557] hover:bg-[#1D3557]/10"
+                  onClick={() => setShowForgotPassword(true)}
+                >
+                  Forgot Password?
+                </Button>
+              )}
             </form>
+            )}
 
-            <div className="mt-4" role="region" aria-label="Alternative sign-in options">
+            {!showForgotPassword && !showResetPassword && (
+              <>
+                <div className="mt-4" role="region" aria-label="Alternative sign-in options">
               <div className="relative" role="separator" aria-label="Or continue with">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t" />
@@ -315,6 +524,8 @@ export default function AuthPage() {
                 </div>
               </div>
             </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

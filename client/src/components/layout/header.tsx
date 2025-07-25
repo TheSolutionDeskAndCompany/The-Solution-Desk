@@ -92,7 +92,7 @@ export default function Header() {
                 <Button variant="ghost" className="flex items-center space-x-3 h-auto p-2">
                   <Avatar className="h-8 w-8">
                     <AvatarImage 
-                      src={user?.profileImageUrl || undefined} 
+                      src={user?.profileImageUrl && user.profileImageUrl.startsWith('http') ? user.profileImageUrl : undefined} 
                       alt={getDisplayName()}
                     />
                     <AvatarFallback className="text-xs">

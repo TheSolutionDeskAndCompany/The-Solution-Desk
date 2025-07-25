@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { Lock, Unlock, BarChart3, Brain, Zap, ArrowRight, CheckCircle } from 'lucide-react';
-import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
+import { useQuery } from '@tanstack/react-query';
+import Sidebar from "@/components/layout/sidebar";
+import Header from "@/components/layout/header";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Lock, Unlock, BarChart3, Brain, Zap, ArrowRight, CheckCircle, Play, Settings } from 'lucide-react';
 
 interface SubscriptionStatus {
   status: string;
@@ -70,35 +75,34 @@ const automationTools: AutomationTool[] = [
 ];
 
 export default function AutomationPage() {
-  const { user, isLoading: authLoading } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
-  const [subscription, setSubscription] = useState<SubscriptionStatus | null>(null);
-  const [loadingStatus, setLoadingStatus] = useState(true);
   const [runningTool, setRunningTool] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, any>>({});
   const [sampleProjectId] = useState(1);
 
-  useEffect(() => {
-    if (user) {
-      fetchSubscriptionStatus();
-    }
-  }, [user]);
+  const { data: subscription } = useQuery<SubscriptionStatus>({
+    queryKey: ["/api/subscription/status"],
+    retry: false,
+    enabled: isAuthenticated,
+  });
 
-  const fetchSubscriptionStatus = async () => {
-    try {
-      const response = await apiRequest('GET', '/api/subscription-status');
-      const data = await response.json();
-      setSubscription(data);
-    } catch (error) {
-      console.error('Failed to fetch subscription status:', error);
-      setSubscription({ status: 'free', plan: 'free' });
-    } finally {
-      setLoadingStatus(false);
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      toast({
+        title: "Unauthorized",
+        description: "You are logged out. Logging in again...",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/api/login";
+      }, 500);
+      return;
     }
-  };
+  }, [isAuthenticated, isLoading, toast]);
 
   const canAccessTool = (tool: AutomationTool): boolean => {
-    if (!subscription) return false;
+    if (!subscription) return tool.tier === 'free';
     
     if (tool.tier === 'free') return true;
     if (tool.tier === 'professional') return subscription.plan === 'professional' || subscription.plan === 'enterprise';
@@ -156,483 +160,161 @@ export default function AutomationPage() {
     }
   };
 
-  if (authLoading || loadingStatus) {
+  if (isLoading) {
     return (
-      <div style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center' 
-      }}>
-        <div style={{
-          width: '32px',
-          height: '32px',
-          border: '3px solid #9333EA',
-          borderTop: '3px solid transparent',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite'
-        }}></div>
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
       </div>
     );
   }
 
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 50%, #0B1426 100%)', 
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-      position: 'relative'
-    }}>
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <div className="flex">
+        <Sidebar />
 
-      {/* Navigation */}
-      <header style={{
-        backgroundColor: 'rgba(11, 20, 38, 0.95)',
-        borderBottom: '1px solid #334155',
-        padding: '0 20px',
-        backdropFilter: 'blur(10px)',
-        position: 'relative',
-        zIndex: 10
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: '90px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img 
-              src={logoImage} 
-              alt="Systoro Logo" 
-              style={{ 
-                height: '76px', 
-                width: 'auto',
-                filter: 'brightness(1.3) saturate(1.2)'
-              }} 
-            />
-            <h1 style={{
-              fontSize: '32px',
-              color: '#9333EA',
-              margin: '0',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '700'
-            }}>
-              Systoro
-            </h1>
-          </div>
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <span style={{ color: '#CBD5E1', fontWeight: '500', fontSize: '18px' }}>
-              Automation Tools
-            </span>
-            <button 
-              style={{
-                background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
-                color: 'white',
-                padding: '12px 24px',
-                fontSize: '20px',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '600',
-                boxShadow: '0 4px 12px rgba(34, 211, 238, 0.25)',
-                transition: 'all 0.2s ease'
-              }} 
-              onClick={() => window.location.href = '/'}
-            >
-              Back to Dashboard
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main style={{ padding: '40px 20px', position: 'relative', zIndex: 10 }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          
-          {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <h1 style={{
-              fontSize: '48px',
-              fontWeight: '800',
-              margin: '0 0 16px 0',
-              background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}>
-              Automated Process Tools
-            </h1>
-            
-            <p style={{ 
-              fontSize: '20px', 
-              color: '#94A3B8', 
-              maxWidth: '800px', 
-              margin: '0 auto 32px auto',
-              lineHeight: '1.6'
-            }}>
-              Leverage powerful automation tools to analyze, optimize, and improve your business processes. 
-              Advanced features unlock with higher subscription tiers.
-            </p>
-
-            {/* Current subscription status */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '32px' }}>
-              <span style={{ color: '#94A3B8', fontWeight: '500' }}>Current Plan:</span>
-              <div style={{ 
-                padding: '8px 16px', 
-                borderRadius: '20px',
-                backgroundColor: subscription?.plan === 'free' ? 'rgba(107, 114, 128, 0.2)' : 'rgba(147, 51, 234, 0.2)',
-                color: subscription?.plan === 'free' ? '#9CA3AF' : '#A855F7',
-                border: subscription?.plan === 'free' ? '1px solid #6B7280' : '1px solid #9333EA',
-                fontWeight: '600'
-              }}>
-                {subscription?.plan?.toUpperCase() || 'FREE'}
+        <main className="flex-1 p-4 md:p-6">
+          {/* Automation Header */}
+          <div className="mb-6 md:mb-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-3 sm:space-y-0">
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Automation Tools</h2>
+                <p className="text-sm md:text-base text-gray-600">Powerful tools to analyze, optimize, and improve your business processes</p>
               </div>
-              {subscription?.plan === 'free' && (
-                <button 
-                  style={{
-                    background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)',
-                    color: 'white',
-                    padding: '12px 24px',
-                    fontSize: '16px',
-                    fontWeight: '700',
-                    border: 'none',
-                    borderRadius: '12px',
-                    cursor: 'pointer',
-                    boxShadow: '0 8px 20px rgba(147, 51, 234, 0.4)',
-                    transition: 'all 0.3s ease',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}
-                  onClick={() => window.location.href = '/subscribe'}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(147, 51, 234, 0.6)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(147, 51, 234, 0.4)';
-                  }}
-                >
-                  Upgrade to Professional
-                </button>
-              )}
             </div>
           </div>
 
           {/* Tools Grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-            gap: '32px',
-            marginBottom: '48px'
-          }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {automationTools.map((tool) => {
-              const hasAccess = canAccessTool(tool);
+              const canAccess = canAccessTool(tool);
               const isRunning = runningTool === tool.id;
               const hasResults = results[tool.id];
 
               return (
-                <div key={tool.id} style={{
-                  background: hasAccess 
-                    ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
-                    : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
-                  backgroundColor: 'rgba(30, 41, 59, 0.8)',
-                  borderRadius: '16px',
-                  padding: '24px',
-                  border: hasAccess ? '2px solid #9333EA' : '2px solid #6B7280',
-                  backdropFilter: 'blur(15px)',
-                  boxShadow: hasAccess 
-                    ? '0 8px 24px rgba(147, 51, 234, 0.2)' 
-                    : '0 8px 24px rgba(0, 0, 0, 0.1)',
-                  transition: 'all 0.3s ease',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}>
-                  
-                  {/* Header */}
-                  <div style={{ marginBottom: '16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{ 
-                          padding: '8px', 
-                          borderRadius: '8px', 
-                          backgroundColor: hasAccess ? 'rgba(34, 211, 238, 0.1)' : 'rgba(107, 114, 128, 0.1)' 
-                        }}>
-                          {hasAccess ? <Unlock style={{ width: '20px', height: '20px', color: '#22D3EE' }} /> : <Lock style={{ width: '20px', height: '20px', color: '#6B7280' }} />}
+                <Card 
+                  key={tool.id}
+                  className={`transition-all duration-200 ${
+                    canAccess 
+                      ? 'hover:shadow-md hover:border-primary/20 cursor-pointer' 
+                      : 'opacity-60 cursor-not-allowed'
+                  }`}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className={`p-2 rounded-lg ${
+                          canAccess ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-400'
+                        }`}>
+                          {tool.icon}
                         </div>
-                        <div style={{ 
-                          padding: '8px', 
-                          borderRadius: '8px', 
-                          backgroundColor: hasAccess ? 'rgba(147, 51, 234, 0.1)' : 'rgba(107, 114, 128, 0.1)' 
-                        }}>
-                          <div style={{ color: hasAccess ? '#9333EA' : '#6B7280' }}>
-                            {tool.icon}
-                          </div>
+                        <div>
+                          <CardTitle className="text-sm font-medium">{tool.name}</CardTitle>
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs mt-1 ${
+                              tool.tier === 'free' ? 'bg-green-100 text-green-800' :
+                              tool.tier === 'professional' ? 'bg-blue-100 text-blue-800' :
+                              'bg-purple-100 text-purple-800'
+                            }`}
+                          >
+                            {tool.tier}
+                          </Badge>
                         </div>
                       </div>
-                      <div style={{ 
-                        padding: '4px 12px', 
-                        borderRadius: '12px',
-                        backgroundColor: hasAccess ? 'rgba(147, 51, 234, 0.2)' : 'rgba(107, 114, 128, 0.2)',
-                        color: hasAccess ? '#A855F7' : '#9CA3AF',
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        textTransform: 'uppercase'
-                      }}>
-                        {tool.tier}
-                      </div>
+                      {!canAccess && <Lock className="h-4 w-4 text-gray-400" />}
                     </div>
-                    
-                    <h3 style={{ 
-                      fontSize: '20px', 
-                      fontWeight: '700', 
-                      margin: '0 0 8px 0',
-                      color: hasAccess ? '#FFFFFF' : '#9CA3AF'
-                    }}>
-                      {tool.name}
-                    </h3>
-                    
-                    <p style={{ 
-                      fontSize: '14px', 
-                      color: hasAccess ? '#CBD5E1' : '#6B7280',
-                      lineHeight: '1.5',
-                      margin: '0'
-                    }}>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-0">
+                    <p className="text-xs text-gray-600 mb-4 leading-relaxed">
                       {tool.description}
                     </p>
-                  </div>
-
-                  {/* Features list */}
-                  <div style={{ marginBottom: '24px' }}>
-                    <h4 style={{ 
-                      fontSize: '14px', 
-                      fontWeight: '600', 
-                      marginBottom: '12px',
-                      color: hasAccess ? '#E2E8F0' : '#6B7280'
-                    }}>
-                      Features:
-                    </h4>
-                    <ul style={{ margin: '0', padding: '0', listStyle: 'none' }}>
-                      {tool.features.map((feature, index) => (
-                        <li key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
-                          <CheckCircle style={{ 
-                            width: '16px', 
-                            height: '16px', 
-                            marginTop: '2px', 
-                            flexShrink: 0,
-                            color: hasAccess ? '#10B981' : '#6B7280'
-                          }} />
-                          <span style={{ 
-                            fontSize: '14px',
-                            color: hasAccess ? '#CBD5E1' : '#6B7280'
-                          }}>
+                    
+                    <div className="space-y-2 mb-4">
+                      <h4 className="text-xs font-medium text-gray-900">Features:</h4>
+                      <ul className="text-xs text-gray-600 space-y-1">
+                        {tool.features.slice(0, 3).map((feature, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <CheckCircle className="h-3 w-3 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                             {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="flex space-x-2">
+                      <Button
+                        size="sm"
+                        disabled={!canAccess || isRunning}
+                        onClick={() => runAutomationTool(tool)}
+                        className="flex-1"
+                      >
+                        {isRunning ? (
+                          <>
+                            <div className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full mr-2" />
+                            Running...
+                          </>
+                        ) : (
+                          <>
+                            <Play className="h-3 w-3 mr-1" />
+                            Run Tool
+                          </>
+                        )}
+                      </Button>
+                      
+                      {canAccess && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={isRunning}
+                        >
+                          <Settings className="h-3 w-3" />
+                        </Button>
+                      )}
+                    </div>
 
-                  {/* Action button */}
-                  <button 
-                    onClick={() => runAutomationTool(tool)}
-                    disabled={!hasAccess || isRunning}
-                    style={{
-                      width: '100%',
-                      padding: '12px 20px',
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      border: 'none',
-                      borderRadius: '12px',
-                      cursor: hasAccess && !isRunning ? 'pointer' : 'not-allowed',
-                      background: hasAccess 
-                        ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)' 
-                        : 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
-                      color: 'white',
-                      transition: 'all 0.3s ease',
-                      boxShadow: hasAccess ? '0 4px 12px rgba(147, 51, 234, 0.3)' : 'none'
-                    }}
-                    onMouseOver={(e) => {
-                      if (hasAccess && !isRunning) {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 8px 20px rgba(147, 51, 234, 0.4)';
-                      }
-                    }}
-                    onMouseOut={(e) => {
-                      if (hasAccess && !isRunning) {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(147, 51, 234, 0.3)';
-                      }
-                    }}
-                  >
-                    {isRunning ? (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        <div style={{
-                          width: '16px',
-                          height: '16px',
-                          border: '2px solid white',
-                          borderTop: '2px solid transparent',
-                          borderRadius: '50%',
-                          animation: 'spin 1s linear infinite'
-                        }}></div>
-                        Running Analysis...
-                      </div>
-                    ) : hasAccess ? (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        Run Analysis
-                        <ArrowRight style={{ width: '16px', height: '16px' }} />
-                      </div>
-                    ) : (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        <Lock style={{ width: '16px', height: '16px' }} />
-                        Requires {tool.tier}
+                    {hasResults && (
+                      <div className="mt-3 p-2 bg-green-50 rounded border border-green-200">
+                        <p className="text-xs text-green-800">
+                          ✓ Analysis completed successfully
+                        </p>
                       </div>
                     )}
-                  </button>
-
-                  {/* Results preview */}
-                  {hasResults && (
-                    <div style={{
-                      marginTop: '16px',
-                      padding: '12px',
-                      backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                      border: '1px solid rgba(16, 185, 129, 0.3)',
-                      borderRadius: '8px'
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                        <CheckCircle style={{ width: '16px', height: '16px', color: '#10B981' }} />
-                        <span style={{ fontSize: '14px', fontWeight: '600', color: '#10B981' }}>
-                          Analysis Complete
-                        </span>
-                      </div>
-                      <p style={{ fontSize: '14px', color: '#059669', margin: '0' }}>
-                        Results generated successfully. Check the console for detailed output.
-                      </p>
-                    </div>
-                  )}
-                </div>
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
 
-          {/* Upgrade banner for free users */}
-          {subscription?.plan === 'free' && (
-            <div style={{
-              background: 'linear-gradient(135deg, #9333EA 0%, #A855F7 100%)',
-              padding: '32px',
-              borderRadius: '16px',
-              marginBottom: '48px',
-              border: '2px solid #9333EA',
-              boxShadow: '0 8px 24px rgba(147, 51, 234, 0.3)',
-              textAlign: 'center'
-            }}>
-              <h3 style={{ fontSize: '24px', fontWeight: '800', color: 'white', margin: '0 0 12px 0' }}>
-                Unlock Professional Automation Tools
-              </h3>
-              <p style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.9)', margin: '0 0 24px 0' }}>
-                Upgrade to Professional for $29/month to access advanced statistical analysis, process insights, and optimization tools.
-              </p>
-              <button 
-                style={{
-                  background: 'white',
-                  color: '#9333EA',
-                  padding: '16px 32px',
-                  fontSize: '18px',
-                  fontWeight: '800',
-                  border: 'none',
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-                }}
+          {/* Current subscription status */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 p-4 bg-gray-50 rounded-lg">
+            <span className="text-sm text-gray-600 font-medium">Current Plan:</span>
+            <Badge 
+              variant="outline" 
+              className={`${
+                subscription?.plan === 'free' ? 'bg-gray-100 text-gray-800' : 'bg-primary/10 text-primary'
+              }`}
+            >
+              {subscription?.plan?.toUpperCase() || 'FREE'}
+            </Badge>
+            {subscription?.plan === 'free' && (
+              <Button 
                 onClick={() => window.location.href = '/subscribe'}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-                }}
+                className="bg-primary text-white hover:bg-secondary"
               >
-                Upgrade to Professional Now
-              </button>
-            </div>
-          )}
-
-          {/* Tier comparison */}
-          <div style={{ textAlign: 'center' }}>
-            <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#FFFFFF', marginBottom: '32px' }}>
-              Choose Your Plan
-            </h2>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-              gap: '24px', 
-              maxWidth: '900px', 
-              margin: '0 auto' 
-            }}>
-              {['Free', 'Professional', 'Enterprise'].map((tier) => (
-                <div key={tier} style={{
-                  background: tier.toLowerCase() === subscription?.plan 
-                    ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)'
-                    : 'linear-gradient(135deg, rgba(75, 85, 99, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%)',
-                  backgroundColor: 'rgba(30, 41, 59, 0.8)',
-                  borderRadius: '16px',
-                  padding: '24px',
-                  border: tier.toLowerCase() === subscription?.plan ? '2px solid #9333EA' : '2px solid #6B7280',
-                  backdropFilter: 'blur(15px)'
-                }}>
-                  <h3 style={{ 
-                    fontSize: '20px', 
-                    fontWeight: '700', 
-                    margin: '0 0 8px 0',
-                    color: tier.toLowerCase() === subscription?.plan ? '#A855F7' : '#FFFFFF'
-                  }}>
-                    {tier}
-                  </h3>
-                  <p style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '16px' }}>
-                    {tier === 'Free' && 'Basic project management'}
-                    {tier === 'Professional' && 'Advanced automation tools'}
-                    {tier === 'Enterprise' && 'Full suite + priority support'}
-                  </p>
-                  <div style={{ fontSize: '32px', fontWeight: '800', color: '#FFFFFF', marginBottom: '16px' }}>
-                    {tier === 'Free' && '$0'}
-                    {tier === 'Professional' && '$29'}
-                    {tier === 'Enterprise' && '$49'}
-                    {tier !== 'Free' && <span style={{ fontSize: '14px', fontWeight: '400', color: '#9CA3AF' }}>/month</span>}
-                  </div>
-                  <ul style={{ margin: '0', padding: '0', listStyle: 'none' }}>
-                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
-                      • {tier === 'Free' ? '1 project' : tier === 'Professional' ? '10 projects' : 'Unlimited projects'}
-                    </li>
-                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
-                      • {tier === 'Free' ? '50 data points' : tier === 'Professional' ? '1,000 data points' : 'Unlimited data'}
-                    </li>
-                    <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
-                      • {tier === 'Free' ? 'Basic reporting' : 'Automated analysis'}
-                    </li>
-                    {tier !== 'Free' && (
-                      <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
-                        • Statistical process insights
-                      </li>
-                    )}
-                    {tier === 'Enterprise' && (
-                      <li style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '8px' }}>
-                        • Priority support
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              ))}
-            </div>
+                Upgrade to Professional
+              </Button>
+            )}
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

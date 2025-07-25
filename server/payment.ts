@@ -107,6 +107,16 @@ export async function getSubscriptionStatus(userId: number) {
     throw new Error("User not found");
   }
 
+  // Check for manual subscription status in database (for test users)
+  if (user.subscriptionStatus && user.subscriptionStatus !== 'free') {
+    return { 
+      status: 'active', 
+      plan: user.subscriptionStatus,
+      current_period_end: null,
+      cancel_at_period_end: false
+    };
+  }
+
   if (!user.stripeSubscriptionId) {
     return { status: 'free', plan: 'free' };
   }

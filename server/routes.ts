@@ -306,6 +306,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Alternative endpoint for frontend compatibility
+  app.get('/api/subscription/status', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const status = await getSubscriptionStatus(userId);
+      res.json(status);
+    } catch (error: any) {
+      console.error("Get subscription status error:", error);
+      res.status(500).json({ error: { message: error.message } });
+    }
+  });
+
   // Cancel subscription
   app.post('/api/cancel-subscription', isAuthenticated, async (req: any, res) => {
     try {

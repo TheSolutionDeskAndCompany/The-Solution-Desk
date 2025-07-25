@@ -97,6 +97,43 @@ export default function About() {
             >
               Pricing
             </button>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <button 
+                style={{
+                  background: 'transparent',
+                  color: '#A78BFA',
+                  padding: '12px 24px',
+                  fontSize: '18px',
+                  border: '2px solid #A78BFA',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  transition: 'all 0.2s ease'
+                }} 
+                onClick={() => window.location.href = '/auth'}
+                aria-label="Sign in to existing account"
+              >
+                Sign In
+              </button>
+              <button 
+                style={{
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                  color: 'white',
+                  padding: '14px 28px',
+                  fontSize: '18px',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
+                  transition: 'all 0.2s ease'
+                }} 
+                onClick={() => window.location.href = '/auth'}
+                aria-label="Create new account"
+              >
+                Get Started
+              </button>
+            </div>
           </nav>
         </div>
       </header>

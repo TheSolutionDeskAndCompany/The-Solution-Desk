@@ -18,6 +18,14 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
+- **July 25, 2025**: Six Sigma Tools Implementation and Enhancement
+  - **Complete Six Sigma Tool Suite**: Added interactive SIPOC, 5 Whys, FMEA, Fishbone, and Value Stream Mapping tools
+  - **Professional Methodology Integration**: All tools follow proven DMAIC (Define, Measure, Analyze, Improve, Control) methodology
+  - **Interactive Tool Builder**: SIPOC creates visual diagrams, 5 Whys provides guided chat interface, FMEA calculates RPN automatically
+  - **Tier-Based Access Control**: Free tools (SIPOC, 5 Whys, Pareto) and Professional tools (FMEA, Fishbone, Value Stream)
+  - **Export Capabilities**: PDF and PNG export functionality with jsPDF integration for professional reports
+  - **Six Sigma Navigation**: Added dedicated Six Sigma page accessible via sidebar navigation
+  - **Methodology Framework**: Clear DMAIC phase mapping showing which tools apply to Define, Measure, Analyze, Improve, Control
 - **July 25, 2025**: UI/UX fixes and authentication page improvements
   - **Fixed Notifications System**: Working dropdown with sample notifications and "mark all as read" functionality
   - **Improved Project Input Modal**: Light background with proper contrast for better readability

@@ -34,12 +34,44 @@ const analyticsTools: Tool[] = [
     tier: 'free'
   },
   {
+    id: 'sipoc',
+    name: 'SIPOC Process Snapshot',
+    description: 'Create a high-level map of suppliers, inputs, process, outputs, and customers with visual diagram.',
+    icon: Target,
+    category: 'analysis',
+    tier: 'free'
+  },
+  {
     id: 'control-charts',
     name: 'Control Charts (SPC)',
     description: 'Generate statistical process control charts with upper and lower control limits.',
     icon: Activity,
     category: 'statistical',
     tier: 'professional'
+  },
+  {
+    id: 'pareto-analysis',
+    name: 'Pareto Analysis',
+    description: 'Identify the most significant factors affecting your process using the 80/20 rule.',
+    icon: BarChart3,
+    category: 'optimization',
+    tier: 'free'
+  },
+  {
+    id: 'fishbone',
+    name: 'Fishbone Root Cause',
+    description: 'Build Ishikawa diagrams to analyze root causes across categories like Materials, Methods, People.',
+    icon: TrendingUp,
+    category: 'analysis',
+    tier: 'professional'
+  },
+  {
+    id: 'five-whys',
+    name: '5 Whys Drill Down',
+    description: 'Interactive chat widget that guides you through 5 levels of "why" questions to find root causes.',
+    icon: Settings,
+    category: 'analysis',
+    tier: 'free'
   },
   {
     id: 'capability-analysis',
@@ -50,20 +82,20 @@ const analyticsTools: Tool[] = [
     tier: 'professional'
   },
   {
-    id: 'trend-analysis',
-    name: 'Trend Analysis',
-    description: 'Identify patterns and trends in your process data with regression analysis.',
-    icon: TrendingUp,
-    category: 'analysis',
+    id: 'fmea',
+    name: 'FMEA Risk Matrix',
+    description: 'Failure Mode & Effects Analysis with automated RPN calculation and risk prioritization.',
+    icon: Calculator,
+    category: 'optimization',
     tier: 'professional'
   },
   {
-    id: 'pareto-analysis',
-    name: 'Pareto Analysis',
-    description: 'Identify the most significant factors affecting your process using the 80/20 rule.',
-    icon: BarChart3,
+    id: 'value-stream',
+    name: 'Value Stream Mapping',
+    description: 'Map end-to-end flow and identify waste spots with automated red-flag highlighting.',
+    icon: Activity,
     category: 'optimization',
-    tier: 'free'
+    tier: 'professional'
   },
   {
     id: 'distribution-analysis',

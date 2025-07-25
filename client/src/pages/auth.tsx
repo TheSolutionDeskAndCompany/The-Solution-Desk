@@ -277,6 +277,7 @@ export default function AuthPage() {
                 className="w-full mt-4 focus:ring-2 focus:ring-[#1D3557] focus:ring-offset-2"
                 onClick={handleGitHubLogin}
                 aria-label="Sign in with GitHub"
+                disabled={!import.meta.env.VITE_GITHUB_ENABLED}
               >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
                   <path

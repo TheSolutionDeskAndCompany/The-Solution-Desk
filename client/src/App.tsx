@@ -13,6 +13,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Automation from "@/pages/automation";
 import SixSigma from "@/pages/sixsigma";
+import ToolDashboard from "@/pages/tool-dashboard";
 import Analytics from "@/pages/analytics";
 import Billing from "@/pages/billing";
 import Dashboard from "@/pages/dashboard";
@@ -41,6 +42,7 @@ function Router() {
           <Route path="/analytics" component={Analytics} />
           <Route path="/automation" component={Automation} />
           <Route path="/sixsigma" component={SixSigma} />
+          <Route path="/tools" component={ToolDashboard} />
           <Route path="/billing" component={Billing} />
           <Route path="/subscribe" component={Subscribe} />
           <Route path="/contact" component={Contact} />

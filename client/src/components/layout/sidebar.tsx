@@ -23,9 +23,10 @@ export default function Sidebar() {
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
     { name: "Projects", href: "/projects", icon: FolderOpen },
+    { name: "Your Tools", href: "/tools", icon: Target },
     { name: "Analytics", href: "/analytics", icon: TrendingUp },
     { name: "Automation", href: "/automation", icon: Zap },
-    { name: "Process Tools", href: "/sixsigma", icon: Target },
+    { name: "Process Tools", href: "/sixsigma", icon: Settings },
     { name: "Billing", href: "/billing", icon: CreditCard },
   ];
 

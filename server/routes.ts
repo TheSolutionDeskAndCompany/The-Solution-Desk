@@ -2,6 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./auth";
+import { handleStripeWebhook } from "./webhooks";
+import express from "express";
 import { insertProjectSchema, insertProjectDataSchema, insertProjectMetricsSchema } from "@shared/schema";
 import { z } from "zod";
 import { createSubscription, getSubscriptionStatus, cancelSubscription } from "./payment";
@@ -385,6 +387,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       res.status(500).json({ message });
+    }
+  });
+
+  // Stripe webhook endpoint (needs raw body)
+  app.post('/api/webhooks/stripe', express.raw({ type: 'application/json' }), handleStripeWebhook);
+
+  // Tool access endpoint for automated provisioning
+  app.get('/api/tools/access', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const tier = await checkUserTierAccess(userId);
+      
+      // Tool access mapping based on subscription tier
+      const toolAccess = {
+        free: [
+          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
+          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
+          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' }
+        ],
+        professional: [
+          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
+          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
+          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' },
+          { id: 'fmea', name: 'Risk Matrix Builder', category: 'Risk Assessment' },
+          { id: 'fishbone', name: 'Root Cause Explorer', category: 'Root Cause Analysis' },
+          { id: 'value-stream', name: 'Flow Analyzer', category: 'Process Optimization' }
+        ],
+        enterprise: [
+          { id: 'sipoc', name: 'Process Mapping Snapshot', category: 'Process Mapping' },
+          { id: 'five-whys', name: 'Root Cause Drill Down', category: 'Root Cause Analysis' },
+          { id: 'pareto-analysis', name: 'Issue Prioritizer', category: 'Problem Prioritization' },
+          { id: 'fmea', name: 'Risk Matrix Builder', category: 'Risk Assessment' },
+          { id: 'fishbone', name: 'Root Cause Explorer', category: 'Root Cause Analysis' },
+          { id: 'value-stream', name: 'Flow Analyzer', category: 'Process Optimization' },
+          { id: 'stability-tracker', name: 'Stability Tracker', category: 'Control Charts' },
+          { id: 'advanced-analytics', name: 'Advanced Analytics', category: 'Data Science' }
+        ]
+      };
+
+      res.json({
+        currentTier: tier,
+        availableTools: toolAccess[tier] || toolAccess.free,
+        features: TIER_FEATURES[tier]
+      });
+    } catch (error: any) {
+      console.error("Tool access error:", error);
+      res.status(500).json({ error: { message: error.message } });
     }
   });
 

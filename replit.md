@@ -18,15 +18,15 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
-- **July 25, 2025**: Process Improvement Tools Implementation and Enhancement
-  - **Complete Process Tool Suite**: Added interactive Process Mapping, Root Cause Drill Down, Risk Matrix Builder, Root Cause Explorer, and Flow Analyzer tools
-  - **Professional Methodology Integration**: All tools follow proven DMAIC (Define, Measure, Analyze, Improve, Control) methodology
-  - **Interactive Tool Builder**: Process mapping creates visual diagrams, 5 Whys provides guided chat interface, FMEA calculates RPN automatically
-  - **Tier-Based Access Control**: Free tools (Process Mapping, Root Cause Drill Down, Issue Prioritizer) and Professional tools (Risk Matrix Builder, Root Cause Explorer, Flow Analyzer)
-  - **Export Capabilities**: PDF and PNG export functionality with jsPDF integration for professional reports
-  - **Process Tools Navigation**: Added dedicated Process Tools page accessible via sidebar navigation
-  - **Methodology Framework**: Clear DMAIC phase mapping showing which tools apply to Define, Measure, Analyze, Improve, Control
-  - **Brand Compliance**: Removed all industry-specific terminology to maintain generic process improvement branding
+- **July 25, 2025**: Complete Automation & Self-Service Implementation
+  - **100% Automated Onboarding**: Stripe webhook integration with instant tool provisioning upon payment
+  - **Self-Service Tool Dashboard**: Dedicated /tools page showing user's available tools based on subscription tier
+  - **Email Automation Engine**: Complete drip sequence system with welcome emails, tool completion notifications, and upsell campaigns
+  - **Tier-Based Tool Access**: Automated API endpoint that provisions tools based on subscription level (Free: 3 tools, Professional: 6 tools, Enterprise: 8+ tools)
+  - **Interactive Tool Cards**: Launch buttons for each tool with download report functionality and booking integration
+  - **Process Improvement Branding**: Removed all industry-specific terminology, using generic business process optimization language
+  - **Automated Provisioning**: Payment → Tool Access → Email Sequence → Upsell Triggers all happen without manual intervention
+  - **Scalable Architecture**: Ready for Zapier integration, calendar booking widgets, and advanced analytics automation
 - **July 25, 2025**: UI/UX fixes and authentication page improvements
   - **Fixed Notifications System**: Working dropdown with sample notifications and "mark all as read" functionality
   - **Improved Project Input Modal**: Light background with proper contrast for better readability

@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import heroImage from "@assets/assets_task_01k0xxcddae2ztf238qpfhf1w6_1753350666_img_1_1753350706829.webp";
+import heroImage from "@assets/logo_1753331638873.png";
 
 export default function AuthPage() {
   const [, navigate] = useLocation();
@@ -220,7 +220,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDF6E3] flex" role="main">
+    <div className="min-h-screen bg-[#F8F9FA] flex" role="main">
       {/* Skip to main content link for screen readers */}
       <a 
         href="#auth-form" 
@@ -539,32 +539,32 @@ export default function AuthPage() {
             alt="Systoro Hero" 
             className="w-full h-full object-cover object-center"
           />
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/30" />
+          {/* Light overlay for better text readability */}
+          <div className="absolute inset-0 bg-white/60" />
         </div>
         
         {/* Overlaid text content */}
-        <div className="relative z-10 h-full flex flex-col justify-center items-center p-12 text-white text-center">
+        <div className="relative z-10 h-full flex flex-col justify-center items-center p-12 text-gray-800 text-center">
           <div className="max-w-2xl">
-            <h1 className="text-5xl font-bold mb-6 drop-shadow-lg" id="hero-title">
+            <h1 className="text-5xl font-bold mb-6 text-gray-900" id="hero-title">
               Streamline Your Path to Better Processes
             </h1>
-            <p className="text-2xl mb-8 drop-shadow-md opacity-95" aria-describedby="hero-title">
+            <p className="text-2xl mb-8 text-gray-700" aria-describedby="hero-title">
               Systoro automates the complex steps of continuous improvement so your team can focus on results, not complexity.
             </p>
             
-            <div className="space-y-6 text-lg" role="list" aria-label="Key features">
+            <div className="space-y-6 text-lg text-gray-700" role="list" aria-label="Key features">
               <div className="flex items-center justify-center space-x-4" role="listitem">
-                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
-                <span className="drop-shadow-sm">Automated process analysis and optimization</span>
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full" aria-hidden="true" />
+                <span>Automated process analysis and optimization</span>
               </div>
               <div className="flex items-center justify-center space-x-4" role="listitem">
-                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
-                <span className="drop-shadow-sm">Real-time performance tracking and insights</span>
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full" aria-hidden="true" />
+                <span>Real-time performance tracking and insights</span>
               </div>
               <div className="flex items-center justify-center space-x-4" role="listitem">
-                <div className="w-3 h-3 bg-[#F4A261] rounded-full drop-shadow-sm" aria-hidden="true" />
-                <span className="drop-shadow-sm">Professional-grade statistical analysis tools</span>
+                <div className="w-3 h-3 bg-[#F4A261] rounded-full" aria-hidden="true" />
+                <span>Professional-grade statistical analysis tools</span>
               </div>
             </div>
           </div>

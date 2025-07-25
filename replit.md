@@ -18,6 +18,14 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
+- **July 25, 2025**: UI/UX fixes and authentication page improvements
+  - **Fixed Notifications System**: Working dropdown with sample notifications and "mark all as read" functionality
+  - **Improved Project Input Modal**: Light background with proper contrast for better readability
+  - **Enhanced Workflow Interactivity**: Clickable workflow steps with hover effects and console logging
+  - **Fixed Analytics Tools**: Functional settings buttons with proper event handling and loading states
+  - **Fixed Payment Page**: Replaced broken image links with gradient icons for professional and enterprise plans
+  - **Authentication Page Update**: Switched to original neon logo with lighter overlay for better text visibility
+  - **SSL Status**: "Connection not secure" warning exists in development due to HTTP; production uses HTTPS on thesolutiondesk.ca
 - **July 25, 2025**: Data entry system implementation and hardcoded example data removal
   - **Fixed Hardcoded Data Issue**: Removed all placeholder/example data from dashboard metrics and statistics
   - **Created Real Data Entry System**: Built comprehensive AddDataModal component for inputting actual project data

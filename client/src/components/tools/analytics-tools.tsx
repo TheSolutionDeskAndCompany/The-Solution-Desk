@@ -35,7 +35,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'sipoc',
-    name: 'SIPOC Process Snapshot',
+    name: 'Process Mapping Snapshot',
     description: 'Create a high-level map of suppliers, inputs, process, outputs, and customers with visual diagram.',
     icon: Target,
     category: 'analysis',
@@ -51,7 +51,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'pareto-analysis',
-    name: 'Pareto Analysis',
+    name: 'Issue Prioritizer',
     description: 'Identify the most significant factors affecting your process using the 80/20 rule.',
     icon: BarChart3,
     category: 'optimization',
@@ -59,7 +59,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'fishbone',
-    name: 'Fishbone Root Cause',
+    name: 'Root Cause Explorer',
     description: 'Build Ishikawa diagrams to analyze root causes across categories like Materials, Methods, People.',
     icon: TrendingUp,
     category: 'analysis',
@@ -67,7 +67,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'five-whys',
-    name: '5 Whys Drill Down',
+    name: 'Root Cause Drill Down',
     description: 'Interactive chat widget that guides you through 5 levels of "why" questions to find root causes.',
     icon: Settings,
     category: 'analysis',
@@ -83,7 +83,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'fmea',
-    name: 'FMEA Risk Matrix',
+    name: 'Risk Matrix Builder',
     description: 'Failure Mode & Effects Analysis with automated RPN calculation and risk prioritization.',
     icon: Calculator,
     category: 'optimization',
@@ -91,7 +91,7 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'value-stream',
-    name: 'Value Stream Mapping',
+    name: 'Flow Analyzer',
     description: 'Map end-to-end flow and identify waste spots with automated red-flag highlighting.',
     icon: Activity,
     category: 'optimization',

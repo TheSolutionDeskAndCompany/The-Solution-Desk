@@ -18,14 +18,15 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
-- **July 25, 2025**: Six Sigma Tools Implementation and Enhancement
-  - **Complete Six Sigma Tool Suite**: Added interactive SIPOC, 5 Whys, FMEA, Fishbone, and Value Stream Mapping tools
+- **July 25, 2025**: Process Improvement Tools Implementation and Enhancement
+  - **Complete Process Tool Suite**: Added interactive Process Mapping, Root Cause Drill Down, Risk Matrix Builder, Root Cause Explorer, and Flow Analyzer tools
   - **Professional Methodology Integration**: All tools follow proven DMAIC (Define, Measure, Analyze, Improve, Control) methodology
-  - **Interactive Tool Builder**: SIPOC creates visual diagrams, 5 Whys provides guided chat interface, FMEA calculates RPN automatically
-  - **Tier-Based Access Control**: Free tools (SIPOC, 5 Whys, Pareto) and Professional tools (FMEA, Fishbone, Value Stream)
+  - **Interactive Tool Builder**: Process mapping creates visual diagrams, 5 Whys provides guided chat interface, FMEA calculates RPN automatically
+  - **Tier-Based Access Control**: Free tools (Process Mapping, Root Cause Drill Down, Issue Prioritizer) and Professional tools (Risk Matrix Builder, Root Cause Explorer, Flow Analyzer)
   - **Export Capabilities**: PDF and PNG export functionality with jsPDF integration for professional reports
-  - **Six Sigma Navigation**: Added dedicated Six Sigma page accessible via sidebar navigation
+  - **Process Tools Navigation**: Added dedicated Process Tools page accessible via sidebar navigation
   - **Methodology Framework**: Clear DMAIC phase mapping showing which tools apply to Define, Measure, Analyze, Improve, Control
+  - **Brand Compliance**: Removed all industry-specific terminology to maintain generic process improvement branding
 - **July 25, 2025**: UI/UX fixes and authentication page improvements
   - **Fixed Notifications System**: Working dropdown with sample notifications and "mark all as read" functionality
   - **Improved Project Input Modal**: Light background with proper contrast for better readability

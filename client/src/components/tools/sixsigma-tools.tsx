@@ -51,7 +51,7 @@ export default function SixSigmaTools({ toolId, userTier }: SixSigmaToolsProps) 
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Target className="h-5 w-5" />
-          SIPOC Process Snapshot
+          Process Mapping Snapshot
         </CardTitle>
         <p className="text-sm text-gray-600">
           Create a high-level process map showing Suppliers → Inputs → Process → Outputs → Customers
@@ -116,12 +116,12 @@ export default function SixSigmaTools({ toolId, userTier }: SixSigmaToolsProps) 
           disabled={isGenerating}
           className="w-full"
         >
-          {isGenerating ? 'Generating SIPOC Diagram...' : 'Generate Visual SIPOC'}
+          {isGenerating ? 'Generating Process Map...' : 'Generate Visual Process Map'}
         </Button>
 
         {results && (
           <div className="mt-6 p-4 bg-green-50 rounded-lg">
-            <h4 className="font-medium text-green-800 mb-2">SIPOC Diagram Generated!</h4>
+            <h4 className="font-medium text-green-800 mb-2">Process Map Generated!</h4>
             <div className="flex gap-2">
               <Button size="sm" variant="outline">
                 <Download className="h-4 w-4 mr-2" />

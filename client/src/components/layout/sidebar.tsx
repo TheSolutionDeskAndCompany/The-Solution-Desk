@@ -25,7 +25,7 @@ export default function Sidebar() {
     { name: "Projects", href: "/projects", icon: FolderOpen },
     { name: "Analytics", href: "/analytics", icon: TrendingUp },
     { name: "Automation", href: "/automation", icon: Zap },
-    { name: "Six Sigma", href: "/sixsigma", icon: Target },
+    { name: "Process Tools", href: "/sixsigma", icon: Target },
     { name: "Billing", href: "/billing", icon: CreditCard },
   ];
 

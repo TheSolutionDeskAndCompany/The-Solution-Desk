@@ -29,7 +29,7 @@ const automationTools: AutomationTool[] = [
   {
     id: 'analysis',
     name: 'Statistical Process Analysis',
-    description: 'Automated statistical analysis including control charts, capability studies, and trend analysis using proven Six Sigma methodologies.',
+    description: 'Automated statistical analysis including control charts, capability studies, and trend analysis using proven process improvement methodologies.',
     icon: <BarChart3 className="w-6 h-6" />,
     tier: 'professional',
     features: [
@@ -45,11 +45,11 @@ const automationTools: AutomationTool[] = [
   {
     id: 'insights',
     name: 'Process Intelligence Engine',
-    description: 'Advanced statistical analysis using Six Sigma methodology to identify improvement opportunities and performance patterns.',
+    description: 'Advanced statistical analysis using proven methodology to identify improvement opportunities and performance patterns.',
     icon: <Brain className="w-6 h-6" />,
     tier: 'professional',
     features: [
-      'Six Sigma statistical analysis',
+      'Advanced statistical analysis',
       'Process capability studies (Cp/Cpk)',
       'Risk assessment with mitigation strategies',
       'Performance benchmarking analysis',

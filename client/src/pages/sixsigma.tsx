@@ -37,7 +37,7 @@ interface SixSigmaTool {
 const sixSigmaTools: SixSigmaTool[] = [
   {
     id: 'sipoc',
-    name: 'SIPOC Process Snapshot',
+    name: 'Process Mapping Snapshot',
     description: 'Create high-level process maps showing suppliers, inputs, process, outputs, and customers with exportable visual diagrams.',
     icon: <Target className="w-6 h-6" />,
     tier: 'free',
@@ -51,7 +51,7 @@ const sixSigmaTools: SixSigmaTool[] = [
   },
   {
     id: 'five-whys',
-    name: '5 Whys Root Cause',
+    name: 'Root Cause Drill Down',
     description: 'Interactive drill-down analysis that guides you through 5 levels of "why" questions to identify true root causes.',
     icon: <MessageCircle className="w-6 h-6" />,
     tier: 'free',
@@ -65,7 +65,7 @@ const sixSigmaTools: SixSigmaTool[] = [
   },
   {
     id: 'pareto-analysis',
-    name: 'Pareto Chart Generator',
+    name: 'Issue Prioritizer',
     description: 'Automated 80/20 analysis with visual charts showing which few factors cause most of your problems.',
     icon: <BarChart3 className="w-6 h-6" />,
     tier: 'free',
@@ -79,7 +79,7 @@ const sixSigmaTools: SixSigmaTool[] = [
   },
   {
     id: 'fmea',
-    name: 'FMEA Risk Matrix',
+    name: 'Risk Matrix Builder',
     description: 'Failure Mode & Effects Analysis with automated Risk Priority Number (RPN) calculation and risk ranking.',
     icon: <Calculator className="w-6 h-6" />,
     tier: 'professional',
@@ -93,7 +93,7 @@ const sixSigmaTools: SixSigmaTool[] = [
   },
   {
     id: 'fishbone',
-    name: 'Fishbone Diagram Builder',
+    name: 'Root Cause Explorer',
     description: 'Build Ishikawa diagrams analyzing root causes across categories like Materials, Methods, People, and Environment.',
     icon: <TrendingUp className="w-6 h-6" />,
     tier: 'professional',
@@ -107,7 +107,7 @@ const sixSigmaTools: SixSigmaTool[] = [
   },
   {
     id: 'value-stream',
-    name: 'Value Stream Mapping',
+    name: 'Flow Analyzer',
     description: 'Map end-to-end process flow with automated waste identification and improvement opportunity highlighting.',
     icon: <Activity className="w-6 h-6" />,
     tier: 'professional',
@@ -165,7 +165,7 @@ export default function SixSigmaPage() {
     if (!canAccessTool(tier)) {
       toast({
         title: "Professional Feature",
-        description: `This tool requires a ${tier} subscription. Upgrade now to unlock advanced Six Sigma tools!`,
+        description: `This tool requires a ${tier} subscription. Upgrade now to unlock advanced process improvement tools!`,
         variant: "destructive",
       });
       setTimeout(() => {
@@ -201,7 +201,7 @@ export default function SixSigmaPage() {
                 onClick={() => setSelectedTool(null)}
                 className="mb-4"
               >
-                ← Back to Six Sigma Tools
+                ← Back to Process Tools
               </Button>
             </div>
             <SixSigmaTools 
@@ -226,8 +226,8 @@ export default function SixSigmaPage() {
           <div className="mb-6 md:mb-8">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 space-y-3 sm:space-y-0">
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Six Sigma Tools</h2>
-                <p className="text-sm md:text-base text-gray-600">Interactive tools for process improvement and quality management</p>
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900">Process Improvement Tools</h2>
+                <p className="text-sm md:text-base text-gray-600">Interactive tools for business process optimization and quality management</p>
               </div>
               <div className="flex gap-2">
                 <Badge variant="outline" className="bg-green-100 text-green-800">
@@ -322,9 +322,9 @@ export default function SixSigmaPage() {
           {/* Feature Comparison */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Six Sigma Methodology Integration</CardTitle>
+              <CardTitle>Process Improvement Methodology</CardTitle>
               <p className="text-sm text-gray-600">
-                Our tools follow proven Six Sigma DMAIC (Define, Measure, Analyze, Improve, Control) methodology
+                Our tools follow proven DMAIC (Define, Measure, Analyze, Improve, Control) methodology for systematic process optimization
               </p>
             </CardHeader>
             <CardContent>
@@ -356,9 +356,9 @@ export default function SixSigmaPage() {
           {(!subscription || subscription.plan === 'free') && (
             <Card className="border-dashed border-2 border-primary/20 bg-primary/5">
               <CardContent className="text-center py-8">
-                <h3 className="text-lg font-medium mb-2">Unlock Advanced Six Sigma Tools</h3>
+                <h3 className="text-lg font-medium mb-2">Unlock Advanced Process Tools</h3>
                 <p className="text-gray-600 mb-4">
-                  Get access to FMEA, Fishbone diagrams, Value Stream Mapping, and more professional tools
+                  Get access to FMEA, Fishbone diagrams, Value Stream Mapping, and more professional analysis tools
                 </p>
                 <Button onClick={() => window.location.href = '/subscribe'}>
                   Upgrade to Professional

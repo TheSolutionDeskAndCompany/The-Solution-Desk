@@ -33,8 +33,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Add tier information for frontend
       const tier = await checkUserTierAccess(userId);
+      const { password, ...userWithoutPassword } = user;
       const userWithTier = {
-        ...user,
+        ...userWithoutPassword,
         currentTier: tier,
         features: TIER_FEATURES[tier]
       };

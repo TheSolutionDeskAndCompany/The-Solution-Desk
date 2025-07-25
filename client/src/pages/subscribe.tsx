@@ -7,10 +7,8 @@ import { useAuth } from "@/hooks/useAuth";
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 const SubscribeForm = ({ planType }: { planType: string }) => {
   const stripe = useStripe();
@@ -205,6 +203,49 @@ export default function Subscribe() {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
   const { user, isLoading: authLoading, isAuthenticated } = useAuth();
+
+  // Check for Stripe configuration
+  if (!stripePublicKey) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          backgroundColor: 'rgba(30, 41, 59, 0.5)',
+          borderRadius: '20px',
+          padding: '40px',
+          border: '1px solid #334155',
+          backdropFilter: 'blur(10px)',
+          textAlign: 'center',
+          maxWidth: '400px'
+        }}>
+          <h2 style={{ color: '#F1F5F9', marginBottom: '16px' }}>Payment System Unavailable</h2>
+          <p style={{ color: '#94A3B8', marginBottom: '24px' }}>
+            Payment processing is temporarily unavailable. Please try again later.
+          </p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            style={{
+              background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+              color: 'white',
+              padding: '12px 24px',
+              fontSize: '16px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // Redirect to login if not authenticated
   useEffect(() => {

@@ -18,6 +18,14 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
 - **Updated**: July 24, 2025
 
 ## Recent Changes
+- **July 25, 2025**: Authentication and billing system fixes
+  - **Authentication Issues Resolved**: Fixed email/password registration and login functionality
+  - **Payment System Repaired**: Subscription upgrades now create proper Stripe payment intents with client secrets
+  - **Security Enhanced**: Password hashes no longer exposed in API responses for improved security
+  - **GitHub OAuth Ready**: Complete GitHub OAuth implementation exists but requires GitHub app credentials
+    - Code supports both development (Replit) and production (thesolutiondesk.ca) callback URLs
+    - Database schema includes GitHub ID fields and provider tracking
+    - Frontend includes "Sign in with GitHub" button ready for activation
 - **July 25, 2025**: Project optimization and cleanup
   - **Performance Optimizations**: Reduced bundle size by removing 29 unused UI components
   - **Asset Cleanup**: Removed 20 unused attached assets (text files and redundant images)  

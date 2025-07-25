@@ -68,7 +68,7 @@ Systoro is a comprehensive software suite designed to help teams analyze, improv
     - Removed Google OAuth to avoid additional costs, focusing on GitHub and email authentication
     - **Comprehensive Accessibility**: Added full screen reader support, ARIA labels, semantic HTML
     - **Authentication Fixed**: Sign-in/sign-up toggle working with test account (test@example.com/password)
-    - **Domain Setup**: Using domain forwarding to http://workspace.thesolutiondesk.repl.co for thesolutiondesk.ca
+    - **Domain Setup**: Domain forwarding configured but experiencing SSL/TLS certificate issues requiring resolution
 
 ## User Preferences
 

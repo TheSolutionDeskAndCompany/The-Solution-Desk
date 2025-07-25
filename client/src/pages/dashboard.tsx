@@ -125,7 +125,7 @@ export default function Dashboard() {
 
           {/* Statistical Analysis Tools */}
           <div className="mt-8">
-            <StatisticalChart />
+            <StatisticalChart data={undefined} />
           </div>
         </main>
       </div>

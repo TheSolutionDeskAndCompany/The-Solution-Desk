@@ -95,20 +95,12 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
 
   const handleRunTool = async (toolId: string) => {
     if (!projects || projects.length === 0) {
-      console.log("Info: Create projects with data to run analysis tools");
+      window.location.href = '/projects';
       return;
     }
 
-    console.log(`Running ${toolId} analysis on project data...`);
-    setIsRunning(true);
-    setSelectedTool(toolId);
-    
-    // Simulate tool execution with realistic timing
-    setTimeout(() => {
-      setIsRunning(false);
-      setSelectedTool(null);
-      console.log(`${toolId} analysis complete - results would appear here in production`);
-    }, 2000);
+    // Navigate to automation page with the specific tool
+    window.location.href = `/automation?tool=${toolId}`;
   };
 
   const getCategoryColor = (category: string) => {

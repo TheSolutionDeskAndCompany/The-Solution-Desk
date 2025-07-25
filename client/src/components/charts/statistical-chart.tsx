@@ -3,8 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, Download, Settings } from "lucide-react";
 
-export default function StatisticalChart() {
-  const statisticalData = {
+interface StatisticalChartProps {
+  data?: {
+    sampleSize: number;
+    mean: number;
+    stdDev: number;
+    cp: number;
+    defectRate: number;
+    ucl: number;
+    lcl: number;
+  };
+}
+
+export default function StatisticalChart({ data }: StatisticalChartProps = {}) {
+  const exampleData = {
     sampleSize: 245,
     mean: 2.34,
     stdDev: 0.152,
@@ -20,13 +32,27 @@ export default function StatisticalChart() {
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg font-semibold">Statistical Analysis Tools</CardTitle>
           <div className="flex space-x-2">
-            <Button size="sm" className="bg-primary text-white hover:bg-secondary">
+            <Button 
+              size="sm" 
+              className="bg-primary text-white hover:bg-secondary"
+              onClick={() => window.location.href = '/automation'}
+            >
               Control Charts
             </Button>
-            <Button size="sm" variant="outline" className="text-gray-700 hover:bg-gray-100">
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="text-gray-700 hover:bg-gray-100"
+              onClick={() => window.location.href = '/automation'}
+            >
               Pareto Analysis
             </Button>
-            <Button size="sm" variant="outline" className="text-gray-700 hover:bg-gray-100">
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="text-gray-700 hover:bg-gray-100"
+              onClick={() => window.location.href = '/automation'}
+            >
               Process Capability
             </Button>
           </div>
@@ -37,16 +63,30 @@ export default function StatisticalChart() {
           {/* Chart Area */}
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-medium text-gray-900 mb-3">Process Performance Chart</h4>
-            <div className="h-48 bg-white rounded border-2 border-dashed border-gray-300 flex items-center justify-center">
-              <div className="text-center text-gray-500">
+            <div 
+              className="h-48 bg-white rounded border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer group"
+              title={data ? undefined : `Example: Mean: ${exampleData.mean}, StdDev: ${exampleData.stdDev}, UCL: ${exampleData.ucl}, LCL: ${exampleData.lcl}`}
+              onClick={() => window.location.href = '/automation'}
+            >
+              <div className="text-center text-gray-500 group-hover:text-primary transition-colors">
                 <BarChart3 className="h-12 w-12 mx-auto mb-2" />
-                <p className="text-sm font-medium">Statistical Control Chart</p>
-                <p className="text-xs mt-1">
-                  Mean: {statisticalData.mean}, StdDev: {statisticalData.stdDev}
+                <p className="text-sm font-medium">
+                  {data ? "Statistical Control Chart" : "No Data - Click to Add"}
                 </p>
-                <p className="text-xs">
-                  UCL: {statisticalData.ucl}, LCL: {statisticalData.lcl}
-                </p>
+                {data ? (
+                  <>
+                    <p className="text-xs mt-1">
+                      Mean: {data.mean}, StdDev: {data.stdDev}
+                    </p>
+                    <p className="text-xs">
+                      UCL: {data.ucl}, LCL: {data.lcl}
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-xs mt-1 group-hover:block hidden">
+                    Hover to see example values
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -58,35 +98,35 @@ export default function StatisticalChart() {
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Sample Size (n)</span>
                 <Badge variant="outline" className="font-mono">
-                  {statisticalData.sampleSize}
+                  {data?.sampleSize || 0}
                 </Badge>
               </div>
               
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Mean (x̄)</span>
                 <Badge variant="outline" className="font-mono">
-                  {statisticalData.mean}
+                  {data?.mean || 0}
                 </Badge>
               </div>
               
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Standard Deviation (σ)</span>
                 <Badge variant="outline" className="font-mono">
-                  {statisticalData.stdDev}
+                  {data?.stdDev || 0}
                 </Badge>
               </div>
               
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Process Capability (Cp)</span>
                 <Badge variant="default" className="bg-green-100 text-green-800 font-mono">
-                  {statisticalData.cp}
+                  {data?.cp || 0}
                 </Badge>
               </div>
               
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Defect Rate (PPM)</span>
                 <Badge variant="outline" className="font-mono">
-                  {statisticalData.defectRate.toLocaleString()}
+                  {data?.defectRate?.toLocaleString() || 0}
                 </Badge>
               </div>
             </div>

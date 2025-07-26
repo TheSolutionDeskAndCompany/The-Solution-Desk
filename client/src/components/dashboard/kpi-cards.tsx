@@ -1,13 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { TrendingUp, DollarSign, BarChart3, Star } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+interface DashboardMetrics {
+  activeProjects: number;
+  costSavings: number;
+  efficiency: number;
+  qualityScore: number;
+}
 
 interface KpiCardsProps {
-  metrics?: {
-    activeProjects: number;
-    costSavings: number;
-    efficiency: number;
-    qualityScore: number;
-  };
+  metrics?: DashboardMetrics;
   isLoading: boolean;
 }
 
@@ -77,7 +80,7 @@ export default function KpiCards({ metrics, isLoading }: KpiCardsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       {cards.map((card, index) => {
         const Icon = card.icon;
-        
+
         return (
           <Card key={index} className="shadow-sm border border-gray-200">
             <CardContent className="p-6">

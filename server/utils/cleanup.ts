@@ -83,7 +83,7 @@ export class HealthChecker {
     
     // Check for console statements
     if (content.includes('console.log')) {
-      issues.push('Contains debug 
+      issues.push('Contains debug console statements'); 
     }
     
     // Check for loose equality

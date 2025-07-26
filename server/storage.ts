@@ -302,22 +302,33 @@ export class DatabaseStorage implements IStorage {
     let totalQuality = 0;
     let projectCount = 0;
 
-    for (const project of userProjects) {
-      const metrics = await this.getProjectMetrics(project.id);
-      
+    // Use Promise.all for better performance with multiple database calls
+    const projectMetricsPromises = userProjects.map(project => 
+      this.getProjectMetrics(project.id)
+    );
+    
+    const allProjectMetrics = await Promise.all(projectMetricsPromises);
+    
+    allProjectMetrics.forEach(metrics => {
       metrics.forEach(metric => {
         const value = parseFloat(metric.value.toString());
         
-        if (metric.metricType === 'cost_savings') {
-          totalCostSavings += value;
-        } else if (metric.metricType === 'efficiency') {
-          totalEfficiency += value;
-          projectCount++;
-        } else if (metric.metricType === 'quality_score') {
-          totalQuality += value;
+        if (isNaN(value)) return; // Skip invalid values
+        
+        switch (metric.metricType) {
+          case 'cost_savings':
+            totalCostSavings += value;
+            break;
+          case 'efficiency':
+            totalEfficiency += value;
+            projectCount++;
+            break;
+          case 'quality_score':
+            totalQuality += value;
+            break;
         }
       });
-    }
+    });
 
     return {
       activeProjects: activeProjects,

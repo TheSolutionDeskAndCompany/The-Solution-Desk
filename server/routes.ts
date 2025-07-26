@@ -84,11 +84,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/api/projects', isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.id;
+      if (!userId) {
+        return res.status(400).json({ message: "User ID is required" });
+      }
+      
       const projects = await storage.getUserProjects(userId);
-      res.json(projects);
+      res.json(projects || []);
     } catch (error) {
       console.error("Error fetching projects:", error);
-      res.status(500).json({ message: "Failed to fetch projects" });
+      res.status(500).json({ 
+        message: "Failed to fetch projects",
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
     }
   });
 

@@ -199,12 +199,12 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
                   )}
                 </div>
               </CardHeader>
-              
+
               <CardContent className="pt-0">
                 <p className="text-xs text-gray-600 mb-4 leading-relaxed">
                   {tool.description}
                 </p>
-                
+
                 <div className="flex space-x-2">
                   <Button
                     size="sm"
@@ -224,7 +224,7 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
                       </>
                     )}
                   </Button>
-                  
+
                   {canUse && hasProjects && (
                     <Button
                       size="sm"

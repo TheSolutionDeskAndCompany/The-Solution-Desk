@@ -392,6 +392,47 @@ function generateAdvancedStatisticalInsights(project: Project, projectData: Proj
   if (outliers.length > values.length * 0.05) {
     recommendations.push({
       category: "quality",
+      action: "Investigate and address outliers to improve process consistency",
+      priority: "medium",
+      timeline: "1-2 weeks",
+      expectedOutcome: `Reduce outliers from ${outliers.length} to <${Math.round(values.length * 0.02)}`,
+      requiredResources: "Root cause analysis, process documentation review"
+    });
+  }
+  
+  if (trendAnalysis.trend === 'declining') {
+    recommendations.push({
+      category: "performance",
+      action: "Implement corrective actions to reverse declining trend",
+      priority: "high",
+      timeline: "immediate",
+      expectedOutcome: "Stabilize or improve process performance",
+      requiredResources: "Management intervention, process review"
+    });
+  }
+  
+  return {
+    processMetrics: {
+      mean: Math.round(mean * 100) / 100,
+      standardDeviation: Math.round(stdDev * 100) / 100,
+      coefficientOfVariation: Math.round(cv * 10000) / 100,
+      processCapability,
+      efficiencyScore
+    },
+    controlLimits,
+    capability,
+    trendAnalysis,
+    outliers: outliers.length,
+    recommendations,
+    insights: {
+      keyFindings: [
+        `Process shows ${processCapability} capability`,
+        `Efficiency score: ${efficiencyScore}%`,
+        `${outliers.length} outliers detected out of ${values.length} data points`
+      ],
+      actionItems: recommendations.filter(r => r.priority === 'high').map(r => r.action)
+    }
+  };
       action: "Investigate and eliminate special causes creating outliers",
       priority: "high",
       timeline: "1-2 weeks",
@@ -564,7 +605,7 @@ function generateStatisticalRecommendations(values: number[], project: Project) 
   return recommendations;
 }
 
-// Optimization functions
+// Optimization functionsons
 function analyzeCurrentState(data: ProjectData[], metrics: ProjectMetrics[]) {
   return {
     dataQuality: data.length > 30 ? 'good' : 'limited',
@@ -651,7 +692,7 @@ function calculateProjectedImpact(data: ProjectData[], metrics: ProjectMetrics[]
     costSavings: '$10K-$25K annually',
     qualityImprovement: '20-30%',
     timeReduction: '10-15%'
-  };
+  };;
 }
 
 function createImplementationPlan(project: Project) {
@@ -674,7 +715,10 @@ function createImplementationPlan(project: Project) {
   };
 }
 
+// Import memoize utility if not already imported
+import memoize from 'memoizee';
+
 // Memoized statistical calculations for performance
 const memoizedCalculateStandardDeviation = memoize(calculateStandardDeviation, { max: 50, maxAge: 60000 });
 const memoizedCalculateMean = memoize(calculateMean, { max: 50, maxAge: 60000 });
-const memoizedIdentifyOutliers = memoize(identifyOutliers, { max: 50, maxAge: 60000 });
+const memoizedIdentifyOutliers = memoize(identifyOutliers, { max: 50, maxAge: 60000 }); });

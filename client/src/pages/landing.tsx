@@ -249,7 +249,7 @@ export default function Landing() {
                 Featured Product
               </div>
             </div>
-            
+
             <p style={{
               fontSize: '20px',
               background: 'linear-gradient(135deg, #00CED1 0%, #20B2AA 50%, #4682B4 100%)',
@@ -261,7 +261,7 @@ export default function Landing() {
             }}>
               Your Smart Suite for Continuous Improvement and Operational Excellence
             </p>
-            
+
             <p style={{
               fontSize: '18px',
               background: 'linear-gradient(135deg, #40E0D0 0%, #48D1CC 50%, #5F9EA0 100%)',
@@ -684,8 +684,7 @@ export default function Landing() {
                   </ul>
                 </div>
                 <button 
-                  style={{
-                    background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 100%)',
+                  style={{                    background: 'linear-gradient(135deg, #1E90FF 0%, #4169E1 100%)',
                     color: 'white',
                     padding: '12px 24px',
                     fontSize: '16px',
@@ -707,6 +706,126 @@ export default function Landing() {
                   Start Enterprise Plan
                 </button>
               </div>
+            </div>
+          </section>
+
+          {/* GitHub Sponsors Section */}
+          <section style={{
+            backgroundColor: 'rgba(30, 41, 59, 0.4)',
+            padding: '60px 20px',
+            borderRadius: '20px',
+            border: '1px solid #334155',
+            textAlign: 'center',
+            marginTop: '80px'
+          }}>
+            <h2 style={{
+              fontSize: '32px',
+              background: 'linear-gradient(135deg, #9333EA 0%, #06B6D4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '24px',
+              fontWeight: '700'
+            }}>
+              Support Our Development
+            </h2>
+            <p style={{
+              fontSize: '18px',
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '32px',
+              maxWidth: '600px',
+              margin: '0 auto 32px'
+            }}>
+              Help us continue building the best process improvement tools for teams worldwide
+            </p>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '40px'
+            }}>
+              <iframe 
+                src="https://github.com/sponsors/TheSolutionDeskAndCompany/card" 
+                title="Sponsor TheSolutionDeskAndCompany" 
+                height="225" 
+                width="600" 
+                style={{
+                  border: '0',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2)'
+                }}
+              />
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section style={{
+            backgroundColor: 'rgba(30, 41, 59, 0.4)',
+            padding: '80px 20px',
+            borderRadius: '20px',
+            border: '1px solid #334155',
+            textAlign: 'center',
+            marginTop: '40px'
+          }}>
+            <h2 style={{
+              fontSize: '48px',
+              background: 'linear-gradient(135deg, #9333EA 0%, #06B6D4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '24px',
+              fontWeight: '700'
+            }}>
+              Ready to transform your processes?
+            </h2>
+            <p style={{
+              fontSize: '20px',
+              background: 'linear-gradient(135deg, #CBD5E1 0%, #94A3B8 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '40px',
+              maxWidth: '600px',
+              margin: '0 auto 40px'
+            }}>
+              Join thousands of teams already improving their operations with Systoro
+            </p>
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button 
+                style={{
+                  background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                  color: 'white',
+                  padding: '16px 32px',
+                  fontSize: '18px',
+                  border: 'none',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  boxShadow: '0 4px 12px rgba(167, 139, 250, 0.25)',
+                  transition: 'all 0.2s ease'
+                }}
+                onClick={() => window.location.href = '/auth'}
+              >
+                Start Free Trial
+              </button>
+              <button 
+                style={{
+                  background: 'transparent',
+                  color: '#22D3EE',
+                  padding: '16px 32px',
+                  fontSize: '18px',
+                  border: '2px solid #22D3EE',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  transition: 'all 0.2s ease'
+                }}
+                onClick={() => window.location.href = '/contact'}
+              >
+                Contact Sales
+              </button>
             </div>
           </section>
         </div>

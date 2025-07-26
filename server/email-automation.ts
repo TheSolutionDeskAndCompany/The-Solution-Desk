@@ -201,7 +201,7 @@ export class EmailAutomationEngine {
     };
 
     await this.sendEmail(data.email, template, variables);
-    console.log(`Welcome email sent to ${data.email} for ${data.plan} plan`);
+    
   }
 
   private async sendToolCompletionEmail(data: { email: string; toolName: string; insights: string; userId: string }) {
@@ -216,7 +216,7 @@ export class EmailAutomationEngine {
     };
 
     await this.sendEmail(data.email, template, variables);
-    console.log(`Tool completion email sent for ${data.toolName} to ${data.email}`);
+    
   }
 
   private async sendUpsellEmail(type: string, data: { email: string; userId: string }) {
@@ -229,23 +229,23 @@ export class EmailAutomationEngine {
     };
 
     await this.sendEmail(data.email, template, variables);
-    console.log(`Upsell email (${type}) sent to ${data.email}`);
+    
   }
 
   private async generateControlChart(data: { userId: string; email: string }) {
     // This would integrate with your data analysis system
-    console.log(`Generating control chart for user ${data.userId}`);
+    
     // Implementation would pull user's data and generate charts
   }
 
   private async sendMonthlyReport(data: { userId: string; email: string }) {
-    console.log(`Sending monthly report to ${data.email}`);
+    
     // Implementation would send automated monthly insights
   }
 
   private async triggerBookingWidget(data: { userId: string }) {
     // This would trigger a frontend notification or popup
-    console.log(`Triggering booking widget for user ${data.userId}`);
+    
   }
 
   private async sendEmail(email: string, template: EmailTemplate, variables: Record<string, string>) {

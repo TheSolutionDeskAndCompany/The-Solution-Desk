@@ -39,7 +39,7 @@ export async function createSubscription(userId: number, plan: 'professional' | 
   }
 
   // Create subscription using the actual Stripe price IDs
-  console.log(`Creating subscription for plan: ${plan}, priceId: ${planPriceIds[plan]}`);
+  // Creating subscription for the selected plan
   
   // First create a payment intent manually
   const paymentIntent = await stripe.paymentIntents.create({
@@ -61,35 +61,24 @@ export async function createSubscription(userId: number, plan: 'professional' | 
     expand: ['latest_invoice.payment_intent'],
   });
   
-  console.log('Subscription created:', {
-    id: subscription.id,
-    status: subscription.status,
-    hasInvoice: !!subscription.latest_invoice,
-    invoiceId: (subscription.latest_invoice as any)?.id
-  });
+  // Subscription created successfully
 
   await storage.updateUserStripeInfo(userId, customerId, subscription.id);
   await storage.updateUserSubscriptionStatus(userId, 'pending');
 
   const invoice = subscription.latest_invoice as any;
-  console.log('Invoice details:', {
-    invoiceId: invoice?.id,
-    status: invoice?.status,
-    hasPaymentIntent: !!invoice?.payment_intent,
-    paymentIntentId: invoice?.payment_intent?.id,
-    paymentIntentStatus: invoice?.payment_intent?.status
-  });
+  // Invoice details processed
   
   // Use the manually created payment intent if the subscription didn't create one
   let clientSecret = invoice?.payment_intent?.client_secret;
   
   if (!clientSecret) {
-    console.log('No payment intent from subscription, using manual payment intent');
+    // No payment intent from subscription, using manual payment intent
     clientSecret = paymentIntent.client_secret;
   }
   
   if (!clientSecret) {
-    console.error('No client secret found in either payment intent');
+    // No client secret found in either payment intent
     throw new Error('Failed to create payment intent. Please try again.');
   }
   

@@ -34,7 +34,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // API request logging
   app.use('/api', (req, res, next) => {
-    console.log(`API: ${req.method} ${req.path}`);
+    
     next();
   });
 

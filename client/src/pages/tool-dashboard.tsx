@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import { 
   Target, 
   MessageCircle, 
   BarChart3, 
   Calculator, 
-  TrendingUp, 
   Activity,
   Download,
   Play,
@@ -47,10 +46,10 @@ const toolIcons: Record<string, any> = {
   'five-whys': MessageCircle,
   'pareto-analysis': BarChart3,
   'fmea': Calculator,
-  'fishbone': TrendingUp,
+  'fishbone': MessageCircle,
   'value-stream': Activity,
   'stability-tracker': BarChart3,
-  'advanced-analytics': TrendingUp
+  'advanced-analytics': BarChart3
 };
 
 export default function ToolDashboard() {
@@ -84,7 +83,7 @@ export default function ToolDashboard() {
     );
   }
 
-  const categories = ['all', ...new Set(toolData?.availableTools.map(tool => tool.category) || [])];
+  const categories = ['all', ...Array.from(new Set(toolData?.availableTools.map(tool => tool.category) || []))];
   const filteredTools = selectedCategory === 'all' 
     ? toolData?.availableTools || []
     : toolData?.availableTools.filter(tool => tool.category === selectedCategory) || [];
@@ -96,13 +95,13 @@ export default function ToolDashboard() {
 
   const handleReportDownload = (toolId: string) => {
     // Download latest report for this tool
-    console.log(`Downloading report for ${toolId}`);
+    // Downloading report
     // In production, this would trigger PDF generation
   };
 
   const handleBookDebrief = () => {
     // Open Calendly or booking widget
-    console.log('Opening booking widget');
+    // Opening booking widget
     // In production, integrate with Calendly
   };
 

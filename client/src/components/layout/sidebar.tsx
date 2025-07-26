@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+// Badge import removed - unused
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { 
@@ -8,7 +8,6 @@ import {
   FolderOpen, 
   TrendingUp, 
   Settings, 
-  Users, 
   CreditCard,
   Zap,
   Target,

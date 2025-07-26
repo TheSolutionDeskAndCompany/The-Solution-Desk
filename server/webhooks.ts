@@ -28,7 +28,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         await handleSubscriptionCanceled(event.data.object as Stripe.Subscription);
         break;
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        
     }
 
     res.json({ received: true });
@@ -69,7 +69,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     userId: customerId
   });
   
-  console.log(`Subscription activated for customer ${customerId}: ${planTier}`);
+  
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
@@ -85,7 +85,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   
   await storage.updateUserSubscriptionStatus(customerId, planTier, subscription.status as any);
   
-  console.log(`Subscription updated for customer ${customerId}: ${planTier}`);
+  
 }
 
 async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
@@ -93,7 +93,7 @@ async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
   
   await storage.updateUserSubscriptionStatus(customerId, 'free', 'canceled');
   
-  console.log(`Subscription canceled for customer ${customerId}`);
+  
 }
 
 // Email automation is now handled by the EmailAutomationEngine

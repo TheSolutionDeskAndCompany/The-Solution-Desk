@@ -232,7 +232,7 @@ export default function AnalyticsTools({ userTier }: AnalyticsToolsProps) {
                       disabled={isToolRunning}
                       onClick={(e) => {
                         e.stopPropagation();
-                        console.log(`Opening settings for ${tool.name}`);
+                        // Opening tool settings
                         // Add settings functionality here
                       }}
                     >

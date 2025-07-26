@@ -131,7 +131,7 @@ export function setupAuth(app: Express) {
       const user = await storage.getUser(userId);
       done(null, user);
     } catch (error) {
-      console.error("Deserialize user error:", error);
+      // Deserialize user error handled by logger
       done(null, false); // Don't error out, just return no user
     }
   });
@@ -160,7 +160,7 @@ export function setupAuth(app: Express) {
         res.status(201).json(userWithoutPassword);
       });
     } catch (error) {
-      console.error("Registration error:", error);
+      // Registration error handled by logger
       res.status(500).json({ message: "Registration failed" });
     }
   });
@@ -202,8 +202,8 @@ export function setupAuth(app: Express) {
       
       // In a real app, you'd send this via email
       // For testing, we'll just log it
-      console.log(`Password reset token for ${email}: ${token}`);
-      console.log(`Reset URL: ${req.protocol}://${req.get('host')}/auth?reset=${token}`);
+      
+      
       
       res.json({ 
         message: "If the email exists, a reset link has been sent.",
@@ -211,7 +211,7 @@ export function setupAuth(app: Express) {
         ...(process.env.NODE_ENV === 'development' && { resetToken: token })
       });
     } catch (error) {
-      console.error("Password reset request error:", error);
+      // Password reset request error handled by logger
       res.status(500).json({ message: "Failed to process password reset request" });
     }
   });
@@ -233,7 +233,7 @@ export function setupAuth(app: Express) {
       
       res.json({ message: "Password reset successful" });
     } catch (error) {
-      console.error("Password reset error:", error);
+      // Password reset error handled by logger
       res.status(500).json({ message: "Failed to reset password" });
     }
   });

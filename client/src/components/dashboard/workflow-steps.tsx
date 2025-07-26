@@ -94,7 +94,7 @@ export default function WorkflowSteps() {
               }`}
               onClick={() => {
                 // Navigate to detailed step view
-                console.log(`Opening details for step ${step.number}: ${step.title}`);
+                // Opening step details
               }}
             >
               <div className="flex-shrink-0">

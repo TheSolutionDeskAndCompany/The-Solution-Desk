@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { createServer } from 'http'; // Import createServer
 
 const app = express();
 
@@ -9,12 +10,12 @@ app.use((req, res, next) => {
   // Check if request is from custom domain
   const host = req.get('host');
   const isCustomDomain = host && host.includes('thesolutiondesk.ca');
-  
+
   // Force HTTPS for custom domain
   if (isCustomDomain && req.header('x-forwarded-proto') !== 'https') {
     return res.redirect(301, `https://${host}${req.url}`);
   }
-  
+
   // Set security headers for custom domain
   if (isCustomDomain) {
     res.set({
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
       'Referrer-Policy': 'strict-origin-when-cross-origin'
     });
   }
-  
+
   next();
 });
 
@@ -84,10 +85,12 @@ app.use((req, res, next) => {
     // importantly only setup vite in development and after
     // setting up all the other routes so the catch-all route
     // doesn't interfere with the other routes
+
+    // Serve static files (including index.html) from the 'dist' directory
+    serveStatic(app);
+
     if (app.get("env") === "development") {
       await setupVite(app, server);
-    } else {
-      serveStatic(app);
     }
 
     // ALWAYS serve the app on the port specified in the environment variable PORT
@@ -96,7 +99,7 @@ app.use((req, res, next) => {
     // It is the only port that is not firewalled.
     const port = parseInt(process.env.PORT || '5000', 10);
     // Server starting
-    
+
     server.listen({
       port,
       host: "0.0.0.0",

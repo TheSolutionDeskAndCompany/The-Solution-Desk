@@ -19,6 +19,23 @@ export function log(message: string, source = "express") {
   
 }
 
+export function serveStatic(app: Express) {
+  const distDir = path.resolve(import.meta.dirname, "..", "dist", "public");
+  
+  // Serve static assets
+  app.use(express.static(distDir));
+  
+  // Handle client-side routing - serve index.html for all non-API routes
+  app.get("*", (req, res, next) => {
+    // Skip API routes and static assets
+    if (req.path.startsWith('/api') || req.path.includes('.')) {
+      return next();
+    }
+    
+    res.sendFile(path.join(distDir, "index.html"));
+  });
+}
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -43,6 +60,11 @@ export async function setupVite(app: Express, server: Server) {
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+
+    // Skip API routes and static assets
+    if (url.startsWith('/api') || url.includes('.')) {
+      return next();
+    }
 
     try {
       const clientTemplate = path.resolve(

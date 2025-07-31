@@ -19,22 +19,23 @@ export function log(message: string, source = "express") {
 }
 
 /**
- * Serves static assets from the production build directory,
- * with SPA fallback to index.html for non-API routes.
+ * Serves production static assets from the Vite build directory.
+ * All non-API, non-static requests fall back to index.html for SPA routing.
  */
 export function serveStatic(app: Express) {
-  const distDir = path.resolve(import.meta.dirname, "..", "dist", "public");
+  // Main Vite output directory (change to "dist" if that's your build output)
+  const distDir = path.resolve(import.meta.dirname, "..", "dist");
 
-  if (!fs.existsSync(distDir)) {
+  if (!fs.existsSync(path.join(distDir, "index.html"))) {
     throw new Error(
-      `Could not find the build directory: ${distDir}. Make sure to build the client first.`
+      `Could not find index.html in: ${distDir}. Make sure to build the client first (npm run build).`
     );
   }
 
-  // Serve static files (CSS, JS, images, etc.)
+  // Serve static assets (js, css, etc)
   app.use(express.static(distDir));
 
-  // SPA Fallback: send index.html for all non-API, non-static routes
+  // SPA fallback: serve index.html for all other non-API routes
   app.get("*", (req, res, next) => {
     if (req.path.startsWith("/api") || req.path.includes(".")) {
       return next();
@@ -44,7 +45,7 @@ export function serveStatic(app: Express) {
 }
 
 /**
- * Sets up Vite's development server as Express middleware.
+ * Sets up Vite's dev server as Express middleware (for development only).
  */
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -72,7 +73,6 @@ export async function setupVite(app: Express, server: Server) {
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
-    // Skip API routes and static assets
     if (url.startsWith("/api") || url.includes(".")) {
       return next();
     }

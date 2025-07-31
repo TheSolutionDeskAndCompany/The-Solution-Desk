@@ -15,27 +15,37 @@ export function log(message: string, source = "express") {
     second: "2-digit",
     hour12: true,
   });
-
-  
+  console.log(`[${formattedTime}] [${source}] ${message}`);
 }
 
+/**
+ * Serves static assets from the production build directory,
+ * with SPA fallback to index.html for non-API routes.
+ */
 export function serveStatic(app: Express) {
   const distDir = path.resolve(import.meta.dirname, "..", "dist", "public");
-  
-  // Serve static assets
+
+  if (!fs.existsSync(distDir)) {
+    throw new Error(
+      `Could not find the build directory: ${distDir}. Make sure to build the client first.`
+    );
+  }
+
+  // Serve static files (CSS, JS, images, etc.)
   app.use(express.static(distDir));
-  
-  // Handle client-side routing - serve index.html for all non-API routes
+
+  // SPA Fallback: send index.html for all non-API, non-static routes
   app.get("*", (req, res, next) => {
-    // Skip API routes and static assets
-    if (req.path.startsWith('/api') || req.path.includes('.')) {
+    if (req.path.startsWith("/api") || req.path.includes(".")) {
       return next();
     }
-    
     res.sendFile(path.join(distDir, "index.html"));
   });
 }
 
+/**
+ * Sets up Vite's development server as Express middleware.
+ */
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -58,11 +68,12 @@ export async function setupVite(app: Express, server: Server) {
   });
 
   app.use(vite.middlewares);
+
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
     // Skip API routes and static assets
-    if (url.startsWith('/api') || url.includes('.')) {
+    if (url.startsWith("/api") || url.includes(".")) {
       return next();
     }
 
@@ -71,14 +82,13 @@ export async function setupVite(app: Express, server: Server) {
         import.meta.dirname,
         "..",
         "client",
-        "index.html",
+        "index.html"
       );
 
-      // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`,
+        `src="/src/main.tsx?v=${nanoid()}"`
       );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
@@ -86,22 +96,5 @@ export async function setupVite(app: Express, server: Server) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
     }
-  });
-}
-
-export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
-
-  if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
-  }
-
-  app.use(express.static(distPath));
-
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

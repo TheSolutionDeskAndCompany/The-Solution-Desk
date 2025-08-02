@@ -1,9 +1,6 @@
 services:
   - type: web
     name: the-solution-desk
-    env: node
-    buildCommand: npm install && npm run build
+    runtime: node
+    buildCommand: npm ci && npm run build
     startCommand: npm start
-    envVars:
-      - key: NODE_VERSION
-        value: 20.11.0

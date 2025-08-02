@@ -1,0 +1,452 @@
+import { useStripe, Elements, PaymentElement, useElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { useEffect, useState } from 'react';
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+
+// Make sure to call `loadStripe` outside of a component's render to avoid
+// recreating the `Stripe` object on every render.
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
+
+const SubscribeForm = ({ planType }: { planType: string }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const { toast } = useToast();
+  const { user, isLoading, isAuthenticated } = useAuth();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to upgrade your plan",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/auth";
+      }, 1000);
+      return;
+    }
+  }, [isAuthenticated, isLoading, toast]);
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ color: 'white', fontSize: '18px' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin,
+      },
+    });
+
+    if (error) {
+      toast({
+        title: "Payment Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Payment Successful",
+        description: "Welcome to Systoro Professional!",
+      });
+    }
+  }
+
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+      padding: '40px 20px'
+    }}>
+      <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{
+          backgroundColor: 'rgba(30, 41, 59, 0.5)',
+          borderRadius: '20px',
+          padding: '40px',
+          border: '1px solid #334155',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            marginBottom: '16px'
+          }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              marginRight: '12px',
+              background: planType === 'professional' 
+                ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px',
+              color: 'white',
+              fontWeight: 'bold'
+            }}>
+              {planType === 'professional' ? 'P' : 'E'}
+            </div>
+            <h1 style={{
+              fontSize: '32px',
+              background: planType === 'professional' 
+                ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              margin: '0',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '700'
+            }}>
+              {planType === 'enterprise' ? 'Enterprise' : 'Professional'}
+            </h1>
+          </div>
+          <p style={{
+            fontSize: '18px',
+            background: 'linear-gradient(135deg, #94A3B8 0%, #64748B 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: '24px',
+            textAlign: 'center'
+          }}>
+            {planType === 'enterprise' 
+              ? 'Get advanced integrations and dedicated support for $49/month'
+              : 'Unlock unlimited projects and advanced features for $29/month'
+            }
+          </p>
+          
+          {/* Product visualization */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            marginBottom: '32px' 
+          }}>
+            <div style={{
+              width: '200px',
+              height: '150px',
+              border: `2px solid ${planType === 'professional' ? '#A855F7' : '#4169E1'}`,
+              borderRadius: '12px',
+              padding: '24px',
+              backgroundColor: 'rgba(30, 41, 59, 0.3)',
+              backdropFilter: 'blur(5px)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '60px',
+                background: planType === 'professional' 
+                  ? 'linear-gradient(135deg, #9333EA 0%, #A855F7 50%, #C084FC 100%)'
+                  : 'linear-gradient(135deg, #1E90FF 0%, #4169E1 50%, #6495ED 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                color: 'white',
+                fontWeight: 'bold',
+                marginBottom: '12px'
+              }}>
+                {planType === 'professional' ? 'PRO' : 'ENT'}
+              </div>
+              <div style={{
+                fontSize: '12px',
+                color: '#94A3B8',
+                lineHeight: '1.4'
+              }}>
+                {planType === 'professional' 
+                  ? 'Advanced Analytics & Unlimited Projects'
+                  : 'Enterprise Features & Priority Support'
+                }
+              </div>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: '24px' }}>
+              <PaymentElement />
+            </div>
+            <button 
+              type="submit"
+              disabled={!stripe}
+              style={{
+                background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)',
+                color: 'white',
+                padding: '16px 32px',
+                fontSize: '16px',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                width: '100%',
+                boxShadow: '0 4px 12px rgba(167, 139, 250, 0.3)',
+                transition: 'all 0.2s ease',
+                opacity: !stripe ? 0.6 : 1
+              }}
+            >
+              Subscribe Now
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function Subscribe() {
+  const [clientSecret, setClientSecret] = useState("");
+  const [planType, setPlanType] = useState("professional");
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+  const { user, isLoading: authLoading, isAuthenticated } = useAuth();
+
+  // Check for Stripe configuration
+  if (!stripePublicKey) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          backgroundColor: 'rgba(30, 41, 59, 0.5)',
+          borderRadius: '20px',
+          padding: '40px',
+          border: '1px solid #334155',
+          backdropFilter: 'blur(10px)',
+          textAlign: 'center',
+          maxWidth: '400px'
+        }}>
+          <h2 style={{ color: '#F1F5F9', marginBottom: '16px' }}>Payment System Unavailable</h2>
+          <p style={{ color: '#94A3B8', marginBottom: '24px' }}>
+            Payment processing is temporarily unavailable. Please try again later.
+          </p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            style={{
+              background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+              color: 'white',
+              padding: '12px 24px',
+              fontSize: '16px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to upgrade your plan",
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        window.location.href = "/auth";
+      }, 1000);
+      return;
+    }
+  }, [isAuthenticated, authLoading, toast]);
+
+  useEffect(() => {
+    // Don't create subscription if not authenticated
+    if (authLoading || !isAuthenticated) {
+      return;
+    }
+
+    // Get plan from URL params or default to professional
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPlan = urlParams.get('plan') || 'professional';
+    setPlanType(selectedPlan);
+    
+    // Create subscription for selected plan
+    apiRequest("POST", "/api/create-subscription", { plan: selectedPlan })
+      .then((res) => res.json())
+      .then((data) => {
+        setClientSecret(data.clientSecret);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error creating subscription:", err);
+        const errorMessage = err.message || "Unable to set up subscription. Please try again.";
+        
+        // Check if it's an authentication error
+        if (errorMessage.includes("Unauthorized")) {
+          toast({
+            title: "Authentication Required",
+            description: "Please log in to subscribe to a plan.",
+            variant: "destructive",
+          });
+          setTimeout(() => {
+            window.location.href = '/auth';
+          }, 1000);
+        } else {
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
+        }
+        setLoading(false);
+      });
+  }, [authLoading, isAuthenticated, toast]);
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          color: '#F1F5F9',
+          fontSize: '18px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #334155',
+            borderTop: '4px solid #A78BFA',
+            borderRadius: '50%',
+            margin: '0 auto 16px auto',
+            animation: 'spin 1s linear infinite'
+          }} />
+          Checking authentication...
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  if (loading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          color: '#F1F5F9',
+          fontSize: '18px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #334155',
+            borderTop: '4px solid #A78BFA',
+            borderRadius: '50%',
+            margin: '0 auto 16px auto',
+            animation: 'spin 1s linear infinite'
+          }} />
+          Setting up your subscription...
+        </div>
+      </div>
+    );
+  }
+
+  if (!clientSecret) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #0B1426 0%, #1A202C 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{
+          backgroundColor: 'rgba(30, 41, 59, 0.5)',
+          borderRadius: '20px',
+          padding: '40px',
+          border: '1px solid #334155',
+          backdropFilter: 'blur(10px)',
+          textAlign: 'center',
+          maxWidth: '400px'
+        }}>
+          <h2 style={{ color: '#F1F5F9', marginBottom: '16px' }}>Error</h2>
+          <p style={{ color: '#94A3B8', marginBottom: '24px' }}>
+            Unable to set up subscription. Please try again.
+          </p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            style={{
+              background: 'linear-gradient(135deg, #22D3EE 0%, #06B6D4 100%)',
+              color: 'white',
+              padding: '12px 24px',
+              fontSize: '16px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
+      <SubscribeForm planType={planType} />
+    </Elements>
+  );
+}

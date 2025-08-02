@@ -26,10 +26,32 @@ export function serveStatic(app: Express) {
   // Main Vite output directory - matches vite.config.ts build.outDir
   const distDir = path.resolve(import.meta.dirname, "..", "dist", "public");
 
+  // Check if built files exist, if not provide helpful error but don't crash
+  if (!fs.existsSync(distDir)) {
+    console.warn(`Warning: Build directory not found: ${distDir}`);
+    console.warn('Serving a basic fallback. Run "npm run build" to build the client.');
+    
+    // Serve a basic fallback response
+    app.get("*", (req, res, next) => {
+      if (req.path.startsWith("/api")) {
+        return next();
+      }
+      res.status(503).send(`
+        <html>
+          <body>
+            <h1>Application Starting</h1>
+            <p>The application is starting up. Please wait a moment and refresh.</p>
+            <p>If this persists, the build may not have completed successfully.</p>
+          </body>
+        </html>
+      `);
+    });
+    return;
+  }
+
   if (!fs.existsSync(path.join(distDir, "index.html"))) {
-    throw new Error(
-      `Could not find index.html in: ${distDir}. Make sure to build the client first (npm run build).`
-    );
+    console.warn(`Warning: index.html not found in: ${distDir}`);
+    console.warn('Make sure to build the client first (npm run build).');
   }
 
   // Serve static assets (js, css, etc)
@@ -40,7 +62,13 @@ export function serveStatic(app: Express) {
     if (req.path.startsWith("/api") || req.path.includes(".")) {
       return next();
     }
-    res.sendFile(path.join(distDir, "index.html"));
+    
+    const indexPath = path.join(distDir, "index.html");
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send('Application not built. Please run "npm run build" first.');
+    }
   });
 }
 

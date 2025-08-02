@@ -82,14 +82,12 @@ app.use((req, res, next) => {
       console.error(`Server error: ${status} - ${message}`);
     });
 
-    // importantly only setup vite in development and after
-    // setting up all the other routes so the catch-all route
-    // doesn't interfere with the other routes
-
-    // Serve static files (including index.html) from the 'dist' directory
-    serveStatic(app);
-
-    if (app.get("env") === "development") {
+    // Setup static file serving based on environment
+    if (process.env.NODE_ENV === "production") {
+      // In production, serve built static files
+      serveStatic(app);
+    } else {
+      // In development, setup Vite dev server
       await setupVite(app, server);
     }
 

@@ -23,8 +23,8 @@ export function log(message: string, source = "express") {
  * All non-API, non-static requests fall back to index.html for SPA routing.
  */
 export function serveStatic(app: Express) {
-  // Main Vite output directory (change to "dist" if that's your build output)
-  const distDir = path.resolve(import.meta.dirname, "..", "dist");
+  // Main Vite output directory - matches vite.config.ts build.outDir
+  const distDir = path.resolve(import.meta.dirname, "..", "dist", "public");
 
   if (!fs.existsSync(path.join(distDir, "index.html"))) {
     throw new Error(

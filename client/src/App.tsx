@@ -54,7 +54,7 @@ function Router() {
             <Route path="/projects" component={Projects} />
             <Route path="/analytics" component={Analytics} />
             <Route path="/automation" component={Automation} />
-            <Route path="/sixsigma" component={SixSigma} />
+            <Route path="/process-tools" component={SixSigma} />
             <Route path="/tools" component={ToolDashboard} />
             <Route path="/billing" component={Billing} />
             <Route path="/subscribe" component={Subscribe} />

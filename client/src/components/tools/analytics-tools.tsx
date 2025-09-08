@@ -43,8 +43,8 @@ const analyticsTools: Tool[] = [
   },
   {
     id: 'control-charts',
-    name: 'Control Charts (SPC)',
-    description: 'Generate statistical process control charts with upper and lower control limits.',
+    name: 'Stability Tracker',
+    description: 'Visualize process stability over time with statistically derived thresholds.',
     icon: Activity,
     category: 'statistical',
     tier: 'professional'
@@ -76,7 +76,7 @@ const analyticsTools: Tool[] = [
   {
     id: 'capability-analysis',
     name: 'Process Capability (Cp/Cpk)',
-    description: 'Analyze your process capability and performance indices using Six Sigma methodology.',
+    description: 'Analyze capability and performance indices using industry-standard statistical methods.',
     icon: Target,
     category: 'analysis',
     tier: 'professional'

@@ -322,19 +322,19 @@ export default function SixSigmaPage() {
           {/* Feature Comparison */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Process Improvement Methodology</CardTitle>
+              <CardTitle>Structured Improvement Approach</CardTitle>
               <p className="text-sm text-gray-600">
-                Our tools follow proven DMAIC (Define, Measure, Analyze, Improve, Control) methodology for systematic process optimization
+                Our tools follow a proven, structured five-step approach for systematic process optimization
               </p>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 {[
-                  { phase: 'Define', tools: ['SIPOC', 'Value Stream'], icon: <Target className="h-4 w-4" /> },
-                  { phase: 'Measure', tools: ['Control Charts', 'Data Collection'], icon: <BarChart3 className="h-4 w-4" /> },
-                  { phase: 'Analyze', tools: ['Pareto', '5 Whys', 'Fishbone'], icon: <TrendingUp className="h-4 w-4" /> },
-                  { phase: 'Improve', tools: ['FMEA', 'Solution Design'], icon: <Zap className="h-4 w-4" /> },
-                  { phase: 'Control', tools: ['Control Charts', 'Monitoring'], icon: <Activity className="h-4 w-4" /> }
+                  { phase: 'Discover', tools: ['SIPOC', 'Flow Mapping'], icon: <Target className="h-4 w-4" /> },
+                  { phase: 'Measure', tools: ['Stability Tracking', 'Data Collection'], icon: <BarChart3 className="h-4 w-4" /> },
+                  { phase: 'Analyze', tools: ['Pareto', '5 Whys', 'Cause & Effect'], icon: <TrendingUp className="h-4 w-4" /> },
+                  { phase: 'Improve', tools: ['Risk Matrix', 'Solution Design'], icon: <Zap className="h-4 w-4" /> },
+                  { phase: 'Sustain', tools: ['Stability Tracking', 'Monitoring'], icon: <Activity className="h-4 w-4" /> }
                 ].map((phase, index) => (
                   <div key={index} className="text-center p-3 bg-gray-50 rounded-lg">
                     <div className="flex justify-center mb-2">

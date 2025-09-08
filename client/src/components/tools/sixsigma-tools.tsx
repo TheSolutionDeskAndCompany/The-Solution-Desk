@@ -354,7 +354,7 @@ export default function SixSigmaTools({ toolId, userTier }: SixSigmaToolsProps) 
         <Card className="max-w-3xl mx-auto">
           <CardContent className="text-center py-8">
             <h3 className="text-lg font-medium mb-2">Tool Under Development</h3>
-            <p className="text-gray-600">This Six Sigma tool is being built. Check back soon!</p>
+            <p className="text-gray-600">This tool is being built. Check back soon!</p>
           </CardContent>
         </Card>
       );

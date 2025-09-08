@@ -381,11 +381,11 @@ function generateAdvancedStatisticalInsights(project: Project, projectData: Proj
   if (cv > 0.3) {
     recommendations.push({
       category: "process_control",
-      action: "Implement statistical process control charts to monitor and reduce variability",
+      action: "Implement process stability tracking to monitor and reduce variability",
       priority: "high",
       timeline: "2-3 weeks",
       expectedOutcome: `Reduce coefficient of variation from ${(cv * 100).toFixed(1)}% to <20%`,
-      requiredResources: "SPC training, control chart software, measurement system analysis"
+      requiredResources: "Team training, stability tracking tools, measurement system review"
     });
   }
 
@@ -457,7 +457,7 @@ function generateAdvancedStatisticalInsights(project: Project, projectData: Proj
   const opportunities = [
     {
       type: "variability_reduction",
-      description: `Reduce process variability through Six Sigma DMAIC methodology`,
+      description: `Reduce process variability through a structured five-step improvement approach`,
       priority: cv > 0.3 ? "high" : cv > 0.2 ? "medium" : "low",
       estimatedImpact: `${Math.round((cv - 0.15) * 100)}% reduction in defects`,
       implementationComplexity: "medium"
@@ -476,7 +476,7 @@ function generateAdvancedStatisticalInsights(project: Project, projectData: Proj
       type: "capability_improvement",
       description: `Improve process capability from ${capability.interpretation} to Capable (Cpk ≥ 1.33)`,
       priority: "high",
-      estimatedImpact: "Achieve Six Sigma quality levels",
+      estimatedImpact: "Achieve world-class quality levels",
       implementationComplexity: "high"
     });
   }
@@ -508,7 +508,7 @@ function generateAdvancedStatisticalInsights(project: Project, projectData: Proj
     },
     generatedAt: new Date().toISOString(),
     model: "advanced_statistical_analysis",
-    methodology: "Six Sigma DMAIC, Lean Manufacturing, Statistical Process Control",
+    methodology: "Structured improvement, Lean principles, statistical monitoring",
     dataQuality: {
       sampleSize: values.length,
       adequacy: values.length >= 30 ? "excellent" : values.length >= 10 ? "good" : "limited",
@@ -628,7 +628,7 @@ function generateOptimizationActions(project: Project, data: ProjectData[]) {
 
   actions.push({
     action: 'Implement Statistical Process Control',
-    description: 'Set up control charts for real-time monitoring',
+    description: 'Set up stability tracking for real-time monitoring',
     effort: 'Medium',
     timeframe: '2-3 weeks'
   });

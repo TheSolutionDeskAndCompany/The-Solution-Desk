@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Bell, ChevronDown } from "lucide-react";
+import { Bell, ChevronDown, Sun, Moon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "next-themes";
 
 export default function Header() {
   const { user } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   const getInitials = (firstName?: string, lastName?: string) => {
     const first = firstName?.[0] || "";
@@ -37,7 +39,9 @@ export default function Header() {
             </div>
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            {/* Theme toggle */}
+            <ThemeToggle />
             {/* Notifications */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -138,5 +142,21 @@ export default function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      aria-label="Toggle theme"
+      className="text-gray-600 hover:text-gray-900"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+    >
+      {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+    </Button>
   );
 }

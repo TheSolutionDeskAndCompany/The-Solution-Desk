@@ -9,84 +9,51 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function createSubscription(userId: number, plan: 'professional' | 'enterprise') {
   const user = await storage.getUser(userId);
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new Error("User not found");
+  if (!user.email) throw new Error('No user email on file');
 
-  if (!user.email) {
-    throw new Error('No user email on file');
-  }
-
-  // Define price IDs for different tiers
   const planPriceIds = {
     professional: process.env.STRIPE_PROFESSIONAL_PRICE_ID,
-    enterprise: process.env.STRIPE_ENTERPRISE_PRICE_ID
-  };
+    enterprise: process.env.STRIPE_ENTERPRISE_PRICE_ID,
+  } as const;
+  const priceId = planPriceIds[plan];
+  if (!priceId) throw new Error(`Missing Stripe price ID for ${plan} plan`);
 
-  if (!planPriceIds[plan]) {
-    throw new Error(`Missing Stripe price ID for ${plan} plan`);
-  }
-
-  // Create or get customer
+  // Ensure customer exists
   let customerId = user.stripeCustomerId;
   if (!customerId) {
     const customer = await stripe.customers.create({
       email: user.email,
       name: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+      metadata: { user_id: String(userId) }
     });
     customerId = customer.id;
     await storage.updateUserStripeInfo(userId, customerId, null);
   }
 
-  // Create subscription using the actual Stripe price IDs
-  // Creating subscription for the selected plan
-  
-  // First create a payment intent manually
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: plan === 'professional' ? 2900 : 4900, // $29 or $49 in cents
-    currency: 'usd',
-    customer: customerId,
-    metadata: {
-      plan: plan,
-      user_id: userId.toString()
-    }
-  });
-  
+  // Create subscription with default_incomplete and get invoice payment_intent
   const subscription = await stripe.subscriptions.create({
     customer: customerId,
-    items: [{
-      price: planPriceIds[plan]
-    }],
+    items: [{ price: priceId }],
     payment_behavior: 'default_incomplete',
+    payment_settings: { save_default_payment_method: 'on_subscription' },
     expand: ['latest_invoice.payment_intent'],
+    metadata: { plan, user_id: String(userId) },
   });
-  
-  // Subscription created successfully
 
   await storage.updateUserStripeInfo(userId, customerId, subscription.id);
-  await storage.updateUserSubscriptionStatus(userId, 'pending');
+  await storage.updateUserSubscriptionStatus(userId, subscription.status);
 
   const invoice = subscription.latest_invoice as any;
-  // Invoice details processed
-  
-  // Use the manually created payment intent if the subscription didn't create one
-  let clientSecret = invoice?.payment_intent?.client_secret;
-  
+  const clientSecret = invoice?.payment_intent?.client_secret as string | undefined;
   if (!clientSecret) {
-    // No payment intent from subscription, using manual payment intent
-    clientSecret = paymentIntent.client_secret;
+    throw new Error('Failed to initialize payment. Please try again.');
   }
-  
-  if (!clientSecret) {
-    // No client secret found in either payment intent
-    throw new Error('Failed to create payment intent. Please try again.');
-  }
-  
+
   return {
     subscriptionId: subscription.id,
-    paymentIntentId: paymentIntent.id,
-    clientSecret: clientSecret,
-    plan: plan
+    clientSecret,
+    plan,
   };
 }
 

@@ -2,8 +2,12 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { createServer } from 'http'; // Import createServer
+import compression from 'compression';
 
 const app = express();
+app.disable('x-powered-by');
+// Enable gzip compression for text assets
+app.use(compression());
 
 // Force HTTPS for custom domain
 app.use((req, res, next) => {

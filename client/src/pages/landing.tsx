@@ -1,5 +1,6 @@
 import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export default function Landing() {
   return (
@@ -20,6 +21,7 @@ export default function Landing() {
               <Button variant="outline" className="border-violet-300 text-violet-300 hover:bg-violet-300/10" onClick={() => (window.location.href = '/auth')} aria-label="Sign in">Sign In</Button>
               <Button variant="gradient" className="shadow-lg" onClick={() => (window.location.href = '/auth')} aria-label="Create account">Get Started</Button>
             </div>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
@@ -37,6 +39,82 @@ export default function Landing() {
             <div className="flex items-center justify-center gap-4">
               <Button variant="gradient" className="px-6 py-6" onClick={() => (window.location.href = '/auth')}>Start Free</Button>
               <Button variant="outline" className="px-6 py-6 border-cyan-300 text-cyan-300 hover:bg-cyan-300/10" onClick={() => (window.location.href = '/about')}>Learn More</Button>
+            </div>
+          </section>
+
+          {/* Features */}
+          <section id="systoro" className="mb-16 md:mb-24">
+            <h2 className="text-center text-3xl md:text-4xl font-bold mb-10 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Why Teams Choose Systoro</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: 'Process Mapping Snapshot', desc: 'Map suppliers, inputs, process, outputs, and customers with ease.' },
+                { title: 'Root Cause Drill Down', desc: 'Guided 5 Whys for fast, reliable root cause identification.' },
+                { title: 'Issue Prioritizer', desc: '80/20 analysis to focus your team on the vital few problems.' },
+                { title: 'Risk Matrix Builder', desc: 'Quantify risks with automated scoring to drive smart mitigations.' },
+                { title: 'Flow Analyzer', desc: 'Visualize end-to-end flow and highlight waste and delays.' },
+                { title: 'Stability Tracker', desc: 'Track process stability with statistical thresholds over time.' }
+              ].map((f, i) => (
+                <div key={i} className="rounded-xl border border-slate-700/50 bg-white/5 p-6 backdrop-blur-md">
+                  <h3 className="text-xl font-semibold mb-2 text-white/95">{f.title}</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Testimonials */}
+          <section className="mb-16 md:mb-24">
+            <h2 className="text-center text-3xl md:text-4xl font-bold mb-10 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">What Customers Say</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { name: 'Avery M.', role: 'Operations Lead', quote: 'We finally have a simple way to capture issues and act on the right ones.' },
+                { name: 'Jordan R.', role: 'Quality Manager', quote: 'The stability tracking view changed how we monitor production. Fewer surprises.' },
+                { name: 'Sam K.', role: 'Team Lead', quote: 'The tools feel friendly and focused. We spend less time wrangling spreadsheets.' },
+              ].map((t, i) => (
+                <div key={i} className="rounded-xl border border-slate-700/50 bg-white/5 p-6 backdrop-blur-md">
+                  <p className="text-slate-200 italic mb-4">“{t.quote}”</p>
+                  <div className="text-slate-300 text-sm">{t.name} • {t.role}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Pricing */}
+          <section id="pricing" className="mb-10 md:mb-16">
+            <h2 className="text-center text-3xl md:text-4xl font-bold mb-10 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Simple, Transparent Pricing</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { name: 'Starter', price: '$0', cta: 'Start Free', highlight: false, features: ['Process Mapping', 'Root Cause', 'Prioritizer'] },
+                { name: 'Professional', price: '$29/mo', cta: 'Upgrade', highlight: true, features: ['All Starter', 'Risk Matrix', 'Flow Analyzer', 'Stability Tracker'] },
+                { name: 'Enterprise', price: '$49/mo', cta: 'Contact', highlight: false, features: ['All Professional', 'Advanced Analytics', 'Priority Support'] },
+              ].map((p, i) => (
+                <div key={i} className={`rounded-2xl border backdrop-blur-md p-6 ${p.highlight ? 'border-cyan-400/50 bg-cyan-400/10' : 'border-slate-700/50 bg-white/5'}`}>
+                  <div className="flex items-baseline justify-between mb-4">
+                    <h3 className="text-xl font-semibold text-white/95">{p.name}</h3>
+                    <div className="text-2xl font-bold bg-gradient-to-r from-cyan-300 to-violet-300 bg-clip-text text-transparent">{p.price}</div>
+                  </div>
+                  <ul className="text-slate-300 text-sm space-y-2 mb-6">
+                    {p.features.map((f, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-300" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button variant={p.highlight ? 'gradient' : 'outline'} className={p.highlight ? 'w-full' : 'w-full border-cyan-300 text-cyan-300 hover:bg-cyan-300/10'} onClick={() => (window.location.href = p.name === 'Enterprise' ? '/contact' : '/subscribe')}>
+                    {p.cta}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Final CTA */}
+          <section className="text-center border border-slate-700/50 bg-white/5 p-10 rounded-2xl backdrop-blur-md">
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Ready to improve how your team improves?</h2>
+            <p className="text-slate-300 mb-6">Create an account and start with our free tools today.</p>
+            <div className="flex items-center justify-center gap-3">
+              <Button variant="gradient" onClick={() => (window.location.href = '/auth')}>Get Started</Button>
+              <Button variant="outline" className="border-cyan-300 text-cyan-300 hover:bg-cyan-300/10" onClick={() => (window.location.href = '/demo')}>View Demo</Button>
             </div>
           </section>
         </div>

@@ -31,6 +31,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use(securityHeaders);
   app.use(requestLogger);
   app.use(generalRateLimit);
+  // Health check endpoint (no auth)
+  app.get('/healthz', (_req, res) => {
+    res.json({ ok: true, uptime: process.uptime() });
+  });
+  
+  app.use('/api', apiRateLimit);
 
   // API request logging
   app.use('/api', (req, res, next) => {
@@ -92,9 +98,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(projects || []);
     } catch (error) {
       console.error("Error fetching projects:", error);
+      const errMsg = error instanceof Error ? error.message : String(error);
       res.status(500).json({ 
         message: "Failed to fetch projects",
-        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        error: process.env.NODE_ENV === 'development' ? errMsg : undefined
       });
     }
   });
@@ -417,7 +424,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Stripe webhook endpoint (needs raw body)
-  app.post('/api/webhooks/stripe', express.raw({ type: 'application/json' }), handleStripeWebhook);
+  app.post('/api/webhooks/stripe', webhookRateLimit, express.raw({ type: 'application/json' }), handleStripeWebhook);
 
   // Tool access endpoint for automated provisioning
   app.get('/api/tools/access', isAuthenticated, async (req: any, res) => {

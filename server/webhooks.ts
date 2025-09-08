@@ -3,9 +3,8 @@ import Stripe from 'stripe';
 import { storage } from './storage';
 import { emailAutomation } from './email-automation';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-06-30.basil',
-});
+// Use Stripe SDK default API version to ensure compatibility
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function handleStripeWebhook(req: Request, res: Response) {
   const sig = req.headers['stripe-signature'] as string;
@@ -41,59 +40,55 @@ export async function handleStripeWebhook(req: Request, res: Response) {
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const customerId = session.customer as string;
   const subscriptionId = session.subscription as string;
-  
-  // Get subscription details
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-  const priceId = subscription.items.data[0].price.id;
-  
-  // Determine plan tier
-  let planTier = 'free';
-  if (priceId === 'price_1RoMFVQoGdgh5NO3kZYEpJto') {
-    planTier = 'professional';
-  } else if (priceId === 'price_1RoMGhQoGdgh5NO3NkoGJLbI') {
-    planTier = 'enterprise';
+
+  // Look up the application user by Stripe customer ID
+  const user = await storage.getUserByStripeCustomerId(customerId);
+  if (!user) {
+    // No matching user; nothing to update
+    return;
   }
-  
-  // Update user subscription status
-  await storage.updateUserSubscriptionStatus(customerId, planTier, 'active');
-  
+
+  // Get subscription details and update status
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  // Ensure DB has latest Stripe identifiers
+  await storage.updateUserStripeInfo(user.id, customerId, subscriptionId);
+  await storage.updateUserSubscriptionStatus(user.id, subscription.status);
+
+  // Optional: determine plan tier for messaging (not stored in DB here)
+  const priceId = subscription.items.data[0]?.price?.id;
+  let planTier: 'free' | 'professional' | 'enterprise' = 'free';
+  if (priceId === process.env.STRIPE_PROFESSIONAL_PRICE_ID) planTier = 'professional';
+  if (priceId === process.env.STRIPE_ENTERPRISE_PRICE_ID) planTier = 'enterprise';
+
   // Trigger automated welcome sequence
   await emailAutomation.triggerAutomation('subscription.created', {
     email: session.customer_email!,
     plan: planTier,
-    userId: customerId
+    userId: String(user.id),
   });
-  
+
   await emailAutomation.triggerAutomation(`subscription.created.${planTier}`, {
     email: session.customer_email!,
-    userId: customerId
+    userId: String(user.id),
   });
-  
-  
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const customerId = subscription.customer as string;
-  const priceId = subscription.items.data[0].price.id;
-  
-  let planTier = 'free';
-  if (priceId === 'price_1RoMFVQoGdgh5NO3kZYEpJto') {
-    planTier = 'professional';
-  } else if (priceId === 'price_1RoMGhQoGdgh5NO3NkoGJLbI') {
-    planTier = 'enterprise';
-  }
-  
-  await storage.updateUserSubscriptionStatus(customerId, planTier, subscription.status as any);
-  
-  
+  const user = await storage.getUserByStripeCustomerId(customerId);
+  if (!user) return;
+
+  await storage.updateUserSubscriptionStatus(user.id, subscription.status);
 }
 
 async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
   const customerId = subscription.customer as string;
-  
-  await storage.updateUserSubscriptionStatus(customerId, 'free', 'canceled');
-  
-  
+  const user = await storage.getUserByStripeCustomerId(customerId);
+  if (!user) return;
+
+  await storage.updateUserSubscriptionStatus(user.id, 'canceled');
+  await storage.updateUserStripeInfo(user.id, customerId, null);
 }
 
 // Email automation is now handled by the EmailAutomationEngine

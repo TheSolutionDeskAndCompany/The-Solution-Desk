@@ -54,8 +54,18 @@ export function serveStatic(app: Express) {
     console.warn('Make sure to build the client first (npm run build).');
   }
 
-  // Serve static assets (js, css, etc)
-  app.use(express.static(distDir));
+  // Serve static assets (js, css, etc) with caching
+  app.use(
+    express.static(distDir, {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'no-cache');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        }
+      },
+    })
+  );
 
   // SPA fallback: serve index.html for all other non-API routes
   app.get("*", (req, res, next) => {
@@ -65,6 +75,7 @@ export function serveStatic(app: Express) {
     
     const indexPath = path.join(distDir, "index.html");
     if (fs.existsSync(indexPath)) {
+      res.set({ 'Cache-Control': 'no-cache' });
       res.sendFile(indexPath);
     } else {
       res.status(404).send('Application not built. Please run "npm run build" first.');
@@ -126,4 +137,3 @@ export async function setupVite(app: Express, server: Server) {
     }
   });
 }
-

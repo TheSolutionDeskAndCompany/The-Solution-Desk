@@ -29,8 +29,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// Body parsers – skip Stripe webhooks to preserve raw body for signature verification
+app.use((req, res, next) => {
+  if (req.originalUrl.startsWith('/api/webhooks/stripe')) {
+    return next();
+  }
+  return express.json()(req, res, () => express.urlencoded({ extended: false })(req, res, next));
+});
 
 // Request logging (only for non-static assets)
 app.use((req, res, next) => {

@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function AuthPage() {
   const [, navigate] = useLocation();
@@ -35,18 +36,7 @@ export default function AuthPage() {
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: { email: string; password: string }) => {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(credentials),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Login failed");
-      }
-      
+      const response = await apiRequest("POST", "/api/auth/login", credentials);
       return response.json();
     },
     onSuccess: (user) => {
@@ -73,18 +63,7 @@ export default function AuthPage() {
       firstName: string;
       lastName: string;
     }) => {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(userData),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Registration failed");
-      }
-      
+      const response = await apiRequest("POST", "/api/auth/register", userData);
       return response.json();
     },
     onSuccess: (user) => {
@@ -106,17 +85,7 @@ export default function AuthPage() {
 
   const forgotPasswordMutation = useMutation({
     mutationFn: async (email: string) => {
-      const response = await fetch("/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Failed to send reset email");
-      }
-      
+      const response = await apiRequest("POST", "/api/auth/forgot-password", { email });
       return response.json();
     },
     onSuccess: (data) => {
@@ -142,17 +111,7 @@ export default function AuthPage() {
 
   const resetPasswordMutation = useMutation({
     mutationFn: async (data: { token: string; password: string }) => {
-      const response = await fetch("/api/auth/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || "Failed to reset password");
-      }
-      
+      const response = await apiRequest("POST", "/api/auth/reset-password", data);
       return response.json();
     },
     onSuccess: () => {

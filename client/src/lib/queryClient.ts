@@ -7,14 +7,33 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+let csrfToken: string | null = null;
+async function ensureCsrfToken(): Promise<string> {
+  if (csrfToken) return csrfToken;
+  const res = await fetch('/api/csrf-token', { credentials: 'include' });
+  if (!res.ok) throw new Error('Failed to get CSRF token');
+  const data = await res.json();
+  const token = String(data.csrfToken || '');
+  if (!token) throw new Error('Invalid CSRF token');
+  csrfToken = token;
+  return token;
+}
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  const headers: Record<string, string> = data ? { "Content-Type": "application/json" } : {};
+  // Attach CSRF token for non-GET methods
+  if (method.toUpperCase() !== 'GET') {
+    const token = await ensureCsrfToken();
+    headers['X-CSRF-Token'] = token;
+  }
+
   const res = await fetch(url, {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
+    headers,
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });

@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./auth";
 import { handleStripeWebhook } from "./webhooks";
 import express from "express";
+import csurf from "csurf";
 import { 
   generalRateLimit, 
   authRateLimit, 
@@ -31,6 +32,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use(securityHeaders);
   app.use(requestLogger);
   app.use(generalRateLimit);
+  
+  // CSRF protection: protect API state-changing routes, skip Stripe webhooks
+  const csrfProtection = csurf({ cookie: false });
+  app.use('/api', (req, res, next) => {
+    if (req.path.startsWith('/webhooks/stripe')) return next();
+    return csrfProtection(req, res, next);
+  });
   // Health check endpoint (no auth)
   app.get('/healthz', (_req, res) => {
     res.json({ ok: true, uptime: process.uptime() });
@@ -42,6 +50,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use('/api', (req, res, next) => {
     
     next();
+  });
+  
+  // CSRF token endpoint for SPA to fetch token
+  app.get('/api/csrf-token', csrfProtection, (req: any, res) => {
+    res.json({ csrfToken: req.csrfToken() });
   });
 
   // Auth routes

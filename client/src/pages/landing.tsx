@@ -1,8 +1,14 @@
 import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
 import { Button } from "@/components/ui/button";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import Footer from "@/components/layout/footer";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export default function Landing() {
+  usePageMeta(
+    "The Solution Desk – Process Excellence Platform",
+    "Automate process mapping, root-cause analysis, prioritization and stability tracking — all in one suite."
+  );
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B1426] via-[#1A202C] to-[#0B1426] text-white relative" role="main" aria-label="Systoro - The Solution Desk homepage">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#1D3557] text-white px-4 py-2 rounded z-50">Skip to main content</a>
@@ -119,6 +125,7 @@ export default function Landing() {
           </section>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

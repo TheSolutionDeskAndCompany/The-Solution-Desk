@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
+    "csurf": "^1.11.0",
     "@google/genai": "^1.11.0",
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
@@ -107,6 +108,7 @@
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
+    "@types/csurf": "^1.11.5",
     "@replit/vite-plugin-cartographer": "^0.2.7",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@tailwindcss/typography": "^0.5.15",

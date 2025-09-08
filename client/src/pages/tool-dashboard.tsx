@@ -2,18 +2,20 @@ import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Lock, Zap, BarChart3, Target, TrendingUp, Settings } from "lucide-react";
+import { Lock, Zap, BarChart3, Target, TrendingUp, Settings, Activity, Calculator } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
-interface Tool {
+type Tool = {
   id: string;
   name: string;
   description: string;
   category: string;
-  tier: string;
-  available: boolean;
-  icon: string;
-}
+  route: string;
+  requiredTier: 'free' | 'professional' | 'enterprise';
+  features: string[];
+  methodology: string[];
+  estimatedTime: string;
+};
 
 export default function ToolDashboard() {
   const { user } = useAuth();
@@ -40,20 +42,30 @@ export default function ToolDashboard() {
     );
   }
 
-  const getIcon = (iconName: string) => {
-    const icons: Record<string, any> = {
-      Zap,
-      BarChart3,
-      Target,
-      TrendingUp,
-      Settings,
-    };
-    return icons[iconName] || Settings;
+  const getIconForCategory = (category: string) => {
+    switch (category) {
+      case 'Process Mapping':
+        return Target;
+      case 'Root Cause Analysis':
+        return TrendingUp;
+      case 'Problem Prioritization':
+        return BarChart3;
+      case 'Risk Assessment':
+        return Calculator;
+      case 'Process Optimization':
+        return Zap;
+      case 'Stability Monitoring':
+        return Activity;
+      case 'Data Science':
+        return BarChart3;
+      default:
+        return Settings;
+    }
   };
 
   const currentTier = toolAccess?.currentTier || 'free';
   const availableTools = toolAccess?.availableTools || [];
-  const features = toolAccess?.features || {};
+  const planInfo = toolAccess?.features || {};
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -72,33 +84,28 @@ export default function ToolDashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {availableTools.map((tool: Tool) => {
-          const IconComponent = getIcon(tool.icon);
+          const IconComponent = getIconForCategory(tool.category);
 
           return (
-            <Card key={tool.id} className="relative">
+            <Card key={tool.id} className="relative border border-gray-200/60 hover:border-primary/30 transition-colors">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <IconComponent className="h-8 w-8 text-[#1D3557]" />
-                  {!tool.available && (
-                    <Lock className="h-4 w-4 text-gray-400" />
-                  )}
+                  <IconComponent className="h-8 w-8 text-primary" />
                 </div>
                 <CardTitle className="text-lg">{tool.name}</CardTitle>
                 <CardDescription>{tool.description}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <Badge 
-                    variant={tool.tier === 'free' ? 'secondary' : tool.tier === 'professional' ? 'default' : 'destructive'}
-                  >
-                    {tool.tier.charAt(0).toUpperCase() + tool.tier.slice(1)}
+                  <Badge variant={tool.requiredTier === 'free' ? 'secondary' : tool.requiredTier === 'professional' ? 'default' : 'destructive'}>
+                    {tool.requiredTier.charAt(0).toUpperCase() + tool.requiredTier.slice(1)}
                   </Badge>
                   <Button 
-                    size="sm" 
-                    disabled={!tool.available}
-                    variant={tool.available ? "default" : "outline"}
+                    size="sm"
+                    variant="gradient"
+                    onClick={() => (window.location.href = tool.route)}
                   >
-                    {tool.available ? 'Launch' : 'Upgrade Required'}
+                    Launch
                   </Button>
                 </div>
               </CardContent>
@@ -121,11 +128,11 @@ export default function ToolDashboard() {
       <div className="mt-12">
         <h2 className="text-2xl font-bold text-[#1D3557] mb-4">Plan Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(features).map(([feature, enabled]) => (
+          {(planInfo.features || []).map((feature: string) => (
             <div key={feature} className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${enabled ? 'bg-green-500' : 'bg-gray-300'}`} />
-              <span className={`text-sm ${enabled ? 'text-gray-900' : 'text-gray-500'}`}>
-                {feature.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+              <span className="text-sm text-gray-900">
+                {feature}
               </span>
             </div>
           ))}

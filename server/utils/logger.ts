@@ -24,8 +24,9 @@ const loggerConfig = {
   ]
 };
 
-// Add file logging in production
-if (!isDevelopment) {
+// Add file logging in production only when explicitly enabled
+const enableFileLogs = !isDevelopment && process.env.LOG_TO_FILES === 'true';
+if (enableFileLogs) {
   (loggerConfig.transports as any[]).push(
     new winston.transports.File({ 
       filename: 'logs/error.log', 

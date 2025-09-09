@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import Footer from "@/components/layout/footer";
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
@@ -231,6 +233,7 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
 };
 
 export default function Subscribe() {
+  usePageMeta("Subscribe – The Solution Desk", "Unlock advanced tools with Professional or Enterprise plans.");
   const [clientSecret, setClientSecret] = useState("");
   const [planType, setPlanType] = useState("professional");
   const [loading, setLoading] = useState(true);
@@ -445,8 +448,11 @@ export default function Subscribe() {
   }
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <SubscribeForm planType={planType} />
-    </Elements>
+    <>
+      <Elements stripe={stripePromise} options={{ clientSecret }}>
+        <SubscribeForm planType={planType} />
+      </Elements>
+      <Footer />
+    </>
   );
 }

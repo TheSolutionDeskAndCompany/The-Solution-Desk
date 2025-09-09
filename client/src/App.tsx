@@ -13,6 +13,8 @@ const Subscribe = lazy(() => import("@/pages/subscribe"));
 const Demo = lazy(() => import("@/pages/demo"));
 const About = lazy(() => import("@/pages/about"));
 const Contact = lazy(() => import("@/pages/contact"));
+const Privacy = lazy(() => import("@/pages/privacy"));
+const Terms = lazy(() => import("@/pages/terms"));
 const Automation = lazy(() => import("@/pages/automation"));
 const SixSigma = lazy(() => import("@/pages/sixsigma"));
 const ToolDashboard = lazy(() => import("@/pages/tool-dashboard"));
@@ -62,14 +64,16 @@ function Router() {
             <Route path="/contact" component={Contact} />
           </>
         ) : (
-          <>
-            <Route path="/" component={Landing} />
-            <Route path="/demo" component={Demo} />
-            <Route path="/subscribe" component={Subscribe} />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/auth" component={Auth} />
-          </>
+        <>
+          <Route path="/" component={Landing} />
+          <Route path="/demo" component={Demo} />
+          <Route path="/subscribe" component={Subscribe} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/terms" component={Terms} />
+          <Route path="/auth" component={Auth} />
+        </>
         )}
         <Route path="*" component={NotFound} />
       </Switch>

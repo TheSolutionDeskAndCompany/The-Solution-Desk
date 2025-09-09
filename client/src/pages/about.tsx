@@ -1,7 +1,10 @@
 
 import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
+import Footer from "@/components/layout/footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function About() {
+  usePageMeta("About – The Solution Desk", "Our mission is to simplify process improvement with tools teams love.");
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -346,6 +349,7 @@ export default function About() {
           </div>
         </div>
       </main>
+    <Footer />
     </div>
   );
 }

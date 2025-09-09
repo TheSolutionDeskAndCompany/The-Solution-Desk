@@ -1,7 +1,10 @@
 import { useState } from "react";
 import logoImage from "@assets/assets_task_01k0xwbq1ze6p9hx7ewg203tt3_1753349599_img_0_1753349636875.webp";
+import Footer from "@/components/layout/footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function Contact() {
+  usePageMeta("Contact – The Solution Desk", "Get in touch for support, demos, or enterprise pricing.");
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -385,6 +388,7 @@ export default function Contact() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -10,6 +10,7 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 const Landing = lazy(() => import("@/pages/landing"));
 const Home = lazy(() => import("@/pages/home"));
 const Subscribe = lazy(() => import("@/pages/subscribe"));
+const SubscribeResult = lazy(() => import("@/pages/subscribe-result"));
 const Demo = lazy(() => import("@/pages/demo"));
 const About = lazy(() => import("@/pages/about"));
 const Contact = lazy(() => import("@/pages/contact"));
@@ -61,6 +62,7 @@ function Router() {
             <Route path="/tools" component={ToolDashboard} />
             <Route path="/billing" component={Billing} />
             <Route path="/subscribe" component={Subscribe} />
+            <Route path="/subscribe/result" component={SubscribeResult} />
             <Route path="/contact" component={Contact} />
           </>
         ) : (

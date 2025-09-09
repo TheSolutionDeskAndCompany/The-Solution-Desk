@@ -65,7 +65,7 @@ const SubscribeForm = ({ planType }: { planType: string }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.origin,
+        return_url: `${window.location.origin}/subscribe/result`,
       },
     });
 

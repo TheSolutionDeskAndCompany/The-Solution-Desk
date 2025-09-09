@@ -11,11 +11,13 @@ import RecentProjects from "@/components/dashboard/recent-projects";
 import AnalyticsOverview from "@/components/dashboard/analytics-overview";
 import StatisticalChart from "@/components/charts/statistical-chart";
 import { Button } from "@/components/ui/button";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { Plus } from "lucide-react";
 import NewProjectModal from "@/components/modals/new-project-modal";
 import { useState } from "react";
 
 export default function Dashboard() {
+  usePageMeta("Dashboard – The Solution Desk", "Overview of your projects, metrics and recent activity.");
   const { toast } = useToast();
   const { isAuthenticated, isLoading } = useAuth();
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);

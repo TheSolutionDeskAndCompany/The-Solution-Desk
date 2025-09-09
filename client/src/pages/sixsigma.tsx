@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -122,6 +123,7 @@ const sixSigmaTools: SixSigmaTool[] = [
 ];
 
 export default function SixSigmaPage() {
+  usePageMeta("Process Tools – The Solution Desk", "Launch interactive process tools for mapping, root cause, prioritization, risk and stability.");
   const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
   const [selectedTool, setSelectedTool] = useState<string | null>(null);

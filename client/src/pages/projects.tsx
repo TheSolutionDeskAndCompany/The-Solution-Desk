@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -13,6 +14,7 @@ import AddDataModal from "@/components/modals/add-data-modal";
 import { format } from "date-fns";
 
 export default function Projects() {
+  usePageMeta("Projects – The Solution Desk", "Create, manage, and track your process improvement projects.");
   const { toast } = useToast();
   const { isAuthenticated, isLoading } = useAuth();
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);

@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import AnalyticsTools from "@/components/tools/analytics-tools";
 import { Plus } from "lucide-react";
 
 export default function Analytics() {
+  usePageMeta("Analytics – The Solution Desk", "Run advanced analyses on your project data and generate insights.");
   const { toast } = useToast();
   const { user, isAuthenticated, isLoading } = useAuth();
 

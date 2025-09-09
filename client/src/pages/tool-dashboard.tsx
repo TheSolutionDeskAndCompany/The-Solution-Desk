@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ type Tool = {
 };
 
 export default function ToolDashboard() {
+  usePageMeta("Your Tools – The Solution Desk", "Access the tools available in your current plan.");
   const { user } = useAuth();
 
   const { data: toolAccess, isLoading } = useQuery({

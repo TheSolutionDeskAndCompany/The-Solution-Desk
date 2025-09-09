@@ -41,7 +41,7 @@ A comprehensive SaaS platform for business process optimization, delivering inte
 - Stripe account for payments
 
 ### Environment Variables
-Create a `.env` file with the following:
+Copy `.env.example` to `.env` and fill in values:
 
 ```env
 # Database
@@ -51,6 +51,8 @@ DATABASE_URL=postgresql://username:password@host:port/database
 STRIPE_SECRET_KEY=sk_live_...
 VITE_STRIPE_PUBLIC_KEY=pk_live_...
 STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PROFESSIONAL_PRICE_ID=price_...
+STRIPE_ENTERPRISE_PRICE_ID=price_...
 
 # Authentication
 SESSION_SECRET=your-session-secret-key
@@ -147,7 +149,7 @@ npm test           # Run test suite (when implemented)
 
 - **Rate Limiting**: 100 requests per 15 minutes for general endpoints
 - **Input Validation**: Zod schemas for all API inputs
-- **CSRF Protection**: Helmet security headers
+- **CSRF Protection**: Server-side `csurf` with SPA token endpoint (`GET /api/csrf-token`) and client attaches `X-CSRF-Token` for non-GET requests
 - **SQL Injection Prevention**: Parameterized queries with Drizzle ORM
 - **Authentication Middleware**: Protected routes with session validation
 
@@ -178,20 +180,44 @@ Payment Success → User Tier Update → Tool Provisioning → Welcome Email →
 - Secure payment processing through Stripe
 - Audit logging for compliance tracking
 
-## 🚀 Deployment
+## 🚀 Deployment (Render)
 
 ### Production Environment
 - **Domain**: thesolutiondesk.ca
-- **Platform**: Replit Deployments with custom domain
-- **Database**: Neon serverless PostgreSQL
-- **CDN**: Automatic static asset optimization
+- **Platform**: Render Web Service
+- **Database**: Neon serverless PostgreSQL (or Postgres of your choice)
 
-### Deployment Steps
-1. Set production environment variables
-2. Configure custom domain DNS
-3. Deploy via Replit's one-click deployment
-4. Set up Stripe webhook endpoints
-5. Verify SSL certificate
+### Render Setup
+1. Create a new Render Web Service from this GitHub repo
+   - Build Command: `npm ci && npm run build`
+   - Start Command: `npm start`
+   - Health Check Path: `/healthz`
+2. Add Environment Variables in Render
+   - `DATABASE_URL`
+   - `SESSION_SECRET`
+   - `BASE_URL` (e.g., `https://thesolutiondesk.ca`)
+   - `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
+   - `STRIPE_PROFESSIONAL_PRICE_ID`, `STRIPE_ENTERPRISE_PRICE_ID`
+   - `VITE_STRIPE_PUBLIC_KEY`
+   - optional: `LOG_TO_FILES=false`
+3. Provision the database
+   - Set `DATABASE_URL` and run migrations one-off: `bash scripts/migrate.sh`
+4. Stripe Webhook
+   - Endpoint: `https://thesolutiondesk.ca/api/webhooks/stripe`
+   - Events: `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+   - Put the webhook signing secret into `STRIPE_WEBHOOK_SECRET`
+5. Custom Domain
+   - Add `thesolutiondesk.ca` in Render and follow DNS instructions to point your domain to Render
+6. Verify
+   - `GET https://thesolutiondesk.ca/healthz` returns `{ ok: true, uptime: ... }`
+   - App loads and `/api/auth/user` returns 401 when not logged-in
+
+### Local Stripe Webhook Test
+```bash
+stripe listen --forward-to localhost:5000/api/webhooks/stripe
+# In another shell, run the app locally:
+npm run dev
+```
 
 ## 📈 Business Model
 

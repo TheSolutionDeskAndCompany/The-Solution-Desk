@@ -15,6 +15,12 @@ app.use((req, res, next) => {
   const host = req.get('host');
   const isCustomDomain = host && host.includes('thesolutiondesk.ca');
 
+  // Canonical redirect: send www to apex
+  if (host && host.toLowerCase() === 'www.thesolutiondesk.ca') {
+    const proto = (req.header('x-forwarded-proto') || req.protocol || 'https').toString();
+    return res.redirect(301, `${proto}://thesolutiondesk.ca${req.url}`);
+  }
+
   // Force HTTPS for custom domain
   if (isCustomDomain && req.header('x-forwarded-proto') !== 'https') {
     return res.redirect(301, `https://${host}${req.url}`);

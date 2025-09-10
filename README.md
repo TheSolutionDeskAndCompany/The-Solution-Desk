@@ -149,7 +149,7 @@ npm test           # Run test suite (when implemented)
 
 - **Rate Limiting**: 100 requests per 15 minutes for general endpoints
 - **Input Validation**: Zod schemas for all API inputs
-- **CSRF Protection**: Server-side `csurf` with SPA token endpoint (`GET /api/csrf-token`) and client attaches `X-CSRF-Token` for non-GET requests
+- **CSRF Protection**: Session-backed using `csrf` with SPA token endpoint (`GET /api/csrf-token`) and client attaches `X-CSRF-Token` for non-GET requests
 - **SQL Injection Prevention**: Parameterized queries with Drizzle ORM
 - **Authentication Middleware**: Protected routes with session validation
 
